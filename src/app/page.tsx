@@ -1,5 +1,11 @@
 "use client";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 import Image from "next/image";
 import { useState, FormEvent } from "react";
 import styles from "./page.module.css";
@@ -64,6 +70,13 @@ export default function Home() {
         }
       );
       if (!res.ok) throw new Error("Failed");
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "conversion", {
+          send_to: "AW-18023593816/BAseCIXm7ZIcENjuqJJD",
+          value: 50,
+          currency: "USD",
+        });
+      }
       setFormState("success");
     } catch {
       setFormState("error");
