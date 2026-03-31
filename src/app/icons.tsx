@@ -135,8 +135,11 @@ export function IconUtensils({ size = 28 }: { size?: number }) {
 export function IconPill({ size = 28 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" {...s}>
-      <path d="M10.5 1.5l-8 8a5.66 5.66 0 0 0 8 8l8-8a5.66 5.66 0 0 0-8-8z" />
-      <line x1="6" y1="14" x2="14" y2="6" />
+      <path d="M8.5 2.5a4.95 4.95 0 0 0-7 7l8 8a4.95 4.95 0 0 0 7-7z" />
+      <path d="M5.5 9.5l5-5" />
+      <circle cx="19" cy="5" r="3" />
+      <line x1="19" y1="3.5" x2="19" y2="6.5" />
+      <line x1="17.5" y1="5" x2="20.5" y2="5" />
     </svg>
   );
 }

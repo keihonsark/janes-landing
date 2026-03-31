@@ -349,31 +349,20 @@ export default function Home() {
         <h2>How We Can Help</h2>
         <div className={styles.servicesGrid}>
           {[
-            { icon: <IconHeart size={26} />, label: "Personal Care" },
-            { icon: <IconMessageCircle size={26} />, label: "Companionship" },
-            {
-              icon: <IconBrain size={26} />,
-              label: "Memory & Dementia Support",
-            },
-            { icon: <IconUtensils size={26} />, label: "Meal Preparation" },
-            { icon: <IconPill size={26} />, label: "Medication Reminders" },
-            { icon: <IconCar size={26} />, label: "Transportation" },
-            {
-              icon: <IconMoon size={26} />,
-              label: "Overnight & 24-Hour Care",
-            },
-            {
-              icon: <IconActivity size={26} />,
-              label: "Post-Surgery Recovery",
-            },
-            {
-              icon: <IconHome size={26} />,
-              label: "Independent Living Support",
-            },
+            { icon: <IconHeart size={26} />, label: "Personal Care", desc: "Bathing, grooming, and daily hygiene assistance" },
+            { icon: <IconMessageCircle size={26} />, label: "Companionship", desc: "Meaningful company and emotional support" },
+            { icon: <IconBrain size={26} />, label: "Memory & Dementia Support", desc: "Specialized care for cognitive conditions" },
+            { icon: <IconUtensils size={26} />, label: "Meal Preparation", desc: "Nutritious meals tailored to dietary needs" },
+            { icon: <IconPill size={26} />, label: "Medication Reminders", desc: "On-time reminders and medication tracking" },
+            { icon: <IconCar size={26} />, label: "Transportation", desc: "Safe rides to appointments and errands" },
+            { icon: <IconMoon size={26} />, label: "Overnight & 24-Hour Care", desc: "Round-the-clock support when it matters most" },
+            { icon: <IconActivity size={26} />, label: "Post-Surgery Recovery", desc: "Attentive care during recovery at home" },
+            { icon: <IconHome size={26} />, label: "Independent Living Support", desc: "Help maintaining independence and routine" },
           ].map((s) => (
             <div key={s.label} className={styles.serviceCard}>
               <div className={styles.serviceIcon}>{s.icon}</div>
               <div className={styles.serviceLabel}>{s.label}</div>
+              <div className={styles.serviceDesc}>{s.desc}</div>
             </div>
           ))}
         </div>
