@@ -281,12 +281,12 @@ export default function Home() {
         <div className={styles.jessicaInner}>
           <div className={styles.jessicaImageWrap}>
             <Image
-              src="/images/jessica-fullbody-headshot.jpg"
+              src="/images/jessica-headshot.png"
               alt="Jessica Cassidy, FNP-C — Care Director at Jane's Home Care"
-              fill
+              width={400}
+              height={500}
               className={styles.jessicaImage}
-              sizes="(max-width: 768px) 100vw, 40vw"
-              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, 400px"
             />
           </div>
           <div className={styles.jessicaContent}>
@@ -306,7 +306,7 @@ export default function Home() {
               </span>
               <span className={styles.credentialPill}>Neurosurgery NP</span>
             </div>
-            <a href="tel:5592962189" className={styles.ctaButton}>
+            <a href="#form" className={styles.ctaButton}>
               Talk to Our Team →
             </a>
           </div>

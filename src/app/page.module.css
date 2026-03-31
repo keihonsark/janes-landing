@@ -398,14 +398,15 @@
 
 .jessicaImageWrap {
   flex: 0 0 40%;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  min-height: 500px;
+  display: flex;
+  justify-content: center;
 }
 
 .jessicaImage {
-  object-fit: cover;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  height: auto;
 }
 
 .jessicaContent {
@@ -711,7 +712,6 @@
 
   .jessicaImageWrap {
     flex: none;
-    min-height: 350px;
   }
 
   .jessicaContent h2 {
