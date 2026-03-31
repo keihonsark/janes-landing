@@ -1,0 +1,757 @@
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== HEADER ========== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  z-index: 100;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+}
+
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 52px;
+  width: auto;
+}
+
+.callButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--primary-dark);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  border: 2px solid var(--primary-dark);
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.callButton:hover {
+  background: var(--primary-dark);
+  color: var(--white);
+}
+
+.callButton:hover .callButtonIcon svg {
+  stroke: var(--white);
+}
+
+.callButtonIcon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.trustBar {
+  background: var(--bg);
+  border-top: 1px solid #eee;
+  padding: 5px 24px;
+  text-align: center;
+  font-size: 11px;
+  color: #6b7a60;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.trustBarInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.trustBarStars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin-right: 4px;
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding-top: 110px;
+  padding-bottom: 60px;
+  background: var(--bg);
+}
+
+.heroInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.heroLeft {
+  flex: 0 0 60%;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.heroRight {
+  flex: 0 0 38%;
+  position: relative;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.badge {
+  display: inline-block;
+  background: var(--accent-green);
+  color: var(--white);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.heroH1 {
+  font-size: 42px;
+  color: var(--primary-dark);
+  margin-bottom: 16px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.heroSub {
+  font-size: 17px;
+  color: #666;
+  margin-bottom: 32px;
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+/* ========== FORM ========== */
+.formCard {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.formTitle {
+  font-size: 24px;
+  color: var(--primary-dark);
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.formSubtext {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 14px;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  min-height: 48px;
+  background: var(--white);
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary-dark);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 4px;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.formPrivacy {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.thankYou {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.thankYou h3 {
+  font-family: var(--font-libre-caslon), serif;
+  font-size: 22px;
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+}
+
+.thankYou p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.errorMsg {
+  text-align: center;
+  padding: 24px 0;
+  color: #c0392b;
+}
+
+.errorMsg a {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Hero image */
+.heroImageWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.floatingBadge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: var(--primary-dark);
+  color: var(--white);
+  padding: 10px 18px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* ========== TRUST BADGES ROW ========== */
+.trustBadgesRow {
+  background: var(--white);
+  padding: 20px 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.trustBadgesInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.trustBadgePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid #ddd;
+  border-radius: 24px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  white-space: nowrap;
+}
+
+.trustBadgePill svg {
+  flex-shrink: 0;
+}
+
+.trustBadgeStars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.trustBadgeText {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+/* ========== TRUST BAR SECTION ========== */
+.trustSection {
+  background: var(--white);
+  border-top: 1px solid var(--accent-green);
+  border-bottom: 1px solid var(--accent-green);
+  padding: 48px 24px;
+}
+
+.trustGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.trustItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.trustIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+
+.trustLabel {
+  font-family: var(--font-radley), serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.trustDesc {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.5;
+}
+
+/* ========== JESSICA SECTION ========== */
+.jessicaSection {
+  background: var(--bg);
+  padding: 80px 24px;
+}
+
+.jessicaInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+}
+
+.jessicaImageWrap {
+  flex: 0 0 40%;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  min-height: 500px;
+}
+
+.jessicaImage {
+  object-fit: cover;
+}
+
+.jessicaContent {
+  flex: 1;
+}
+
+.sectionLabel {
+  font-family: var(--font-radley), serif;
+  color: var(--accent-green);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.jessicaContent h2 {
+  font-size: 34px;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.jessicaContent p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.credentialBadges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.credentialPill {
+  background: var(--accent-green);
+  color: var(--white);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ctaButton {
+  display: inline-block;
+  background: var(--primary-dark);
+  color: var(--white);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: opacity 0.2s;
+}
+
+.ctaButton:hover {
+  opacity: 0.9;
+}
+
+/* ========== TESTIMONIALS ========== */
+.testimonials {
+  background: var(--bg);
+  padding: 80px 24px;
+}
+
+.testimonials h2 {
+  text-align: center;
+  font-size: 34px;
+  color: var(--primary-dark);
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+
+.testimonialGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonialCard {
+  background: var(--white);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.testimonialCard p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.testimonialAuthor {
+  font-family: var(--font-radley), serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--primary-dark);
+}
+
+/* ========== SERVICES ========== */
+.services {
+  background: var(--white);
+  padding: 80px 24px;
+}
+
+.services h2 {
+  text-align: center;
+  font-size: 34px;
+  color: var(--primary-dark);
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+
+.servicesGrid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.serviceCard {
+  background: var(--bg);
+  padding: 28px 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid var(--accent-green);
+}
+
+.serviceIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.serviceLabel {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+/* ========== FINAL CTA ========== */
+.finalCta {
+  background: var(--primary-dark);
+  padding: 80px 24px;
+  text-align: center;
+  color: var(--white);
+}
+
+.finalCta h2 {
+  font-size: 36px;
+  color: var(--white);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.finalCtaSub {
+  font-size: 17px;
+  max-width: 600px;
+  margin: 0 auto 32px;
+  opacity: 0.9;
+  line-height: 1.7;
+}
+
+.finalCtaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.btnPrimary {
+  display: inline-block;
+  background: var(--white);
+  color: var(--primary-dark);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: opacity 0.2s;
+}
+
+.btnPrimary:hover {
+  opacity: 0.9;
+}
+
+.btnSecondary {
+  display: inline-block;
+  background: transparent;
+  color: var(--white);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  border: 2px solid var(--white);
+  transition: opacity 0.2s;
+}
+
+.btnSecondary:hover {
+  opacity: 0.8;
+}
+
+.finalCtaSmall {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: #1e2a1f;
+  text-align: center;
+  color: var(--white);
+}
+
+.footerDivider {
+  width: 100%;
+  height: 1px;
+  background: var(--accent-green);
+  opacity: 0.4;
+}
+
+.footerContent {
+  padding: 56px 24px 48px;
+}
+
+.footerLeaf {
+  margin: 0 auto 20px;
+  opacity: 0.9;
+}
+
+.footerName {
+  font-family: var(--font-radley), serif;
+  font-size: 22px;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+.footerContact {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+.footerAreas {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-bottom: 12px;
+}
+
+.footerCopy {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 95px;
+    padding-bottom: 40px;
+  }
+
+  .heroInner {
+    flex-direction: column;
+  }
+
+  .heroLeft {
+    flex: none;
+    order: 1;
+  }
+
+  .heroRight {
+    flex: none;
+    order: 2;
+  }
+
+  .heroH1 {
+    font-size: 30px;
+  }
+
+  .heroImageWrap {
+    min-height: 300px;
+  }
+
+  .trustGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jessicaInner {
+    flex-direction: column;
+  }
+
+  .jessicaImageWrap {
+    flex: none;
+    min-height: 350px;
+  }
+
+  .jessicaContent h2 {
+    font-size: 26px;
+  }
+
+  .testimonialGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trustBar {
+    display: none;
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  .callButton {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .finalCta h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .servicesGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .trustGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
