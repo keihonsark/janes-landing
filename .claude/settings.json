@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -n '387p')",
+      "Read(//tmp/**)"
+    ]
+  }
+}
