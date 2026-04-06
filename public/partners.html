@@ -52,7 +52,7 @@ a, button, .dot { cursor: pointer; }
 /* SLIDE TRACK */
 .deck {
   display: flex; height: 100vh; overflow: hidden;
-  position: relative; will-change: transform;
+  position: relative;
   transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
@@ -89,7 +89,7 @@ a, button, .dot { cursor: pointer; }
   opacity: 0; transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.slide.active .anim-item { opacity: 1; transform: translateY(0); }
+.slide.active .anim-item { opacity: 1 !important; transform: translateY(0) !important; }
 .slide.leaving .anim-item { opacity: 0; transform: translateY(-20px); transition-duration: 0.35s; }
 
 /* STAGGER DELAYS */
@@ -616,6 +616,10 @@ a, button, .dot { cursor: pointer; }
 <!-- SLIDE COUNTER -->
 <div class="slide-counter" id="slideCounter">1 / 9</div>
 
+<!-- NAV ARROWS -->
+<button id="prevBtn" style="position:fixed;left:20px;top:50%;z-index:100;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;width:48px;height:48px;border-radius:50%;font-size:20px;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">&larr;</button>
+<button id="nextBtn" style="position:fixed;right:20px;top:50%;z-index:100;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;width:48px;height:48px;border-radius:50%;font-size:20px;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">&rarr;</button>
+
 <!-- SLIDE DECK -->
 <div class="deck" id="deck">
 
@@ -928,6 +932,7 @@ a, button, .dot { cursor: pointer; }
         slides[i].classList.remove('leaving');
       }
       slides[current].classList.add('active');
+      console.log('Active class added to slide', current, slides[current].classList.toString());
     }, 400);
 
     setTimeout(function() { isTransitioning = false; }, TRANSITION_MS);
@@ -969,6 +974,10 @@ a, button, .dot { cursor: pointer; }
 
   // Begin button
   document.getElementById('beginBtn').addEventListener('click', next);
+  
+  // Nav arrows
+  document.getElementById('prevBtn').addEventListener('click', prev);
+  document.getElementById('nextBtn').addEventListener('click', next);
 
   // Initialize first slide as active
   slides[0].classList.add('active');
