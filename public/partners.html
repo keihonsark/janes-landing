@@ -198,6 +198,82 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
 /* EUCALYPTUS WATERMARK */
 .euc-wm { position: absolute; bottom: 20px; right: 20px; width: 250px; opacity: 0.05; pointer-events: none; z-index: 1; }
+
+/* FLOATING GOLD PARTICLES */
+.particles {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden;
+}
+.particles::before, .particles::after {
+  content: ''; position: absolute; width: 4px; height: 4px; background: #B8975A; border-radius: 50%; opacity: 0;
+}
+.particles::before {
+  top: 0; left: 0;
+  box-shadow:
+    100px 80vh 3px #B8975A, 200px 85vh 2px #D4B978, 350px 75vh 4px #B8975A,
+    500px 90vh 2px #D4B978, 650px 70vh 3px #B8975A, 800px 88vh 2px #D4B978,
+    950px 78vh 4px #B8975A, 1100px 82vh 2px #D4B978, 1250px 92vh 3px #B8975A,
+    1400px 76vh 2px #D4B978, 300px 95vh 3px #B8975A, 700px 98vh 2px #D4B978;
+  animation: particlesFloat 12s ease-in-out infinite;
+}
+.particles::after {
+  top: 0; left: 50px;
+  box-shadow:
+    150px 85vh 2px #D4B978, 300px 90vh 3px #B8975A, 450px 80vh 2px #D4B978,
+    600px 95vh 4px #B8975A, 750px 72vh 2px #D4B978, 900px 88vh 3px #B8975A,
+    1050px 82vh 2px #D4B978, 1200px 78vh 3px #B8975A, 1350px 92vh 2px #D4B978,
+    250px 70vh 3px #B8975A, 550px 96vh 2px #D4B978, 850px 74vh 3px #B8975A;
+  animation: particlesFloat 16s ease-in-out infinite reverse;
+}
+@keyframes particlesFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.4; }
+  50% { opacity: 0.2; transform: translateY(-40vh) translateX(20px); }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-80vh) translateX(-10px); opacity: 0; }
+}
+
+/* GOLD CARD GLOW — S4 */
+.gc { transition: all 0.4s ease; }
+.gc:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(184,151,90,0.15), 0 10px 40px rgba(0,0,0,0.2); transform: translateY(-6px); }
+
+/* PHONE PULSE — S6 */
+.s6 .ph { animation: phoneGlow 3s ease-in-out infinite; }
+@keyframes phoneGlow {
+  0%, 100% { text-shadow: 0 0 20px rgba(184,151,90,0.15); }
+  50% { text-shadow: 0 0 40px rgba(184,151,90,0.45), 0 0 80px rgba(184,151,90,0.15); }
+}
+
+/* STEP LINE SHIMMER — S6 */
+.sln { position: relative; overflow: hidden; background: linear-gradient(90deg, var(--gold), rgba(184,151,90,0.2)); }
+.sln::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, var(--gold), transparent); animation: lineShimmer 3s ease-in-out infinite; }
+@keyframes lineShimmer { 0% { left: -100%; } 100% { left: 100%; } }
+
+/* CARD HOVER — S7 */
+.sgc { transition: all 0.3s ease; }
+.sgc:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+
+/* CARD HOVER — S8 */
+.sv { transition: all 0.3s ease; }
+.sv:hover { transform: translateY(-3px); border-color: var(--sage); box-shadow: 0 8px 25px rgba(0,0,0,0.05); }
+
+/* JESSICA PHOTO HOVER */
+.s5p img { transition: transform 0.8s ease, box-shadow 0.8s ease; }
+.s5p:hover img { transform: scale(1.02); box-shadow: 0 40px 80px rgba(0,0,0,0.15); }
+
+/* GOLD LINE SHIMMER */
+.gold-line { position: relative; overflow: hidden; }
+.gold-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: lineShimmer 4s ease-in-out infinite; }
+
+/* CONTACT LINKS — S9 */
+.s9 .ph:hover { text-shadow: 0 0 30px rgba(184,151,90,0.4); }
+.s9 .em { transition: color 0.3s; }
+.s9 .em:hover { color: var(--gold); }
+.s9 .wb { transition: color 0.3s; }
+.s9 .wb:hover { color: rgba(255,255,255,0.7); }
+
+/* NAV ARROW REFINEMENT */
+.arr { opacity: 0.4; }
+.arr:hover { opacity: 1; }
 </style>
 </head>
 <body>
@@ -212,6 +288,7 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
   <section class="slide s1 active">
     <div class="bg"></div><div class="bg-ov"></div>
+    <div class="particles"></div>
     <div class="sc">
       <img class="logo-c ai" src="/images/Janes Home Care Logo_Primary.png" alt="" /><br>
       <div class="tg ai">The Gold Standard</div>
@@ -245,6 +322,7 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
   <section class="slide s4">
     <div class="bg"></div><div class="bg-ov"></div>
+    <div class="particles"></div>
     <div class="sc">
       <div class="bt ai">THE GOLD STANDARD</div>
       <div class="gcc ai">
@@ -337,6 +415,7 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
   <section class="slide s9">
     <div class="bg"></div><div class="bg-ov"></div>
+    <div class="particles"></div>
     <img class="euc-wm" src="/images/eucalyptus-branch.png" alt="" />
     <div class="sc">
       <img class="lm ai" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
