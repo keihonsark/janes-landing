@@ -204,6 +204,11 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 /* EUCALYPTUS WATERMARK */
 .euc-wm { position: absolute; bottom: 20px; right: 20px; width: 250px; opacity: 0.05; pointer-events: none; z-index: 1; }
 
+/* TESTIMONIAL SLIDE */
+.s-test { background: var(--cream); }
+.s-test .bg { background-image: url('/images/bg-warm.jpg'); background-size: cover; background-position: center; }
+.s-test .bg-ov { background: rgba(247,244,239,0.9); }
+
 /* FLOATING GOLD PARTICLES */
 .particles {
   position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden;
@@ -303,7 +308,7 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 <button class="arr arr-l" onclick="prev()">&#8592;</button>
 <button class="arr arr-r" onclick="nxt()">&#8594;</button>
 <div class="dots" id="dots"></div>
-<div class="counter" id="ctr">1 / 9</div>
+<div class="counter" id="ctr">1 / 10</div>
 
 <div class="deck" id="deck">
 
@@ -417,6 +422,17 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
     </div>
   </section>
 
+  <section class="slide s-test">
+    <div class="bg"></div><div class="bg-ov"></div>
+    <div class="sc" style="text-align:center;display:flex;flex-direction:column;align-items:center;">
+      <div style="font-size:80px;color:var(--gold);font-family:'Playfair Display',serif;line-height:1;margin-bottom:20px;">&ldquo;</div>
+      <blockquote class="ai" style="font-family:'Playfair Display',serif;font-size:28px;font-style:italic;color:var(--charcoal);line-height:1.6;max-width:750px;margin-bottom:28px;">They don&rsquo;t just help with daily needs &mdash; they treat people with respect, patience, and dignity. Jessica and her team take the time to be present and build real connections, which brought comfort to my mother and our family.</blockquote>
+      <div class="ai" style="font-weight:700;color:var(--charcoal);font-size:15px;">Javier Espindola</div>
+      <div class="ai" style="color:var(--text-light);font-size:13px;">Family Member</div>
+      <div class="ai" style="color:var(--gold);font-size:12px;margin-top:4px;letter-spacing:2px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    </div>
+  </section>
+
   <section class="slide s8">
     <div class="sc">
       <div class="eyebrow ai">What We Provide</div>
@@ -452,7 +468,7 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 </div>
 
 <script>
-var c=0,t=9,dk=document.getElementById('deck'),ct=document.getElementById('ctr'),de=document.getElementById('dots');
+var c=0,t=10,dk=document.getElementById('deck'),ct=document.getElementById('ctr'),de=document.getElementById('dots');
 for(var i=0;i<t;i++){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');(function(x){d.onclick=function(){go(x)}})(i);de.appendChild(d)}
 var ds=de.querySelectorAll('.dot');
 var sl=document.querySelectorAll('.slide');
