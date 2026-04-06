@@ -17,7 +17,8 @@
   --text-light: #6E7B6F;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; background: var(--charcoal); }
+body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); }
 
 .deck { display: flex; height: 100vh; transition: transform 0.8s cubic-bezier(0.65,0,0.35,1); }
 .slide { min-width: 100vw; width: 100vw; height: 100vh; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
@@ -146,6 +147,57 @@ html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM San
   .sg { grid-template-columns: 1fr; } .svg { grid-template-columns: 1fr 1fr; }
   .sc { padding: 0 24px; } .arr { display: none; }
 }
+
+/* ANIMATION SYSTEM */
+.ai { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.slide.active .ai { opacity: 1; transform: translateY(0); }
+.slide.active .ai:nth-child(1) { transition-delay: 0.1s; }
+.slide.active .ai:nth-child(2) { transition-delay: 0.2s; }
+.slide.active .ai:nth-child(3) { transition-delay: 0.3s; }
+.slide.active .ai:nth-child(4) { transition-delay: 0.4s; }
+.slide.active .ai:nth-child(5) { transition-delay: 0.5s; }
+.slide.active .ai:nth-child(6) { transition-delay: 0.6s; }
+
+/* GOLD SHIMMER — S1 title */
+.s1 .tg {
+  background: linear-gradient(90deg, #B8975A 0%, #D4B978 25%, #F0D89A 50%, #D4B978 75%, #B8975A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
+@keyframes goldShimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+
+/* BEGIN ARROW BOUNCE */
+.s1 .begin { animation: bounceRight 2s ease-in-out infinite; }
+@keyframes bounceRight { 0%,100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
+
+/* WINDOW SHADOW TEXTURE — cream slides */
+.s3::before, .s5::before, .s7::before, .s8::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
+  background:
+    linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.06) 20.5%, rgba(255,255,255,0.06) 22%, transparent 22.5%,
+    transparent 28%, rgba(255,255,255,0.04) 28.5%, rgba(255,255,255,0.04) 30%, transparent 30.5%,
+    transparent 45%, rgba(255,255,255,0.05) 45.5%, rgba(255,255,255,0.05) 47%, transparent 47.5%,
+    transparent 53%, rgba(255,255,255,0.03) 53.5%, rgba(255,255,255,0.03) 55%, transparent 55.5%,
+    transparent 70%, rgba(255,255,255,0.06) 70.5%, rgba(255,255,255,0.06) 72%, transparent 72.5%);
+  transform: rotate(-5deg); transform-origin: center;
+}
+
+/* CARD HOVER EFFECTS */
+.gc { transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+.gc:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(184,151,90,0.12); }
+.sgc { transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+.sgc:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+.sv { transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+.sv:hover { border-color: var(--sage); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.04); }
+
+/* PHONE GLOW — S6 */
+.s6 .ph { animation: phoneGlow 3s ease-in-out infinite; }
+@keyframes phoneGlow { 0%,100% { text-shadow: 0 0 20px rgba(184,151,90,0.2); } 50% { text-shadow: 0 0 40px rgba(184,151,90,0.5); } }
+
+/* EUCALYPTUS WATERMARK */
+.euc-wm { position: absolute; bottom: 20px; right: 20px; width: 250px; opacity: 0.05; pointer-events: none; z-index: 1; }
 </style>
 </head>
 <body>
@@ -158,43 +210,44 @@ html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM San
 
 <div class="deck" id="deck">
 
-  <section class="slide s1">
+  <section class="slide s1 active">
     <div class="bg"></div><div class="bg-ov"></div>
     <div class="sc">
-      <img class="logo-c" src="/images/Janes Home Care Logo_Primary.png" alt="" /><br>
-      <div class="tg">The Gold Standard</div>
-      <div class="ts">in Home Care</div>
-      <hr class="gold-line" style="margin:20px auto" />
-      <div class="lbl">REFERRAL PARTNER PROGRAM</div>
-      <button class="begin" onclick="nxt()">Begin &rarr;</button>
+      <img class="logo-c ai" src="/images/Janes Home Care Logo_Primary.png" alt="" /><br>
+      <div class="tg ai">The Gold Standard</div>
+      <div class="ts ai">in Home Care</div>
+      <hr class="gold-line ai" style="margin:20px auto" />
+      <div class="lbl ai">REFERRAL PARTNER PROGRAM</div>
+      <button class="begin ai" onclick="nxt()">Begin &rarr;</button>
     </div>
   </section>
 
   <section class="slide s2">
     <div class="bg"></div><div class="bg-ov"></div>
     <div class="sc">
-      <div class="eyebrow">The Reality</div>
-      <h2 class="headline">Patients fall through the cracks after discharge.</h2>
-      <p class="body">Readmission rates climb. Families scramble. And most home care agencies make that transition harder — not easier.</p>
+      <div class="eyebrow ai">The Reality</div>
+      <h2 class="headline ai">Patients fall through the cracks after discharge.</h2>
+      <p class="body ai">Readmission rates climb. Families scramble. And most home care agencies make that transition harder — not easier.</p>
     </div>
   </section>
 
   <section class="slide s3">
     <div class="bg"></div><div class="bg-ov"></div>
+    <img class="euc-wm" src="/images/eucalyptus-branch.png" alt="" />
     <div class="sc">
-      <img class="lm" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
-      <h2 class="headline">Home care should be an integral part of the treatment plan.</h2>
-      <p class="body">Contributing to better patient outcomes — not just filling a gap.</p>
-      <hr class="gold-line" />
-      <p class="it">That's why we built Jane's Home Care.</p>
+      <img class="lm ai" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
+      <h2 class="headline ai">Home care should be an integral part of the treatment plan.</h2>
+      <p class="body ai">Contributing to better patient outcomes — not just filling a gap.</p>
+      <hr class="gold-line ai" />
+      <p class="it ai">That's why we built Jane's Home Care.</p>
     </div>
   </section>
 
   <section class="slide s4">
     <div class="bg"></div><div class="bg-ov"></div>
     <div class="sc">
-      <div class="bt">THE GOLD STANDARD</div>
-      <div class="gcc">
+      <div class="bt ai">THE GOLD STANDARD</div>
+      <div class="gcc ai">
         <div class="gc">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2" stroke-linecap="round"/></svg>
           <h3>NP-Led Oversight</h3><p>Clinical leadership on every care plan</p>
@@ -213,8 +266,8 @@ html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM San
 
   <section class="slide s5">
     <div class="sc">
-      <div class="s5p"><img src="/images/jessica.jpg" alt="Jessica Cassidy, NP" /></div>
-      <div class="s5t">
+      <div class="s5p ai"><img src="/images/jessica.jpg" alt="Jessica Cassidy, NP" /></div>
+      <div class="s5t ai">
         <div class="eyebrow">Clinical Leadership</div>
         <h2 class="headline">Led by a Nurse Practitioner. Not just managed — overseen.</h2>
         <p class="body">Jessica Cassidy, NP, personally develops and oversees every care plan. While we provide non-medical support, our clinical lens ensures nothing gets missed. Your patients are in the hands of someone who thinks like you do.</p>
@@ -225,11 +278,11 @@ html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM San
 
   <section class="slide s6">
     <div class="sc">
-      <div class="eyebrow">Exclusive for Partners</div>
-      <h2 class="headline">Your priority line to premium care.</h2>
-      <a href="tel:5592962189" class="ph">(559) 296-2189</a>
-      <div class="av">Available 7 days a week</div>
-      <div class="steps">
+      <div class="eyebrow ai">Exclusive for Partners</div>
+      <h2 class="headline ai">Your priority line to premium care.</h2>
+      <a href="tel:5592962189" class="ph ai">(559) 296-2189</a>
+      <div class="av ai">Available 7 days a week</div>
+      <div class="steps ai">
         <div class="step"><div class="sn">1</div><div class="sl">You refer</div></div>
         <div class="sln"></div>
         <div class="step"><div class="sn">2</div><div class="sl">We respond in &lt; 30 min</div></div>
@@ -241,10 +294,11 @@ html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM San
 
   <section class="slide s7">
     <div class="bg"></div><div class="bg-ov"></div>
+    <img class="euc-wm" src="/images/eucalyptus-branch.png" alt="" />
     <div class="sc">
-      <div class="eyebrow">Our Caregiver Standard</div>
-      <h2 class="headline">We pay more. We expect more.<br>Your patients get more.</h2>
-      <div class="sg">
+      <div class="eyebrow ai">Our Caregiver Standard</div>
+      <h2 class="headline ai">We pay more. We expect more.<br>Your patients get more.</h2>
+      <div class="sg ai">
         <div class="sgc">
           <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6" stroke-linecap="round"/></svg>
           <div><h4>Highest Wages in Fresno</h4><p>Attracting experienced, dedicated professionals</p></div>
@@ -267,9 +321,9 @@ html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM San
 
   <section class="slide s8">
     <div class="sc">
-      <div class="eyebrow">What We Provide</div>
-      <h2 class="headline">Comprehensive non-medical home care.</h2>
-      <div class="svg">
+      <div class="eyebrow ai">What We Provide</div>
+      <h2 class="headline ai">Comprehensive non-medical home care.</h2>
+      <div class="svg ai">
         <div class="sv"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg><h4>Personal Care</h4><p>Bathing, grooming, mobility</p></div>
         <div class="sv"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg><h4>Companion Care</h4><p>Companionship, conversation</p></div>
         <div class="sv"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><h4>Memory Support</h4><p>Alzheimer's &amp; dementia care</p></div>
@@ -277,20 +331,21 @@ html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM San
         <div class="sv"><svg viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg><h4>Respite Care</h4><p>Relief for family caregivers</p></div>
         <div class="sv"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg><h4>Transitional Care</h4><p>Safe recovery at home</p></div>
       </div>
-      <p class="fn">Private pay. No contracts. Care starts within 24 hours.</p>
+      <p class="fn ai">Private pay. No contracts. Care starts within 24 hours.</p>
     </div>
   </section>
 
   <section class="slide s9">
     <div class="bg"></div><div class="bg-ov"></div>
+    <img class="euc-wm" src="/images/eucalyptus-branch.png" alt="" />
     <div class="sc">
-      <img class="lm" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
-      <h2 class="headline">Questions? We're here.</h2>
-      <p class="body">Reach out anytime to learn more about partnering with Jane's Home Care.</p>
-      <hr class="gold-line" />
-      <a href="tel:5592962189" class="ph">(559) 296-2189</a>
-      <a href="mailto:info@janeshomecare.com" class="em">info@janeshomecare.com</a>
-      <a href="https://www.janeshomecare.com" class="wb" target="_blank">www.janeshomecare.com</a>
+      <img class="lm ai" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
+      <h2 class="headline ai">Questions? We're here.</h2>
+      <p class="body ai">Reach out anytime to learn more about partnering with Jane's Home Care.</p>
+      <hr class="gold-line ai" />
+      <a href="tel:5592962189" class="ph ai">(559) 296-2189</a>
+      <a href="mailto:info@janeshomecare.com" class="em ai">info@janeshomecare.com</a>
+      <a href="https://www.janeshomecare.com" class="wb ai" target="_blank">www.janeshomecare.com</a>
     </div>
     <div class="fine">Jane's Home Care · Fresno, Clovis &amp; Surrounding Areas · Licensed, Insured &amp; Bonded</div>
   </section>
@@ -301,7 +356,8 @@ html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM San
 var c=0,t=9,dk=document.getElementById('deck'),ct=document.getElementById('ctr'),de=document.getElementById('dots');
 for(var i=0;i<t;i++){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');(function(x){d.onclick=function(){go(x)}})(i);de.appendChild(d)}
 var ds=de.querySelectorAll('.dot');
-function go(i){if(i<0||i>=t||i===c)return;c=i;dk.style.transform='translateX(-'+(c*100)+'vw)';ct.textContent=(c+1)+' / '+t;for(var j=0;j<ds.length;j++)ds[j].classList.toggle('on',j===c)}
+var sl=document.querySelectorAll('.slide');
+function go(i){if(i<0||i>=t||i===c)return;c=i;dk.style.transform='translateX(-'+(c*100)+'vw)';ct.textContent=(c+1)+' / '+t;for(var j=0;j<ds.length;j++)ds[j].classList.toggle('on',j===c);for(var j=0;j<sl.length;j++)sl[j].classList.remove('active');sl[c].classList.add('active')}
 function nxt(){go(c+1)}function prev(){go(c-1)}
 window.addEventListener('keydown',function(e){if(e.key==='ArrowRight')nxt();if(e.key==='ArrowLeft')prev()});
 var wt=null;window.addEventListener('wheel',function(e){e.preventDefault();if(wt)return;var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(Math.abs(d)<15)return;if(d>0)nxt();else prev();wt=setTimeout(function(){wt=null},600)},{passive:false});
