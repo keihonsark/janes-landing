@@ -28,14 +28,19 @@ html, body {
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
   background: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* GRAIN OVERLAY */
 body::after {
   content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 9999; opacity: 0.03;
+  pointer-events: none; z-index: 9999; opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
+
+/* CURSOR */
+a, button, .dot { cursor: pointer; }
 
 /* FIXED NAV LOGO */
 .nav-logo {
@@ -46,13 +51,13 @@ body::after {
 
 /* SLIDE TRACK */
 .deck {
-  display: flex; height: 100vh; width: 900vw;
+  display: flex; height: 100vh; overflow: hidden;
   transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 /* INDIVIDUAL SLIDES */
 .slide {
-  width: 100vw; height: 100vh; flex-shrink: 0;
+  min-width: 100vw; width: 100vw; height: 100vh; flex-shrink: 0;
   position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
 }
@@ -73,10 +78,6 @@ body::after {
 }
 
 /* DECORATIVE EUCALYPTUS */
-.euc-branch {
-  position: absolute; pointer-events: none; z-index: 1;
-  opacity: 0.2; transition: transform 1.2s ease;
-}
 .euc-watermark {
   position: absolute; pointer-events: none; z-index: 1;
   opacity: 0.06;
@@ -84,21 +85,22 @@ body::after {
 
 /* ANIMATE IN/OUT */
 .anim-item {
-  opacity: 0; transform: translateY(40px);
+  opacity: 0; transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .slide.active .anim-item { opacity: 1; transform: translateY(0); }
-.slide.leaving .anim-item { opacity: 0; transform: translateY(-30px); transition-duration: 0.4s; }
+.slide.leaving .anim-item { opacity: 0; transform: translateY(-20px); transition-duration: 0.35s; }
 
 /* STAGGER DELAYS */
-.anim-item:nth-child(1) { transition-delay: 0.05s; }
-.anim-item:nth-child(2) { transition-delay: 0.15s; }
-.anim-item:nth-child(3) { transition-delay: 0.25s; }
-.anim-item:nth-child(4) { transition-delay: 0.35s; }
-.anim-item:nth-child(5) { transition-delay: 0.45s; }
-.anim-item:nth-child(6) { transition-delay: 0.55s; }
-.anim-item:nth-child(7) { transition-delay: 0.65s; }
-.anim-item:nth-child(8) { transition-delay: 0.75s; }
+.slide.active .anim-item:nth-child(1) { transition-delay: 0.05s; }
+.slide.active .anim-item:nth-child(2) { transition-delay: 0.15s; }
+.slide.active .anim-item:nth-child(3) { transition-delay: 0.25s; }
+.slide.active .anim-item:nth-child(4) { transition-delay: 0.35s; }
+.slide.active .anim-item:nth-child(5) { transition-delay: 0.45s; }
+.slide.active .anim-item:nth-child(6) { transition-delay: 0.55s; }
+.slide.active .anim-item:nth-child(7) { transition-delay: 0.65s; }
+.slide.active .anim-item:nth-child(8) { transition-delay: 0.75s; }
+.slide.leaving .anim-item { transition-delay: 0s !important; }
 
 /* PROGRESS DOTS */
 .progress {
@@ -108,7 +110,7 @@ body::after {
 .dot {
   width: 10px; height: 10px; border-radius: 50%;
   border: 1.5px solid rgba(184,151,90,0.5);
-  background: transparent; cursor: pointer;
+  background: transparent;
   transition: all 0.4s ease;
 }
 .dot.active {
@@ -126,7 +128,7 @@ body::after {
 
 /* TYPOGRAPHY HELPERS */
 .eyebrow {
-  font-size: 11px; font-weight: 700; letter-spacing: 4px;
+  font-size: 11px; font-weight: 700; letter-spacing: 5px;
   text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
 }
 .headline {
@@ -144,6 +146,15 @@ body::after {
 }
 .gold-line-center { margin-left: auto; margin-right: auto; }
 
+/* EXPANDING GOLD LINE */
+.gold-line-expand {
+  width: 0; height: 1.5px; background: var(--gold); border: none;
+  margin: 28px auto; transition: width 0s;
+}
+.slide.active .gold-line-expand {
+  width: 60px; transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
+}
+
 /* PULSE DOT */
 .pulse-dot {
   display: inline-block; width: 10px; height: 10px; border-radius: 50%;
@@ -155,13 +166,17 @@ body::after {
 /* BEGIN ARROW */
 .begin-arrow {
   display: inline-flex; align-items: center; gap: 8px; color: var(--gold);
-  font-size: 14px; font-weight: 600; letter-spacing: 1px; cursor: pointer;
+  font-size: 14px; font-weight: 600; letter-spacing: 1px;
   border: none; background: none; font-family: 'DM Sans', sans-serif;
-  transition: gap 0.3s;
+  transition: gap 0.3s; animation: beginBounce 2s ease-in-out infinite;
 }
-.begin-arrow:hover { gap: 14px; }
+.begin-arrow:hover { gap: 14px; animation: none; }
 .begin-arrow svg { transition: transform 0.3s; }
 .begin-arrow:hover svg { transform: translateX(4px); }
+@keyframes beginBounce {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
 
 /* ============================================ */
 /* SLIDE 1 — TITLE                              */
@@ -176,6 +191,20 @@ body::after {
 .s1 .title-main {
   font-family: 'Playfair Display', serif; font-size: 64px;
   color: var(--gold); font-weight: 700; line-height: 1.1;
+  position: relative;
+}
+.s1 .title-shimmer {
+  position: relative; display: inline-block;
+}
+.s1 .title-shimmer::before {
+  content: ''; position: absolute; inset: -20px -40px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(184,151,90,0.12) 0%, transparent 70%);
+  animation: goldShimmer 4s ease-in-out infinite;
+  border-radius: 50%; z-index: -1; pointer-events: none;
+}
+@keyframes goldShimmer {
+  0%,100% { opacity: 0.4; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
 .s1 .title-sub {
   font-family: 'Playfair Display', serif; font-size: 52px;
@@ -187,8 +216,8 @@ body::after {
   text-transform: uppercase; color: var(--cream); opacity: 0.7;
   margin-top: 8px;
 }
-.s1 .euc-branch {
-  right: -5%; top: 10%; width: 45%; max-width: 500px; opacity: 0.25;
+.s1 .euc-watermark {
+  right: 4%; bottom: 4%; width: 300px; opacity: 0.06;
 }
 .s1 .begin-wrap { position: absolute; bottom: 60px; }
 
@@ -201,7 +230,7 @@ body::after {
 .s2 .headline { font-size: 44px; color: var(--white); max-width: 600px; }
 .s2 .body-text { color: rgba(255,255,255,0.65); max-width: 500px; }
 .s2 .euc-watermark {
-  right: -5%; bottom: -5%; width: 350px; opacity: 0.04;
+  right: 2%; bottom: 2%; width: 300px; opacity: 0.04;
 }
 
 /* ============================================ */
@@ -240,36 +269,78 @@ body::after {
   text-align: center; height: 100%; justify-content: center;
 }
 .s4 .headline {
-  font-size: 56px; color: var(--gold); letter-spacing: 3px;
+  font-size: 56px; color: var(--gold); letter-spacing: 4px;
   text-transform: uppercase;
 }
+/* Gold gradient sweep on headline */
+.s4 .headline-sweep {
+  background: linear-gradient(90deg, var(--gold) 0%, #D4B77A 40%, var(--gold) 80%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldSweep 3s ease-in-out infinite;
+}
+@keyframes goldSweep {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Gold particles */
+.s4 .gold-particles {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1;
+}
+.gold-particle {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--gold); opacity: 0;
+  animation: particleDrift 8s linear infinite;
+}
+.gold-particle:nth-child(1) { left: 15%; animation-delay: 0s; animation-duration: 7s; }
+.gold-particle:nth-child(2) { left: 30%; animation-delay: 1.5s; animation-duration: 9s; }
+.gold-particle:nth-child(3) { left: 50%; animation-delay: 3s; animation-duration: 6s; }
+.gold-particle:nth-child(4) { left: 65%; animation-delay: 0.8s; animation-duration: 8s; }
+.gold-particle:nth-child(5) { left: 80%; animation-delay: 2.2s; animation-duration: 10s; }
+.gold-particle:nth-child(6) { left: 25%; animation-delay: 4s; animation-duration: 7.5s; }
+.gold-particle:nth-child(7) { left: 70%; animation-delay: 5s; animation-duration: 8.5s; }
+.gold-particle:nth-child(8) { left: 45%; animation-delay: 1s; animation-duration: 9.5s; }
+@keyframes particleDrift {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.25; }
+  50% { opacity: 0.15; }
+  90% { opacity: 0; }
+  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+}
+
 .gold-cards {
-  display: flex; gap: 28px; margin-top: 48px;
+  display: flex; gap: 32px; margin-top: 52px;
 }
 .gold-card {
-  flex: 1; max-width: 280px;
-  border: 1px solid rgba(184,151,90,0.35); border-radius: 16px;
-  padding: 40px 28px 36px; background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  transition: border-color 0.4s, transform 0.4s;
+  flex: 1; max-width: 320px;
+  border: 1.5px solid rgba(184,151,90,0.25); border-radius: 18px;
+  padding: 48px 32px 42px; background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+  animation: cardBorderPulse 4s ease-in-out infinite;
+}
+.gold-card:nth-child(2) { animation-delay: 1.3s; }
+.gold-card:nth-child(3) { animation-delay: 2.6s; }
+@keyframes cardBorderPulse {
+  0%,100% { border-color: rgba(184,151,90,0.2); }
+  50% { border-color: rgba(184,151,90,0.5); }
 }
 .gold-card:hover {
-  border-color: var(--gold); transform: translateY(-4px);
+  border-color: var(--gold); transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(184,151,90,0.12);
 }
 .gold-card-icon {
-  width: 52px; height: 52px; margin: 0 auto 20px;
+  width: 56px; height: 56px; margin: 0 auto 22px;
   display: flex; align-items: center; justify-content: center;
 }
 .gold-card h3 {
-  font-family: 'DM Sans', sans-serif; font-size: 17px;
-  font-weight: 700; color: var(--white); margin-bottom: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 18px;
+  font-weight: 700; color: var(--white); margin-bottom: 10px;
 }
 .gold-card p {
-  font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5;
-}
-.s4 .euc-branch {
-  left: -3%; bottom: 5%; width: 300px; opacity: 0.15;
-  transform: scaleX(-1);
+  font-size: 14.5px; color: rgba(255,255,255,0.55); line-height: 1.55;
 }
 
 /* ============================================ */
@@ -285,6 +356,11 @@ body::after {
   border-radius: 20px; overflow: hidden;
   box-shadow: 0 30px 80px rgba(0,0,0,0.12);
   max-height: 70vh; position: relative;
+  transform: scale(0.95); opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.23,1,0.32,1), opacity 0.9s ease;
+}
+.slide.active .s5-photo {
+  transform: scale(1); opacity: 1;
 }
 .s5-photo img {
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -294,6 +370,14 @@ body::after {
 .s5-text .body-text { color: var(--text-light); }
 .s5-text .gold-border-left {
   border-left: 3px solid var(--gold); padding-left: 24px;
+}
+/* Animated gold accent line */
+.s5-text .gold-accent-draw {
+  height: 2px; background: var(--gold); margin-bottom: 24px;
+  width: 0; transition: width 0s;
+}
+.slide.active .s5-text .gold-accent-draw {
+  width: 60px; transition: width 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s;
 }
 .credential-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -315,19 +399,35 @@ body::after {
 .s6 .phone-big {
   font-family: 'Playfair Display', serif; font-size: 52px;
   color: var(--gold); text-decoration: none; display: block;
-  margin: 12px 0 6px; transition: text-shadow 0.3s;
+  margin: 12px 0 6px;
+  text-shadow: 0 0 20px rgba(184,151,90,0.15);
+  animation: phoneGlow 3s ease-in-out infinite;
 }
-.s6 .phone-big:hover { text-shadow: 0 0 20px rgba(184,151,90,0.3); }
+@keyframes phoneGlow {
+  0%,100% { text-shadow: 0 0 20px rgba(184,151,90,0.1); }
+  50% { text-shadow: 0 0 30px rgba(184,151,90,0.3); }
+}
+.s6 .phone-big:hover { text-shadow: 0 0 40px rgba(184,151,90,0.4); }
 .s6 .phone-sub { color: rgba(255,255,255,0.45); font-size: 14px; margin-bottom: 52px; }
 
 .steps-row {
   display: flex; align-items: flex-start; gap: 0;
   max-width: 700px; width: 100%; position: relative;
 }
-.steps-row::before {
-  content: ''; position: absolute;
-  top: 24px; left: 15%; right: 15%;
-  height: 1px; background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
+/* Animated connecting line */
+.steps-row .steps-line {
+  position: absolute; top: 24px; left: 15%; right: 15%;
+  height: 1px; overflow: hidden;
+}
+.steps-row .steps-line::after {
+  content: ''; display: block; width: 100%; height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0s;
+}
+.slide.active .steps-row .steps-line::after {
+  transform: scaleX(1);
+  transition: transform 1s cubic-bezier(0.25,0.46,0.45,0.94) 0.5s;
 }
 .step-item {
   flex: 1; text-align: center; position: relative;
@@ -337,15 +437,17 @@ body::after {
   background: rgba(184,151,90,0.12); border: 1px solid rgba(184,151,90,0.3);
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 14px; position: relative; z-index: 2;
+  opacity: 0; transform: scale(0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
+.slide.active .step-item:nth-child(2) .step-icon { opacity: 1; transform: scale(1); transition-delay: 0.8s; }
+.slide.active .step-item:nth-child(3) .step-icon { opacity: 1; transform: scale(1); transition-delay: 1.1s; }
+.slide.active .step-item:nth-child(4) .step-icon { opacity: 1; transform: scale(1); transition-delay: 1.4s; }
 .step-num {
   font-family: 'Playfair Display', serif; font-size: 13px;
   color: var(--gold); font-weight: 700; margin-bottom: 4px;
 }
 .step-label { color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 500; }
-.s6 .euc-branch {
-  right: -2%; top: 8%; width: 280px; opacity: 0.1;
-}
 
 /* ============================================ */
 /* SLIDE 7 — CAREGIVER STANDARD                 */
@@ -363,11 +465,22 @@ body::after {
 }
 .standard-card {
   background: var(--white); border-radius: 14px; padding: 28px 24px;
-  border: 1px solid rgba(107,123,94,0.08);
+  border: 1.5px solid rgba(107,123,94,0.08);
   display: flex; gap: 18px; align-items: flex-start;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  opacity: 0; transform: translateY(20px);
 }
-.standard-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.05); }
+.standard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.06);
+  border-color: var(--gold);
+}
+/* Staggered card entrance */
+.slide.active .standard-card { opacity: 1; transform: translateY(0); }
+.slide.active .standard-card:nth-child(1) { transition-delay: 0.2s; }
+.slide.active .standard-card:nth-child(2) { transition-delay: 0.35s; }
+.slide.active .standard-card:nth-child(3) { transition-delay: 0.5s; }
+.slide.active .standard-card:nth-child(4) { transition-delay: 0.65s; }
 .standard-card-icon {
   width: 40px; height: 40px; min-width: 40px; border-radius: 10px;
   background: rgba(107,123,94,0.08);
@@ -388,18 +501,26 @@ body::after {
 .s8 .headline { font-size: 38px; color: var(--charcoal); }
 .service-pills {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  margin-top: 44px; max-width: 700px; width: 100%;
+  margin-top: 44px; max-width: 750px; width: 100%;
 }
 .service-pill {
-  display: flex; align-items: center; gap: 12px;
-  border: 1.5px solid rgba(107,123,94,0.2); border-radius: 12px;
-  padding: 18px 20px; background: var(--white);
-  transition: border-color 0.3s, transform 0.3s;
+  display: flex; align-items: center; gap: 14px;
+  border: 1.5px solid rgba(107,123,94,0.18); border-radius: 14px;
+  padding: 20px 22px; background: var(--white);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
 }
-.service-pill:hover { border-color: var(--sage); transform: translateY(-2px); }
+.service-pill:hover {
+  border-color: var(--gold); transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
 .service-pill svg { flex-shrink: 0; }
-.service-pill span {
-  font-size: 14px; font-weight: 600; color: var(--charcoal);
+.service-pill-text { display: flex; flex-direction: column; }
+.service-pill-text .pill-name {
+  font-size: 14px; font-weight: 700; color: var(--charcoal); line-height: 1.3;
+}
+.service-pill-text .pill-desc {
+  font-size: 12px; color: var(--text-light); line-height: 1.4; margin-top: 2px;
 }
 .s8 .bottom-note {
   color: var(--text-light); font-size: 15px; margin-top: 36px;
@@ -419,24 +540,24 @@ body::after {
 .s9 .body-text { color: rgba(255,255,255,0.55); text-align: center; max-width: 480px; }
 .s9 .contact-links { margin-top: 32px; display: flex; flex-direction: column; gap: 10px; }
 .s9 .contact-links a {
-  text-decoration: none; font-size: 17px; transition: color 0.3s;
+  text-decoration: none; font-size: 17px; transition: color 0.3s, text-shadow 0.3s;
 }
 .s9 .contact-links .phone-link {
   font-family: 'Playfair Display', serif; font-size: 28px;
   color: var(--gold); font-weight: 600;
 }
-.s9 .contact-links .phone-link:hover { text-shadow: 0 0 12px rgba(184,151,90,0.3); }
+.s9 .contact-links .phone-link:hover { text-shadow: 0 0 16px rgba(184,151,90,0.35); }
 .s9 .contact-links .email-link { color: var(--white); font-weight: 500; }
-.s9 .contact-links .email-link:hover { color: var(--gold); }
+.s9 .contact-links .email-link:hover { color: var(--gold); text-shadow: 0 0 12px rgba(184,151,90,0.2); }
 .s9 .contact-links .web-link { color: rgba(255,255,255,0.5); font-size: 14px; }
 .s9 .contact-links .web-link:hover { color: rgba(255,255,255,0.8); }
+.s9 .euc-watermark {
+  left: 50%; top: 50%; width: 400px;
+  transform: translate(-50%, -50%); opacity: 0.04;
+}
 .s9 .footer-text {
   position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
   color: rgba(255,255,255,0.25); font-size: 12px; white-space: nowrap;
-}
-.s9 .euc-branch {
-  left: -3%; top: 12%; width: 350px; opacity: 0.15;
-  transform: scaleX(-1);
 }
 
 /* ============================================ */
@@ -452,7 +573,6 @@ body::after {
   .s1 .title-main { font-size: 38px; }
   .s1 .title-sub { font-size: 30px; }
   .s1 .logo-hero { height: 40px; }
-  .s1 .euc-branch { width: 60%; opacity: 0.15; right: -10%; }
 
   .s2 .headline { font-size: 30px; }
   .s2 .body-text { font-size: 15px; }
@@ -462,7 +582,7 @@ body::after {
 
   .s4 .headline { font-size: 32px; }
   .gold-cards { flex-direction: column; align-items: center; gap: 16px; }
-  .gold-card { max-width: 300px; width: 100%; padding: 28px 24px; }
+  .gold-card { max-width: 300px; width: 100%; padding: 32px 24px; }
 
   .s5 .slide-content {
     grid-template-columns: 1fr; gap: 32px;
@@ -475,13 +595,13 @@ body::after {
   .s6 .headline { font-size: 28px; }
   .s6 .phone-big { font-size: 34px; }
   .steps-row { flex-direction: column; gap: 20px; max-width: 280px; }
-  .steps-row::before { display: none; }
+  .steps-row .steps-line { display: none; }
 
   .s7 .headline { font-size: 28px; }
   .standard-grid { grid-template-columns: 1fr; max-width: 360px; }
 
   .s8 .headline { font-size: 28px; }
-  .service-pills { grid-template-columns: 1fr; max-width: 320px; }
+  .service-pills { grid-template-columns: 1fr; max-width: 340px; }
 
   .s9 .headline { font-size: 30px; }
   .s9 .contact-links .phone-link { font-size: 24px; }
@@ -505,13 +625,13 @@ body::after {
 
   <!-- ======================== SLIDE 1: TITLE ======================== -->
   <section class="slide s1 active" data-slide="0">
-    <div class="slide-bg" data-parallax="0.03"></div>
+    <div class="slide-bg"></div>
     <div class="slide-bg-overlay"></div>
-    <img class="euc-branch" src="/images/eucalyptus-branch.png" alt="" data-parallax="-0.02" />
+    <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
     <div class="slide-content">
       <img class="logo-hero anim-item" src="/images/Janes Home Care Logo_Primary.png" alt="Jane's Home Care" />
       <div class="anim-item" style="margin-bottom: 4px;">
-        <div class="title-main">The Gold Standard</div>
+        <div class="title-main"><span class="title-shimmer">The Gold Standard</span></div>
       </div>
       <div class="anim-item">
         <div class="title-sub">in Home Care</div>
@@ -529,7 +649,7 @@ body::after {
 
   <!-- ======================== SLIDE 2: THE PROBLEM ======================== -->
   <section class="slide s2" data-slide="1">
-    <div class="slide-bg" data-parallax="0.03"></div>
+    <div class="slide-bg"></div>
     <div class="slide-bg-overlay"></div>
     <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
     <div class="slide-content">
@@ -541,30 +661,35 @@ body::after {
 
   <!-- ======================== SLIDE 3: THE REFRAME ======================== -->
   <section class="slide s3" data-slide="2">
-    <div class="slide-bg" data-parallax="0.02"></div>
+    <div class="slide-bg"></div>
     <div class="slide-bg-overlay"></div>
     <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
     <div class="slide-content">
       <img class="logomark anim-item" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
       <h2 class="headline anim-item">Home care should be an integral part of the treatment plan.</h2>
       <p class="body-text anim-item">Contributing to better patient outcomes &mdash; not just filling a gap.</p>
-      <hr class="gold-line gold-line-center anim-item" />
+      <hr class="gold-line-expand anim-item" />
       <p class="reframe-italic anim-item">That's why we built Jane's Home Care.</p>
     </div>
   </section>
 
   <!-- ======================== SLIDE 4: THE GOLD STANDARD ======================== -->
   <section class="slide s4" data-slide="3">
-    <div class="slide-bg" data-parallax="0.03"></div>
+    <div class="slide-bg"></div>
     <div class="slide-bg-overlay"></div>
-    <img class="euc-branch" src="/images/eucalyptus-branch.png" alt="" data-parallax="-0.015" />
+    <div class="gold-particles">
+      <div class="gold-particle"></div><div class="gold-particle"></div>
+      <div class="gold-particle"></div><div class="gold-particle"></div>
+      <div class="gold-particle"></div><div class="gold-particle"></div>
+      <div class="gold-particle"></div><div class="gold-particle"></div>
+    </div>
     <div class="slide-content">
-      <h2 class="headline anim-item">The Gold Standard</h2>
+      <h2 class="headline headline-sweep anim-item">The Gold Standard</h2>
       <div class="gold-cards anim-item">
         <!-- Card 1: Stethoscope -->
         <div class="gold-card">
           <div class="gold-card-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A2 2 0 0 0 4 4v1a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V4a2 2 0 0 0-.8-1.7"/><path d="M8 6v2a6 6 0 0 1-6 6v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4a6 6 0 0 1-6-6V6"/><path d="M15 2v4"/><path d="M15 10v1"/></svg>
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A2 2 0 0 0 4 4v1a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V4a2 2 0 0 0-.8-1.7"/><path d="M8 6v2a6 6 0 0 1-6 6v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4a6 6 0 0 1-6-6V6"/><path d="M15 2v4"/><path d="M15 10v1"/></svg>
           </div>
           <h3>NP-Led Oversight</h3>
           <p>Clinical leadership on every care plan</p>
@@ -572,7 +697,7 @@ body::after {
         <!-- Card 2: Clock -->
         <div class="gold-card">
           <div class="gold-card-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 8 14"/></svg>
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 8 14"/></svg>
           </div>
           <h3>&lt; 30 Min Response</h3>
           <p>Priority line for referral partners</p>
@@ -580,7 +705,7 @@ body::after {
         <!-- Card 3: Shield -->
         <div class="gold-card">
           <div class="gold-card-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/><polyline points="9 12 11 14 15 10"/></svg>
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/><polyline points="9 12 11 14 15 10"/></svg>
           </div>
           <h3>Vetted Caregivers</h3>
           <p>Highest paid, rigorously screened</p>
@@ -592,10 +717,11 @@ body::after {
   <!-- ======================== SLIDE 5: NP-LED ======================== -->
   <section class="slide s5" data-slide="4">
     <div class="slide-content">
-      <div class="s5-photo anim-item">
+      <div class="s5-photo">
         <img src="/images/jessica.jpg" alt="Jessica Cassidy, FNP-C" />
       </div>
       <div class="s5-text">
+        <div class="gold-accent-draw"></div>
         <div class="eyebrow anim-item">Clinical Leadership</div>
         <h2 class="headline anim-item">Led by a Nurse Practitioner. Not just managed &mdash; overseen.</h2>
         <div class="gold-border-left anim-item">
@@ -611,7 +737,6 @@ body::after {
 
   <!-- ======================== SLIDE 6: PRIORITY REFERRAL LINE ======================== -->
   <section class="slide s6" data-slide="5">
-    <img class="euc-branch" src="/images/eucalyptus-branch.png" alt="" data-parallax="-0.02" />
     <div class="slide-content">
       <div class="eyebrow anim-item">Exclusive for Partners</div>
       <h2 class="headline anim-item">Your priority line to premium care.</h2>
@@ -620,6 +745,7 @@ body::after {
         <div class="phone-sub">Available 7 days a week</div>
       </div>
       <div class="steps-row anim-item">
+        <div class="steps-line"></div>
         <div class="step-item">
           <div class="step-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.36a2 2 0 0 1-.45 2.11L8.09 9.45a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0 1 22 16.92z"/></svg>
@@ -647,13 +773,13 @@ body::after {
 
   <!-- ======================== SLIDE 7: CAREGIVER STANDARD ======================== -->
   <section class="slide s7" data-slide="6">
-    <div class="slide-bg" data-parallax="0.02"></div>
+    <div class="slide-bg"></div>
     <div class="slide-bg-overlay"></div>
     <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
     <div class="slide-content">
       <div class="eyebrow anim-item">Our Caregiver Standard</div>
       <h2 class="headline anim-item">We pay more. We expect more.<br>Your patients get more.</h2>
-      <div class="standard-grid anim-item">
+      <div class="standard-grid">
         <div class="standard-card">
           <div class="standard-card-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -703,32 +829,32 @@ body::after {
         <!-- Personal Care -->
         <div class="service-pill">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.3 2-3.5 2-5a7 7 0 0 0-14 0c0 1.5.5 3.7 2 5"/><path d="M12 10v4"/><path d="M10 12h4"/><circle cx="12" cy="20" r="2"/></svg>
-          <span>Personal Care</span>
+          <div class="service-pill-text"><span class="pill-name">Personal Care</span><span class="pill-desc">Bathing, grooming &amp; daily hygiene</span></div>
         </div>
         <!-- Companion Care -->
         <div class="service-pill">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>Companion Care</span>
+          <div class="service-pill-text"><span class="pill-name">Companion Care</span><span class="pill-desc">Companionship &amp; emotional support</span></div>
         </div>
         <!-- Memory Support -->
         <div class="service-pill">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 1 8 8c0 3-1.5 5.5-4 7v3H8v-3c-2.5-1.5-4-4-4-7a8 8 0 0 1 8-8z"/><line x1="9" y1="22" x2="15" y2="22"/></svg>
-          <span>Memory Support</span>
+          <div class="service-pill-text"><span class="pill-name">Memory Support</span><span class="pill-desc">Alzheimer's &amp; dementia care</span></div>
         </div>
         <!-- Overnight -->
         <div class="service-pill">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <span>Overnight &amp; 24-Hour</span>
+          <div class="service-pill-text"><span class="pill-name">Overnight &amp; 24-Hour</span><span class="pill-desc">Round-the-clock supervision</span></div>
         </div>
         <!-- Respite Care -->
         <div class="service-pill">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-          <span>Respite Care</span>
+          <div class="service-pill-text"><span class="pill-name">Respite Care</span><span class="pill-desc">Flexible relief for family caregivers</span></div>
         </div>
         <!-- Transitional -->
         <div class="service-pill">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M14 2l-2 5-2-5"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span>Transitional &amp; Post-Discharge</span>
+          <div class="service-pill-text"><span class="pill-name">Transitional &amp; Post-Discharge</span><span class="pill-desc">Safe recovery &amp; readmission prevention</span></div>
         </div>
       </div>
       <p class="bottom-note anim-item">Private pay. No contracts. Care starts within 24 hours.</p>
@@ -737,14 +863,14 @@ body::after {
 
   <!-- ======================== SLIDE 9: CONTACT ======================== -->
   <section class="slide s9" data-slide="8">
-    <div class="slide-bg" data-parallax="0.03"></div>
+    <div class="slide-bg"></div>
     <div class="slide-bg-overlay"></div>
-    <img class="euc-branch" src="/images/eucalyptus-branch.png" alt="" data-parallax="-0.02" />
+    <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
     <div class="slide-content">
       <img class="logomark anim-item" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
       <h2 class="headline anim-item">Questions? We're here.</h2>
       <p class="body-text anim-item">Reach out anytime to learn more about partnering with Jane's Home Care.</p>
-      <hr class="gold-line gold-line-center anim-item" />
+      <hr class="gold-line-expand anim-item" />
       <div class="contact-links anim-item">
         <a href="tel:5592962189" class="phone-link">(559) 296-2189</a>
         <a href="mailto:info@janeshomecare.com" class="email-link">info@janeshomecare.com</a>
@@ -758,78 +884,89 @@ body::after {
 
 <script>
 (function() {
-  const TOTAL = 9;
-  const deck = document.getElementById('deck');
-  const counter = document.getElementById('slideCounter');
-  const progressEl = document.getElementById('progress');
-  const slides = document.querySelectorAll('.slide');
-  let current = 0;
-  let isTransitioning = false;
-  const TRANSITION_MS = 800;
+  var TOTAL = 9;
+  var deck = document.getElementById('deck');
+  var counter = document.getElementById('slideCounter');
+  var progressEl = document.getElementById('progress');
+  var slides = document.querySelectorAll('.slide');
+  var current = 0;
+  var isTransitioning = false;
+  var TRANSITION_MS = 800;
 
   // Build progress dots
-  for (let i = 0; i < TOTAL; i++) {
-    const dot = document.createElement('div');
+  for (var i = 0; i < TOTAL; i++) {
+    var dot = document.createElement('div');
     dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
+    (function(idx) { dot.addEventListener('click', function() { goTo(idx); }); })(i);
     progressEl.appendChild(dot);
   }
-  const dots = progressEl.querySelectorAll('.dot');
+  var dots = progressEl.querySelectorAll('.dot');
 
   function goTo(index) {
     if (isTransitioning || index === current || index < 0 || index >= TOTAL) return;
     isTransitioning = true;
 
-    // Mark leaving
+    // Mark leaving — remove active and add leaving
     slides[current].classList.add('leaving');
     slides[current].classList.remove('active');
 
+    // Reset standard-card visibility on slide 7 when leaving
+    if (current === 6) {
+      var cards = slides[6].querySelectorAll('.standard-card');
+      // They'll reset naturally when leaving class is processed
+    }
+
+    var prev = current;
     current = index;
     deck.style.transform = 'translateX(-' + (current * 100) + 'vw)';
     counter.textContent = (current + 1) + ' / ' + TOTAL;
 
     // Update dots
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle('active', i === current);
+    }
 
-    // Activate new slide after a short delay
-    setTimeout(() => {
-      slides.forEach(s => s.classList.remove('leaving'));
+    // After a brief delay, clear leaving and set active on new slide
+    setTimeout(function() {
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('leaving');
+      }
       slides[current].classList.add('active');
-    }, 150);
+    }, 100);
 
-    setTimeout(() => { isTransitioning = false; }, TRANSITION_MS);
+    setTimeout(function() { isTransitioning = false; }, TRANSITION_MS);
   }
 
   function next() { goTo(current + 1); }
   function prev() { goTo(current - 1); }
 
   // Mouse wheel (debounced)
-  let wheelTimeout = null;
-  window.addEventListener('wheel', (e) => {
+  var wheelTimeout = null;
+  window.addEventListener('wheel', function(e) {
     e.preventDefault();
     if (wheelTimeout) return;
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
     if (Math.abs(delta) < 15) return;
     if (delta > 0) next(); else prev();
-    wheelTimeout = setTimeout(() => { wheelTimeout = null; }, 600);
+    wheelTimeout = setTimeout(function() { wheelTimeout = null; }, 600);
   }, { passive: false });
 
   // Arrow keys
-  window.addEventListener('keydown', (e) => {
+  window.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); next(); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
   });
 
   // Touch swipe
-  let touchStartX = 0;
-  let touchStartY = 0;
-  window.addEventListener('touchstart', (e) => {
+  var touchStartX = 0;
+  var touchStartY = 0;
+  window.addEventListener('touchstart', function(e) {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
   }, { passive: true });
-  window.addEventListener('touchend', (e) => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    const dy = e.changedTouches[0].clientY - touchStartY;
+  window.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
     if (dx < 0) next(); else prev();
   }, { passive: true });
@@ -837,26 +974,8 @@ body::after {
   // Begin button
   document.getElementById('beginBtn').addEventListener('click', next);
 
-  // Parallax on slide transition (subtle shift of bg images)
-  const parallaxEls = document.querySelectorAll('[data-parallax]');
-  function updateParallax() {
-    const offset = current * window.innerWidth;
-    parallaxEls.forEach(el => {
-      const speed = parseFloat(el.dataset.parallax);
-      el.style.transform = 'translateX(' + (-offset * speed) + 'px)';
-    });
-  }
-
-  // Override goTo to include parallax
-  const _goTo = goTo;
-  // Patch parallax into existing goTo
-  const origTransform = deck.style.transform;
-  const observer = new MutationObserver(() => updateParallax());
-  observer.observe(deck, { attributes: true, attributeFilter: ['style'] });
-
-  // Initialize first slide
+  // Initialize first slide as active
   slides[0].classList.add('active');
-  updateParallax();
 })();
 </script>
 
