@@ -70,11 +70,16 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .s3 .it { color: var(--sage); font-style: italic; font-family: 'Playfair Display', serif; font-size: 16px; margin-top: 8px; }
 
 /* S4 */
-.s4 { background: #111; color: white; }
-.s4 .bg { background-image: url('/images/slide-gold.jpg'); }
-.s4 .bg-ov { background: rgba(0,0,0,0.5); }
+.s4 { background: linear-gradient(135deg, #0a0a0a 0%, #1a1510 50%, #0a0a0a 100%); color: white; }
 .s4 .sc { text-align: center; }
-.s4 .bt { font-family: 'Playfair Display', serif; font-size: 56px; color: var(--gold); letter-spacing: 4px; margin-bottom: 48px; }
+.s4 .bt {
+  font-family: 'Playfair Display', serif; font-size: 56px; letter-spacing: 4px; margin-bottom: 48px;
+  background: linear-gradient(90deg, #B8975A 0%, #D4B978 25%, #F0D89A 50%, #D4B978 75%, #B8975A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
+}
 .gcc { display: flex; gap: 24px; justify-content: center; }
 .gc { flex: 1; max-width: 280px; padding: 32px 24px; border: 1px solid rgba(184,151,90,0.3); border-radius: 14px; background: rgba(255,255,255,0.04); text-align: center; }
 .gc svg { width: 36px; height: 36px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 16px; }
@@ -232,6 +237,22 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
   100% { transform: translateY(-80vh) translateX(-10px); opacity: 0; }
 }
 
+/* SUBTLE PARTICLES — S4 */
+.s4 .particles::before {
+  box-shadow:
+    100px 80vh 3px rgba(184,151,90,0.5), 200px 85vh 2px rgba(212,185,120,0.4), 350px 75vh 4px rgba(184,151,90,0.5),
+    500px 90vh 2px rgba(212,185,120,0.4), 650px 70vh 3px rgba(184,151,90,0.5), 800px 88vh 2px rgba(212,185,120,0.4),
+    950px 78vh 4px rgba(184,151,90,0.5), 1100px 82vh 2px rgba(212,185,120,0.4), 1250px 92vh 3px rgba(184,151,90,0.5),
+    1400px 76vh 2px rgba(212,185,120,0.4), 300px 95vh 3px rgba(184,151,90,0.5), 700px 98vh 2px rgba(212,185,120,0.4);
+}
+.s4 .particles::after {
+  box-shadow:
+    150px 85vh 2px rgba(212,185,120,0.4), 300px 90vh 3px rgba(184,151,90,0.5), 450px 80vh 2px rgba(212,185,120,0.4),
+    600px 95vh 4px rgba(184,151,90,0.5), 750px 72vh 2px rgba(212,185,120,0.4), 900px 88vh 3px rgba(184,151,90,0.5),
+    1050px 82vh 2px rgba(212,185,120,0.4), 1200px 78vh 3px rgba(184,151,90,0.5), 1350px 92vh 2px rgba(212,185,120,0.4),
+    250px 70vh 3px rgba(184,151,90,0.5), 550px 96vh 2px rgba(212,185,120,0.4), 850px 74vh 3px rgba(184,151,90,0.5);
+}
+
 /* GOLD CARD GLOW — S4 */
 .gc { transition: all 0.4s ease; }
 .gc:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(184,151,90,0.15), 0 10px 40px rgba(0,0,0,0.2); transform: translateY(-6px); }
@@ -321,7 +342,6 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
   </section>
 
   <section class="slide s4">
-    <div class="bg"></div><div class="bg-ov"></div>
     <div class="particles"></div>
     <div class="sc">
       <div class="bt ai">THE GOLD STANDARD</div>
