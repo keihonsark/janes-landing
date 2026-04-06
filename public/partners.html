@@ -52,6 +52,7 @@ a, button, .dot { cursor: pointer; }
 /* SLIDE TRACK */
 .deck {
   display: flex; height: 100vh; overflow: hidden;
+  position: relative; will-change: transform;
   transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
@@ -168,12 +169,12 @@ a, button, .dot { cursor: pointer; }
   display: inline-flex; align-items: center; gap: 8px; color: var(--gold);
   font-size: 14px; font-weight: 600; letter-spacing: 1px;
   border: none; background: none; font-family: 'DM Sans', sans-serif;
-  transition: gap 0.3s; animation: beginBounce 2s ease-in-out infinite;
+  transition: gap 0.3s; animation: bounceRight 2s ease-in-out infinite;
 }
 .begin-arrow:hover { gap: 14px; animation: none; }
 .begin-arrow svg { transition: transform 0.3s; }
 .begin-arrow:hover svg { transform: translateX(4px); }
-@keyframes beginBounce {
+@keyframes bounceRight {
   0%,100% { transform: translateX(0); }
   50% { transform: translateX(8px); }
 }
@@ -190,21 +191,16 @@ a, button, .dot { cursor: pointer; }
 .s1 .logo-hero { height: 56px; margin-bottom: 40px; }
 .s1 .title-main {
   font-family: 'Playfair Display', serif; font-size: 64px;
-  color: var(--gold); font-weight: 700; line-height: 1.1;
-  position: relative;
-}
-.s1 .title-shimmer {
-  position: relative; display: inline-block;
-}
-.s1 .title-shimmer::before {
-  content: ''; position: absolute; inset: -20px -40px;
-  background: radial-gradient(ellipse at 50% 50%, rgba(184,151,90,0.12) 0%, transparent 70%);
+  font-weight: 700; line-height: 1.1;
+  background: linear-gradient(90deg, #B8975A 0%, #D4B978 25%, #F0D89A 50%, #D4B978 75%, #B8975A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
   animation: goldShimmer 4s ease-in-out infinite;
-  border-radius: 50%; z-index: -1; pointer-events: none;
 }
 @keyframes goldShimmer {
-  0%,100% { opacity: 0.4; transform: scale(0.95); }
-  50% { opacity: 1; transform: scale(1.1); }
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 .s1 .title-sub {
   font-family: 'Playfair Display', serif; font-size: 52px;
@@ -631,7 +627,7 @@ a, button, .dot { cursor: pointer; }
     <div class="slide-content">
       <img class="logo-hero anim-item" src="/images/Janes Home Care Logo_Primary.png" alt="Jane's Home Care" />
       <div class="anim-item" style="margin-bottom: 4px;">
-        <div class="title-main"><span class="title-shimmer">The Gold Standard</span></div>
+        <div class="title-main">The Gold Standard</div>
       </div>
       <div class="anim-item">
         <div class="title-sub">in Home Care</div>
@@ -932,7 +928,7 @@ a, button, .dot { cursor: pointer; }
         slides[i].classList.remove('leaving');
       }
       slides[current].classList.add('active');
-    }, 100);
+    }, 400);
 
     setTimeout(function() { isTransitioning = false; }, TRANSITION_MS);
   }
