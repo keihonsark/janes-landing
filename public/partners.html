@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Jane's Home Care — Referral Partner Program</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jane's Home Care — The Gold Standard in Home Care</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --cream: #F7F4EF;
-  --cream-dark: #EDE8DF;
   --sage: #6B7B5E;
-  --sage-light: #8A9A7B;
   --sage-dark: #4A5640;
   --charcoal: #2D3A2E;
   --gold: #B8975A;
@@ -18,971 +16,296 @@
   --text: #3D4A3E;
   --text-light: #6E7B6F;
 }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow: hidden; height: 100vh; width: 100vw; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+.deck { display: flex; height: 100vh; transition: transform 0.8s cubic-bezier(0.65,0,0.35,1); }
+.slide { min-width: 100vw; width: 100vw; height: 100vh; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.sc { position: relative; z-index: 5; max-width: 1100px; width: 100%; padding: 0 60px; }
+.bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-size: cover; background-position: center; }
+.bg-ov { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
 
-html, body {
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text);
-  background: var(--charcoal);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.headline { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
+.body { font-size: 17px; line-height: 1.75; }
+.gold-line { width: 60px; height: 2px; background: var(--gold); border: none; margin: 24px 0; }
 
-/* GRAIN OVERLAY */
-body::after {
-  content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 9999; opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-}
+.nav-logo { position: fixed; top: 24px; left: 32px; z-index: 100; height: 34px; opacity: 0.85; }
+.arr { position: fixed; top: 50%; transform: translateY(-50%); z-index: 100; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: white; font-size: 18px; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s; }
+.arr:hover { background: rgba(255,255,255,0.2); }
+.arr-l { left: 20px; }
+.arr-r { right: 20px; }
+.dots { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; gap: 10px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--gold); background: transparent; cursor: pointer; transition: background 0.3s; }
+.dot.on { background: var(--gold); }
+.counter { position: fixed; bottom: 28px; right: 32px; z-index: 100; font-size: 13px; color: rgba(255,255,255,0.5); }
 
-/* CURSOR */
-a, button, .dot { cursor: pointer; }
+/* S1 */
+.s1 { background: var(--charcoal); color: white; }
+.s1 .bg { background-image: url('/images/bg-dark.jpg'); }
+.s1 .bg-ov { background: rgba(0,0,0,0.4); }
+.s1 .sc { text-align: center; }
+.s1 .logo-c { height: 50px; margin-bottom: 36px; }
+.s1 .tg { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700; color: var(--gold); line-height: 1.1; }
+.s1 .ts { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--cream); font-weight: 400; margin-bottom: 8px; }
+.s1 .lbl { font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--cream); opacity: 0.7; margin-top: 28px; }
+.s1 .begin { margin-top: 50px; color: var(--gold); font-size: 15px; font-weight: 600; background: none; border: none; cursor: pointer; letter-spacing: 1px; font-family: 'DM Sans', sans-serif; }
 
-/* FIXED NAV LOGO */
-.nav-logo {
-  position: fixed; top: 24px; left: 32px; z-index: 100;
-  height: 34px; opacity: 0.9; transition: opacity 0.3s;
-}
-.nav-logo:hover { opacity: 1; }
+/* S2 */
+.s2 { background: var(--charcoal); color: white; }
+.s2 .bg { background-image: url('/images/slide-problem.jpg'); }
+.s2 .bg-ov { background: rgba(0,0,0,0.55); }
+.s2 .headline { font-size: 44px; color: white; max-width: 600px; }
+.s2 .body { color: rgba(255,255,255,0.65); max-width: 500px; }
 
-/* SLIDE TRACK */
-.deck {
-  display: flex; height: 100vh; overflow: hidden;
-  position: relative;
-  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
-}
+/* S3 */
+.s3 { background: var(--cream); }
+.s3 .bg { background-image: url('/images/bg-warm.jpg'); }
+.s3 .bg-ov { background: rgba(247,244,239,0.85); }
+.s3 .sc { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.s3 .lm { height: 50px; margin-bottom: 24px; }
+.s3 .headline { font-size: 42px; color: var(--charcoal); max-width: 800px; }
+.s3 .body { color: var(--text-light); font-size: 18px; }
+.s3 .it { color: var(--sage); font-style: italic; font-family: 'Playfair Display', serif; font-size: 16px; margin-top: 8px; }
 
-/* INDIVIDUAL SLIDES */
-.slide {
-  min-width: 100vw; width: 100vw; height: 100vh; flex-shrink: 0;
-  position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-}
+/* S4 */
+.s4 { background: #111; color: white; }
+.s4 .bg { background-image: url('/images/slide-gold.jpg'); }
+.s4 .bg-ov { background: rgba(0,0,0,0.5); }
+.s4 .sc { text-align: center; }
+.s4 .bt { font-family: 'Playfair Display', serif; font-size: 56px; color: var(--gold); letter-spacing: 4px; margin-bottom: 48px; }
+.gcc { display: flex; gap: 24px; justify-content: center; }
+.gc { flex: 1; max-width: 280px; padding: 32px 24px; border: 1px solid rgba(184,151,90,0.3); border-radius: 14px; background: rgba(255,255,255,0.04); text-align: center; }
+.gc svg { width: 36px; height: 36px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 16px; }
+.gc h3 { color: white; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.gc p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.5; }
 
-/* SLIDE BACKGROUNDS */
-.slide-bg {
-  position: absolute; inset: 0; background-size: cover; background-position: center;
-  transition: transform 1.6s ease;
-}
-.slide-bg-overlay {
-  position: absolute; inset: 0;
-}
-
-/* SLIDE CONTENT */
-.slide-content {
-  position: relative; z-index: 2; max-width: 1200px; width: 100%;
-  padding: 0 64px;
-}
-
-/* DECORATIVE EUCALYPTUS */
-.euc-watermark {
-  position: absolute; pointer-events: none; z-index: 1;
-  opacity: 0.06;
-}
-
-/* ANIMATE IN/OUT */
-.anim-item {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.slide.active .anim-item { opacity: 1 !important; transform: translateY(0) !important; }
-.slide.leaving .anim-item { opacity: 0; transform: translateY(-20px); transition-duration: 0.35s; }
-
-/* STAGGER DELAYS */
-.slide.active .anim-item:nth-child(1) { transition-delay: 0.05s; }
-.slide.active .anim-item:nth-child(2) { transition-delay: 0.15s; }
-.slide.active .anim-item:nth-child(3) { transition-delay: 0.25s; }
-.slide.active .anim-item:nth-child(4) { transition-delay: 0.35s; }
-.slide.active .anim-item:nth-child(5) { transition-delay: 0.45s; }
-.slide.active .anim-item:nth-child(6) { transition-delay: 0.55s; }
-.slide.active .anim-item:nth-child(7) { transition-delay: 0.65s; }
-.slide.active .anim-item:nth-child(8) { transition-delay: 0.75s; }
-.slide.leaving .anim-item { transition-delay: 0s !important; }
-
-/* PROGRESS DOTS */
-.progress {
-  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
-  z-index: 100; display: flex; gap: 10px; align-items: center;
-}
-.dot {
-  width: 10px; height: 10px; border-radius: 50%;
-  border: 1.5px solid rgba(184,151,90,0.5);
-  background: transparent;
-  transition: all 0.4s ease;
-}
-.dot.active {
-  background: var(--gold); border-color: var(--gold);
-  box-shadow: 0 0 8px rgba(184,151,90,0.4);
-}
-.dot:hover { border-color: var(--gold); }
-
-/* SLIDE COUNTER */
-.slide-counter {
-  position: fixed; bottom: 28px; right: 32px; z-index: 100;
-  font-size: 13px; font-weight: 500; letter-spacing: 1px;
-  color: rgba(184,151,90,0.7); font-family: 'DM Sans', sans-serif;
-}
-
-/* TYPOGRAPHY HELPERS */
-.eyebrow {
-  font-size: 11px; font-weight: 700; letter-spacing: 5px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
-}
-.headline {
-  font-family: 'Playfair Display', serif; line-height: 1.15;
-  margin-bottom: 24px; font-weight: 700;
-}
-.body-text {
-  font-size: 17px; line-height: 1.75; max-width: 520px;
-}
-
-/* GOLD HR */
-.gold-line {
-  width: 60px; height: 1.5px; background: var(--gold); border: none;
-  margin: 28px 0;
-}
-.gold-line-center { margin-left: auto; margin-right: auto; }
-
-/* EXPANDING GOLD LINE */
-.gold-line-expand {
-  width: 0; height: 1.5px; background: var(--gold); border: none;
-  margin: 28px auto; transition: width 0s;
-}
-.slide.active .gold-line-expand {
-  width: 60px; transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
-}
-
-/* PULSE DOT */
-.pulse-dot {
-  display: inline-block; width: 10px; height: 10px; border-radius: 50%;
-  background: var(--gold); margin-right: 14px; vertical-align: middle;
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(184,151,90,0.4); } 50% { opacity: 0.6; box-shadow: 0 0 0 8px rgba(184,151,90,0); } }
-
-/* BEGIN ARROW */
-.begin-arrow {
-  display: inline-flex; align-items: center; gap: 8px; color: var(--gold);
-  font-size: 14px; font-weight: 600; letter-spacing: 1px;
-  border: none; background: none; font-family: 'DM Sans', sans-serif;
-  transition: gap 0.3s; animation: bounceRight 2s ease-in-out infinite;
-}
-.begin-arrow:hover { gap: 14px; animation: none; }
-.begin-arrow svg { transition: transform 0.3s; }
-.begin-arrow:hover svg { transform: translateX(4px); }
-@keyframes bounceRight {
-  0%,100% { transform: translateX(0); }
-  50% { transform: translateX(8px); }
-}
-
-/* ============================================ */
-/* SLIDE 1 — TITLE                              */
-/* ============================================ */
-.s1 .slide-bg { background-image: url('/images/bg-dark.jpg'); }
-.s1 .slide-bg-overlay { background: rgba(0,0,0,0.45); }
-.s1 .slide-content {
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; text-align: center; height: 100%;
-}
-.s1 .logo-hero { height: 56px; margin-bottom: 40px; }
-.s1 .title-main {
-  font-family: 'Playfair Display', serif; font-size: 64px;
-  font-weight: 700; line-height: 1.1;
-  background: linear-gradient(90deg, #B8975A 0%, #D4B978 25%, #F0D89A 50%, #D4B978 75%, #B8975A 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: goldShimmer 4s ease-in-out infinite;
-}
-@keyframes goldShimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-.s1 .title-sub {
-  font-family: 'Playfair Display', serif; font-size: 52px;
-  color: var(--cream); font-weight: 400; line-height: 1.2;
-  margin-bottom: 6px;
-}
-.s1 .partner-label {
-  font-size: 12px; font-weight: 700; letter-spacing: 5px;
-  text-transform: uppercase; color: var(--cream); opacity: 0.7;
-  margin-top: 8px;
-}
-.s1 .euc-watermark {
-  right: 4%; bottom: 4%; width: 300px; opacity: 0.06;
-}
-.s1 .begin-wrap { position: absolute; bottom: 60px; }
-
-/* ============================================ */
-/* SLIDE 2 — THE PROBLEM                        */
-/* ============================================ */
-.s2 .slide-bg { background-image: url('/images/slide-problem.jpg'); }
-.s2 .slide-bg-overlay { background: rgba(0,0,0,0.6); }
-.s2 .slide-content { max-width: 1100px; }
-.s2 .headline { font-size: 44px; color: var(--white); max-width: 600px; }
-.s2 .body-text { color: rgba(255,255,255,0.65); max-width: 500px; }
-.s2 .euc-watermark {
-  right: 2%; bottom: 2%; width: 300px; opacity: 0.04;
-}
-
-/* ============================================ */
-/* SLIDE 3 — THE REFRAME                        */
-/* ============================================ */
-.s3 .slide-bg { background-image: url('/images/bg-warm.jpg'); background-size: cover; }
-.s3 .slide-bg-overlay { background: rgba(247,244,239,0.85); }
-.s3 .slide-content {
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; height: 100%; justify-content: center;
-}
-.s3 .logomark { height: 56px; margin-bottom: 36px; }
-.s3 .headline {
-  font-size: 44px; color: var(--charcoal); max-width: 800px;
-  margin-left: auto; margin-right: auto;
-}
-.s3 .body-text {
-  color: var(--text-light); font-size: 18px; max-width: 600px;
-  text-align: center;
-}
-.s3 .reframe-italic {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  font-size: 16px; color: var(--sage); margin-top: 4px;
-}
-.s3 .euc-watermark {
-  left: 5%; top: 10%; width: 280px; opacity: 0.05;
-}
-
-/* ============================================ */
-/* SLIDE 4 — THE GOLD STANDARD                  */
-/* ============================================ */
-.s4 .slide-bg { background-image: url('/images/slide-gold.jpg'); }
-.s4 .slide-bg-overlay { background: rgba(0,0,0,0.55); }
-.s4 .slide-content {
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; height: 100%; justify-content: center;
-}
-.s4 .headline {
-  font-size: 56px; color: var(--gold); letter-spacing: 4px;
-  text-transform: uppercase;
-}
-/* Gold gradient sweep on headline */
-.s4 .headline-sweep {
-  background: linear-gradient(90deg, var(--gold) 0%, #D4B77A 40%, var(--gold) 80%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: goldSweep 3s ease-in-out infinite;
-}
-@keyframes goldSweep {
-  0% { background-position: 100% 0; }
-  100% { background-position: -100% 0; }
-}
-
-/* Gold particles */
-.s4 .gold-particles {
-  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1;
-}
-.gold-particle {
-  position: absolute; width: 3px; height: 3px; border-radius: 50%;
-  background: var(--gold); opacity: 0;
-  animation: particleDrift 8s linear infinite;
-}
-.gold-particle:nth-child(1) { left: 15%; animation-delay: 0s; animation-duration: 7s; }
-.gold-particle:nth-child(2) { left: 30%; animation-delay: 1.5s; animation-duration: 9s; }
-.gold-particle:nth-child(3) { left: 50%; animation-delay: 3s; animation-duration: 6s; }
-.gold-particle:nth-child(4) { left: 65%; animation-delay: 0.8s; animation-duration: 8s; }
-.gold-particle:nth-child(5) { left: 80%; animation-delay: 2.2s; animation-duration: 10s; }
-.gold-particle:nth-child(6) { left: 25%; animation-delay: 4s; animation-duration: 7.5s; }
-.gold-particle:nth-child(7) { left: 70%; animation-delay: 5s; animation-duration: 8.5s; }
-.gold-particle:nth-child(8) { left: 45%; animation-delay: 1s; animation-duration: 9.5s; }
-@keyframes particleDrift {
-  0% { transform: translateY(100vh) scale(0); opacity: 0; }
-  10% { opacity: 0.25; }
-  50% { opacity: 0.15; }
-  90% { opacity: 0; }
-  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
-}
-
-.gold-cards {
-  display: flex; gap: 32px; margin-top: 52px;
-}
-.gold-card {
-  flex: 1; max-width: 320px;
-  border: 1.5px solid rgba(184,151,90,0.25); border-radius: 18px;
-  padding: 48px 32px 42px; background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
-  animation: cardBorderPulse 4s ease-in-out infinite;
-}
-.gold-card:nth-child(2) { animation-delay: 1.3s; }
-.gold-card:nth-child(3) { animation-delay: 2.6s; }
-@keyframes cardBorderPulse {
-  0%,100% { border-color: rgba(184,151,90,0.2); }
-  50% { border-color: rgba(184,151,90,0.5); }
-}
-.gold-card:hover {
-  border-color: var(--gold); transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(184,151,90,0.12);
-}
-.gold-card-icon {
-  width: 56px; height: 56px; margin: 0 auto 22px;
-  display: flex; align-items: center; justify-content: center;
-}
-.gold-card h3 {
-  font-family: 'DM Sans', sans-serif; font-size: 18px;
-  font-weight: 700; color: var(--white); margin-bottom: 10px;
-}
-.gold-card p {
-  font-size: 14.5px; color: rgba(255,255,255,0.55); line-height: 1.55;
-}
-
-/* ============================================ */
-/* SLIDE 5 — NP-LED                             */
-/* ============================================ */
+/* S5 */
 .s5 { background: var(--cream); }
-.s5 .slide-content {
-  display: grid; grid-template-columns: 0.45fr 0.55fr;
-  gap: 64px; align-items: center; height: 100%;
-  max-width: 1100px;
-}
-.s5-photo {
-  border-radius: 20px; overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.12);
-  max-height: 70vh; position: relative;
-  transform: scale(0.95); opacity: 0;
-  transition: transform 0.9s cubic-bezier(0.23,1,0.32,1), opacity 0.9s ease;
-}
-.slide.active .s5-photo {
-  transform: scale(1); opacity: 1;
-}
-.s5-photo img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
-.s5-text { padding: 20px 0; }
-.s5-text .headline { font-size: 34px; color: var(--charcoal); }
-.s5-text .body-text { color: var(--text-light); }
-.s5-text .gold-border-left {
-  border-left: 3px solid var(--gold); padding-left: 24px;
-}
-/* Animated gold accent line */
-.s5-text .gold-accent-draw {
-  height: 2px; background: var(--gold); margin-bottom: 24px;
-  width: 0; transition: width 0s;
-}
-.slide.active .s5-text .gold-accent-draw {
-  width: 60px; transition: width 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s;
-}
-.credential-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(107,123,94,0.08); border-radius: 6px;
-  padding: 8px 16px; font-size: 13px; font-weight: 600;
-  color: var(--sage); margin-top: 24px;
-}
-.credential-badge svg { flex-shrink: 0; }
+.s5 .sc { display: flex; gap: 60px; align-items: center; }
+.s5p { flex: 0 0 340px; }
+.s5p img { width: 100%; border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+.s5t { flex: 1; }
+.s5t .headline { font-size: 34px; color: var(--charcoal); }
+.s5t .body { color: var(--text-light); border-left: 3px solid var(--gold); padding-left: 20px; }
+.s5b { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 8px 16px; border: 1px solid var(--sage); border-radius: 6px; font-size: 13px; color: var(--sage); font-weight: 600; }
 
-/* ============================================ */
-/* SLIDE 6 — PRIORITY REFERRAL LINE             */
-/* ============================================ */
-.s6 { background: var(--charcoal); }
-.s6 .slide-content {
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; height: 100%; justify-content: center;
-}
-.s6 .headline { font-size: 40px; color: var(--white); }
-.s6 .phone-big {
-  font-family: 'Playfair Display', serif; font-size: 52px;
-  color: var(--gold); text-decoration: none; display: block;
-  margin: 12px 0 6px;
-  text-shadow: 0 0 20px rgba(184,151,90,0.15);
-  animation: phoneGlow 3s ease-in-out infinite;
-}
-@keyframes phoneGlow {
-  0%,100% { text-shadow: 0 0 20px rgba(184,151,90,0.1); }
-  50% { text-shadow: 0 0 30px rgba(184,151,90,0.3); }
-}
-.s6 .phone-big:hover { text-shadow: 0 0 40px rgba(184,151,90,0.4); }
-.s6 .phone-sub { color: rgba(255,255,255,0.45); font-size: 14px; margin-bottom: 52px; }
+/* S6 */
+.s6 { background: var(--sage-dark); color: white; }
+.s6 .sc { text-align: center; }
+.s6 .headline { font-size: 40px; color: white; margin-bottom: 28px; }
+.s6 .ph { font-family: 'Playfair Display', serif; font-size: 52px; color: var(--gold); text-decoration: none; display: block; margin-bottom: 8px; }
+.s6 .av { color: rgba(255,255,255,0.45); font-size: 14px; margin-bottom: 48px; }
+.steps { display: flex; justify-content: center; align-items: center; max-width: 700px; margin: 0 auto; }
+.step { text-align: center; flex: 1; }
+.sn { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--gold); margin-bottom: 4px; }
+.sl { color: white; font-size: 14px; font-weight: 600; }
+.sln { width: 80px; height: 1px; background: var(--gold); opacity: 0.4; }
 
-.steps-row {
-  display: flex; align-items: flex-start; gap: 0;
-  max-width: 700px; width: 100%; position: relative;
-}
-/* Animated connecting line */
-.steps-row .steps-line {
-  position: absolute; top: 24px; left: 15%; right: 15%;
-  height: 1px; overflow: hidden;
-}
-.steps-row .steps-line::after {
-  content: ''; display: block; width: 100%; height: 100%;
-  background: linear-gradient(90deg, var(--gold), var(--gold));
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0s;
-}
-.slide.active .steps-row .steps-line::after {
-  transform: scaleX(1);
-  transition: transform 1s cubic-bezier(0.25,0.46,0.45,0.94) 0.5s;
-}
-.step-item {
-  flex: 1; text-align: center; position: relative;
-}
-.step-icon {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(184,151,90,0.12); border: 1px solid rgba(184,151,90,0.3);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 14px; position: relative; z-index: 2;
-  opacity: 0; transform: scale(0.5);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.slide.active .step-item:nth-child(2) .step-icon { opacity: 1; transform: scale(1); transition-delay: 0.8s; }
-.slide.active .step-item:nth-child(3) .step-icon { opacity: 1; transform: scale(1); transition-delay: 1.1s; }
-.slide.active .step-item:nth-child(4) .step-icon { opacity: 1; transform: scale(1); transition-delay: 1.4s; }
-.step-num {
-  font-family: 'Playfair Display', serif; font-size: 13px;
-  color: var(--gold); font-weight: 700; margin-bottom: 4px;
-}
-.step-label { color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 500; }
+/* S7 */
+.s7 { background: var(--cream); }
+.s7 .bg { background-image: url('/images/bg-warm.jpg'); }
+.s7 .bg-ov { background: rgba(247,244,239,0.88); }
+.s7 .sc { text-align: center; }
+.s7 .headline { font-size: 36px; color: var(--charcoal); margin-bottom: 40px; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
+.sgc { background: white; border-radius: 12px; padding: 24px; display: flex; gap: 16px; align-items: flex-start; text-align: left; border: 1px solid rgba(107,123,94,0.08); }
+.sgc svg { width: 32px; height: 32px; stroke: var(--sage); fill: none; stroke-width: 1.5; flex-shrink: 0; margin-top: 2px; }
+.sgc h4 { font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+.sgc p { font-size: 13px; color: var(--text-light); line-height: 1.5; }
 
-/* ============================================ */
-/* SLIDE 7 — CAREGIVER STANDARD                 */
-/* ============================================ */
-.s7 .slide-bg { background-image: url('/images/bg-warm.jpg'); background-size: cover; }
-.s7 .slide-bg-overlay { background: rgba(247,244,239,0.88); }
-.s7 .slide-content {
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; height: 100%; justify-content: center;
-}
-.s7 .headline { font-size: 38px; color: var(--charcoal); max-width: 700px; }
-.standard-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-  margin-top: 44px; max-width: 720px; width: 100%; text-align: left;
-}
-.standard-card {
-  background: var(--white); border-radius: 14px; padding: 28px 24px;
-  border: 1.5px solid rgba(107,123,94,0.08);
-  display: flex; gap: 18px; align-items: flex-start;
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-  opacity: 0; transform: translateY(20px);
-}
-.standard-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 35px rgba(0,0,0,0.06);
-  border-color: var(--gold);
-}
-/* Staggered card entrance */
-.slide.active .standard-card { opacity: 1; transform: translateY(0); }
-.slide.active .standard-card:nth-child(1) { transition-delay: 0.2s; }
-.slide.active .standard-card:nth-child(2) { transition-delay: 0.35s; }
-.slide.active .standard-card:nth-child(3) { transition-delay: 0.5s; }
-.slide.active .standard-card:nth-child(4) { transition-delay: 0.65s; }
-.standard-card-icon {
-  width: 40px; height: 40px; min-width: 40px; border-radius: 10px;
-  background: rgba(107,123,94,0.08);
-  display: flex; align-items: center; justify-content: center;
-}
-.standard-card h4 { font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
-.standard-card p { font-size: 13.5px; color: var(--text-light); line-height: 1.5; }
-.s7 .euc-watermark { right: 3%; bottom: 8%; width: 300px; opacity: 0.05; }
-
-/* ============================================ */
-/* SLIDE 8 — SERVICES                           */
-/* ============================================ */
+/* S8 */
 .s8 { background: var(--cream); }
-.s8 .slide-content {
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; height: 100%; justify-content: center;
-}
-.s8 .headline { font-size: 38px; color: var(--charcoal); }
-.service-pills {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  margin-top: 44px; max-width: 750px; width: 100%;
-}
-.service-pill {
-  display: flex; align-items: center; gap: 14px;
-  border: 1.5px solid rgba(107,123,94,0.18); border-radius: 14px;
-  padding: 20px 22px; background: var(--white);
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
-}
-.service-pill:hover {
-  border-color: var(--gold); transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
-}
-.service-pill svg { flex-shrink: 0; }
-.service-pill-text { display: flex; flex-direction: column; }
-.service-pill-text .pill-name {
-  font-size: 14px; font-weight: 700; color: var(--charcoal); line-height: 1.3;
-}
-.service-pill-text .pill-desc {
-  font-size: 12px; color: var(--text-light); line-height: 1.4; margin-top: 2px;
-}
-.s8 .bottom-note {
-  color: var(--text-light); font-size: 15px; margin-top: 36px;
-}
+.s8 .sc { text-align: center; }
+.s8 .headline { font-size: 36px; color: var(--charcoal); margin-bottom: 36px; }
+.svg { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 800px; margin: 0 auto 28px; }
+.sv { background: white; border: 1px solid rgba(107,123,94,0.1); border-radius: 10px; padding: 20px 16px; text-align: center; }
+.sv svg { width: 28px; height: 28px; stroke: var(--sage); fill: none; stroke-width: 1.5; margin-bottom: 8px; }
+.sv h4 { font-size: 14px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+.sv p { font-size: 12px; color: var(--text-light); line-height: 1.4; }
+.s8 .fn { color: var(--text-light); font-size: 14px; }
 
-/* ============================================ */
-/* SLIDE 9 — CONTACT                            */
-/* ============================================ */
-.s9 .slide-bg { background-image: url('/images/bg-dark.jpg'); }
-.s9 .slide-bg-overlay { background: rgba(0,0,0,0.5); }
-.s9 .slide-content {
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; height: 100%; justify-content: center;
-}
-.s9 .logomark { height: 52px; margin-bottom: 32px; }
-.s9 .headline { font-size: 42px; color: var(--white); }
-.s9 .body-text { color: rgba(255,255,255,0.55); text-align: center; max-width: 480px; }
-.s9 .contact-links { margin-top: 32px; display: flex; flex-direction: column; gap: 10px; }
-.s9 .contact-links a {
-  text-decoration: none; font-size: 17px; transition: color 0.3s, text-shadow 0.3s;
-}
-.s9 .contact-links .phone-link {
-  font-family: 'Playfair Display', serif; font-size: 28px;
-  color: var(--gold); font-weight: 600;
-}
-.s9 .contact-links .phone-link:hover { text-shadow: 0 0 16px rgba(184,151,90,0.35); }
-.s9 .contact-links .email-link { color: var(--white); font-weight: 500; }
-.s9 .contact-links .email-link:hover { color: var(--gold); text-shadow: 0 0 12px rgba(184,151,90,0.2); }
-.s9 .contact-links .web-link { color: rgba(255,255,255,0.5); font-size: 14px; }
-.s9 .contact-links .web-link:hover { color: rgba(255,255,255,0.8); }
-.s9 .euc-watermark {
-  left: 50%; top: 50%; width: 400px;
-  transform: translate(-50%, -50%); opacity: 0.04;
-}
-.s9 .footer-text {
-  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-  color: rgba(255,255,255,0.25); font-size: 12px; white-space: nowrap;
-}
+/* S9 */
+.s9 { background: var(--charcoal); color: white; }
+.s9 .bg { background-image: url('/images/bg-dark.jpg'); }
+.s9 .bg-ov { background: rgba(0,0,0,0.45); }
+.s9 .sc { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.s9 .lm { height: 50px; margin-bottom: 20px; }
+.s9 .headline { font-size: 42px; color: white; }
+.s9 .body { color: rgba(255,255,255,0.55); text-align: center; max-width: 480px; margin-bottom: 32px; }
+.s9 .ph { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); text-decoration: none; display: block; margin-bottom: 12px; }
+.s9 .em { color: white; font-size: 16px; text-decoration: none; display: block; margin-bottom: 8px; }
+.s9 .wb { color: rgba(255,255,255,0.4); font-size: 14px; text-decoration: none; display: block; }
+.s9 .fine { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.25); font-size: 11px; }
 
-/* ============================================ */
-/* RESPONSIVE                                   */
-/* ============================================ */
 @media (max-width: 768px) {
-  .nav-logo { height: 28px; top: 16px; left: 20px; }
-  .slide-content { padding: 0 28px; }
-  .slide-counter { font-size: 11px; right: 20px; bottom: 20px; }
-  .progress { bottom: 20px; gap: 8px; }
-  .dot { width: 8px; height: 8px; }
-
-  .s1 .title-main { font-size: 38px; }
-  .s1 .title-sub { font-size: 30px; }
-  .s1 .logo-hero { height: 40px; }
-
-  .s2 .headline { font-size: 30px; }
-  .s2 .body-text { font-size: 15px; }
-
-  .s3 .headline { font-size: 30px; }
-  .s3 .logomark { height: 44px; }
-
-  .s4 .headline { font-size: 32px; }
-  .gold-cards { flex-direction: column; align-items: center; gap: 16px; }
-  .gold-card { max-width: 300px; width: 100%; padding: 32px 24px; }
-
-  .s5 .slide-content {
-    grid-template-columns: 1fr; gap: 32px;
-    padding-top: 80px; padding-bottom: 40px;
-    overflow-y: auto; align-items: start;
-  }
-  .s5-photo { max-height: 40vh; }
-  .s5-text .headline { font-size: 26px; }
-
-  .s6 .headline { font-size: 28px; }
-  .s6 .phone-big { font-size: 34px; }
-  .steps-row { flex-direction: column; gap: 20px; max-width: 280px; }
-  .steps-row .steps-line { display: none; }
-
-  .s7 .headline { font-size: 28px; }
-  .standard-grid { grid-template-columns: 1fr; max-width: 360px; }
-
-  .s8 .headline { font-size: 28px; }
-  .service-pills { grid-template-columns: 1fr; max-width: 340px; }
-
-  .s9 .headline { font-size: 30px; }
-  .s9 .contact-links .phone-link { font-size: 24px; }
-  .s9 .footer-text { font-size: 10px; white-space: normal; text-align: center; max-width: 280px; }
+  .s1 .tg { font-size: 40px; } .s1 .ts { font-size: 30px; }
+  .s2 .headline { font-size: 30px; } .s3 .headline { font-size: 28px; }
+  .s4 .bt { font-size: 36px; } .gcc { flex-direction: column; align-items: center; }
+  .s5 .sc { flex-direction: column; } .s5p { flex: none; max-width: 280px; }
+  .sg { grid-template-columns: 1fr; } .svg { grid-template-columns: 1fr 1fr; }
+  .sc { padding: 0 24px; } .arr { display: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- FIXED NAV LOGO -->
 <img class="nav-logo" src="/images/Janes Home Care Logo_Primary.png" alt="Jane's Home Care" />
+<button class="arr arr-l" onclick="prev()">&#8592;</button>
+<button class="arr arr-r" onclick="nxt()">&#8594;</button>
+<div class="dots" id="dots"></div>
+<div class="counter" id="ctr">1 / 9</div>
 
-<!-- PROGRESS DOTS -->
-<div class="progress" id="progress"></div>
-
-<!-- SLIDE COUNTER -->
-<div class="slide-counter" id="slideCounter">1 / 9</div>
-
-<!-- NAV ARROWS -->
-<button id="prevBtn" style="position:fixed;left:20px;top:50%;z-index:100;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;width:48px;height:48px;border-radius:50%;font-size:20px;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">&larr;</button>
-<button id="nextBtn" style="position:fixed;right:20px;top:50%;z-index:100;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;width:48px;height:48px;border-radius:50%;font-size:20px;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">&rarr;</button>
-
-<!-- SLIDE DECK -->
 <div class="deck" id="deck">
 
-  <!-- ======================== SLIDE 1: TITLE ======================== -->
-  <section class="slide s1 active" data-slide="0">
-    <div class="slide-bg"></div>
-    <div class="slide-bg-overlay"></div>
-    <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
-    <div class="slide-content">
-      <img class="logo-hero anim-item" src="/images/Janes Home Care Logo_Primary.png" alt="Jane's Home Care" />
-      <div class="anim-item" style="margin-bottom: 4px;">
-        <div class="title-main">The Gold Standard</div>
-      </div>
-      <div class="anim-item">
-        <div class="title-sub">in Home Care</div>
-      </div>
-      <hr class="gold-line gold-line-center anim-item" />
-      <div class="partner-label anim-item">Referral Partner Program</div>
-    </div>
-    <div class="begin-wrap anim-item" style="position:absolute;bottom:56px;left:50%;transform:translateX(-50%);">
-      <button class="begin-arrow" id="beginBtn">
-        Begin
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+  <section class="slide s1">
+    <div class="bg"></div><div class="bg-ov"></div>
+    <div class="sc">
+      <img class="logo-c" src="/images/Janes Home Care Logo_Primary.png" alt="" /><br>
+      <div class="tg">The Gold Standard</div>
+      <div class="ts">in Home Care</div>
+      <hr class="gold-line" style="margin:20px auto" />
+      <div class="lbl">REFERRAL PARTNER PROGRAM</div>
+      <button class="begin" onclick="nxt()">Begin &rarr;</button>
     </div>
   </section>
 
-  <!-- ======================== SLIDE 2: THE PROBLEM ======================== -->
-  <section class="slide s2" data-slide="1">
-    <div class="slide-bg"></div>
-    <div class="slide-bg-overlay"></div>
-    <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
-    <div class="slide-content">
-      <div class="eyebrow anim-item">The Reality</div>
-      <h2 class="headline anim-item">Patients fall through the cracks after discharge.</h2>
-      <p class="body-text anim-item">Readmission rates climb. Families scramble. And most home care agencies make that transition harder &mdash; not easier.</p>
+  <section class="slide s2">
+    <div class="bg"></div><div class="bg-ov"></div>
+    <div class="sc">
+      <div class="eyebrow">The Reality</div>
+      <h2 class="headline">Patients fall through the cracks after discharge.</h2>
+      <p class="body">Readmission rates climb. Families scramble. And most home care agencies make that transition harder — not easier.</p>
     </div>
   </section>
 
-  <!-- ======================== SLIDE 3: THE REFRAME ======================== -->
-  <section class="slide s3" data-slide="2">
-    <div class="slide-bg"></div>
-    <div class="slide-bg-overlay"></div>
-    <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
-    <div class="slide-content">
-      <img class="logomark anim-item" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
-      <h2 class="headline anim-item">Home care should be an integral part of the treatment plan.</h2>
-      <p class="body-text anim-item">Contributing to better patient outcomes &mdash; not just filling a gap.</p>
-      <hr class="gold-line-expand anim-item" />
-      <p class="reframe-italic anim-item">That's why we built Jane's Home Care.</p>
+  <section class="slide s3">
+    <div class="bg"></div><div class="bg-ov"></div>
+    <div class="sc">
+      <img class="lm" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
+      <h2 class="headline">Home care should be an integral part of the treatment plan.</h2>
+      <p class="body">Contributing to better patient outcomes — not just filling a gap.</p>
+      <hr class="gold-line" />
+      <p class="it">That's why we built Jane's Home Care.</p>
     </div>
   </section>
 
-  <!-- ======================== SLIDE 4: THE GOLD STANDARD ======================== -->
-  <section class="slide s4" data-slide="3">
-    <div class="slide-bg"></div>
-    <div class="slide-bg-overlay"></div>
-    <div class="gold-particles">
-      <div class="gold-particle"></div><div class="gold-particle"></div>
-      <div class="gold-particle"></div><div class="gold-particle"></div>
-      <div class="gold-particle"></div><div class="gold-particle"></div>
-      <div class="gold-particle"></div><div class="gold-particle"></div>
-    </div>
-    <div class="slide-content">
-      <h2 class="headline headline-sweep anim-item">The Gold Standard</h2>
-      <div class="gold-cards anim-item">
-        <!-- Card 1: Stethoscope -->
-        <div class="gold-card">
-          <div class="gold-card-icon">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A2 2 0 0 0 4 4v1a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V4a2 2 0 0 0-.8-1.7"/><path d="M8 6v2a6 6 0 0 1-6 6v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4a6 6 0 0 1-6-6V6"/><path d="M15 2v4"/><path d="M15 10v1"/></svg>
-          </div>
-          <h3>NP-Led Oversight</h3>
-          <p>Clinical leadership on every care plan</p>
+  <section class="slide s4">
+    <div class="bg"></div><div class="bg-ov"></div>
+    <div class="sc">
+      <div class="bt">THE GOLD STANDARD</div>
+      <div class="gcc">
+        <div class="gc">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2" stroke-linecap="round"/></svg>
+          <h3>NP-Led Oversight</h3><p>Clinical leadership on every care plan</p>
         </div>
-        <!-- Card 2: Clock -->
-        <div class="gold-card">
-          <div class="gold-card-icon">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 8 14"/></svg>
-          </div>
-          <h3>&lt; 30 Min Response</h3>
-          <p>Priority line for referral partners</p>
+        <div class="gc">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>
+          <h3>&lt; 30 Min Response</h3><p>Priority line for referral partners</p>
         </div>
-        <!-- Card 3: Shield -->
-        <div class="gold-card">
-          <div class="gold-card-icon">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
-          <h3>Vetted Caregivers</h3>
-          <p>Highest paid, rigorously screened</p>
+        <div class="gc">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <h3>Vetted Caregivers</h3><p>Highest paid, rigorously screened</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================== SLIDE 5: NP-LED ======================== -->
-  <section class="slide s5" data-slide="4">
-    <div class="slide-content">
-      <div class="s5-photo">
-        <img src="/images/jessica.jpg" alt="Jessica Cassidy, FNP-C" />
+  <section class="slide s5">
+    <div class="sc">
+      <div class="s5p"><img src="/images/jessica.jpg" alt="Jessica Cassidy, NP" /></div>
+      <div class="s5t">
+        <div class="eyebrow">Clinical Leadership</div>
+        <h2 class="headline">Led by a Nurse Practitioner. Not just managed — overseen.</h2>
+        <p class="body">Jessica Cassidy, NP, personally develops and oversees every care plan. While we provide non-medical support, our clinical lens ensures nothing gets missed. Your patients are in the hands of someone who thinks like you do.</p>
+        <div class="s5b">&#10003; Board-Certified Family Nurse Practitioner</div>
       </div>
-      <div class="s5-text">
-        <div class="gold-accent-draw"></div>
-        <div class="eyebrow anim-item">Clinical Leadership</div>
-        <h2 class="headline anim-item">Led by a Nurse Practitioner. Not just managed &mdash; overseen.</h2>
-        <div class="gold-border-left anim-item">
-          <p class="body-text">Jessica Cassidy, NP, personally develops and oversees every care plan. While we provide non-medical support, our clinical lens ensures nothing gets missed. Your patients are in the hands of someone who thinks like you do.</p>
+    </div>
+  </section>
+
+  <section class="slide s6">
+    <div class="sc">
+      <div class="eyebrow">Exclusive for Partners</div>
+      <h2 class="headline">Your priority line to premium care.</h2>
+      <a href="tel:5592962189" class="ph">(559) 296-2189</a>
+      <div class="av">Available 7 days a week</div>
+      <div class="steps">
+        <div class="step"><div class="sn">1</div><div class="sl">You refer</div></div>
+        <div class="sln"></div>
+        <div class="step"><div class="sn">2</div><div class="sl">We respond in &lt; 30 min</div></div>
+        <div class="sln"></div>
+        <div class="step"><div class="sn">3</div><div class="sl">Care starts within 24 hrs</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s7">
+    <div class="bg"></div><div class="bg-ov"></div>
+    <div class="sc">
+      <div class="eyebrow">Our Caregiver Standard</div>
+      <h2 class="headline">We pay more. We expect more.<br>Your patients get more.</h2>
+      <div class="sg">
+        <div class="sgc">
+          <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6" stroke-linecap="round"/></svg>
+          <div><h4>Highest Wages in Fresno</h4><p>Attracting experienced, dedicated professionals</p></div>
         </div>
-        <div class="credential-badge anim-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"><path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/><polyline points="9 12 11 14 15 10"/></svg>
-          Board-Certified Family Nurse Practitioner
+        <div class="sgc">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
+          <div><h4>Rigorous Multi-Stage Vetting</h4><p>Background checks, references, skills assessment</p></div>
+        </div>
+        <div class="sgc">
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5" stroke-linecap="round"/></svg>
+          <div><h4>Ongoing Training &amp; NP Oversight</h4><p>Continuous education and clinical supervision</p></div>
+        </div>
+        <div class="sgc">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <div><h4>One Caregiver Per Client</h4><p>The same trusted face every visit</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================== SLIDE 6: PRIORITY REFERRAL LINE ======================== -->
-  <section class="slide s6" data-slide="5">
-    <div class="slide-content">
-      <div class="eyebrow anim-item">Exclusive for Partners</div>
-      <h2 class="headline anim-item">Your priority line to premium care.</h2>
-      <div class="anim-item">
-        <a href="tel:5592962189" class="phone-big"><span class="pulse-dot"></span>(559) 296-2189</a>
-        <div class="phone-sub">Available 7 days a week</div>
+  <section class="slide s8">
+    <div class="sc">
+      <div class="eyebrow">What We Provide</div>
+      <h2 class="headline">Comprehensive non-medical home care.</h2>
+      <div class="svg">
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg><h4>Personal Care</h4><p>Bathing, grooming, mobility</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg><h4>Companion Care</h4><p>Companionship, conversation</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><h4>Memory Support</h4><p>Alzheimer's &amp; dementia care</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><h4>Overnight &amp; 24-Hour</h4><p>Round-the-clock coverage</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg><h4>Respite Care</h4><p>Relief for family caregivers</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg><h4>Transitional Care</h4><p>Safe recovery at home</p></div>
       </div>
-      <div class="steps-row anim-item">
-        <div class="steps-line"></div>
-        <div class="step-item">
-          <div class="step-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.36a2 2 0 0 1-.45 2.11L8.09 9.45a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div class="step-num">1</div>
-          <div class="step-label">You refer</div>
-        </div>
-        <div class="step-item">
-          <div class="step-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 8 14"/></svg>
-          </div>
-          <div class="step-num">2</div>
-          <div class="step-label">We respond in &lt; 30 min</div>
-        </div>
-        <div class="step-item">
-          <div class="step-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="step-num">3</div>
-          <div class="step-label">Care starts within 24 hrs</div>
-        </div>
-      </div>
+      <p class="fn">Private pay. No contracts. Care starts within 24 hours.</p>
     </div>
   </section>
 
-  <!-- ======================== SLIDE 7: CAREGIVER STANDARD ======================== -->
-  <section class="slide s7" data-slide="6">
-    <div class="slide-bg"></div>
-    <div class="slide-bg-overlay"></div>
-    <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
-    <div class="slide-content">
-      <div class="eyebrow anim-item">Our Caregiver Standard</div>
-      <h2 class="headline anim-item">We pay more. We expect more.<br>Your patients get more.</h2>
-      <div class="standard-grid">
-        <div class="standard-card">
-          <div class="standard-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <div>
-            <h4>Highest Wages in Fresno</h4>
-            <p>Attracting experienced, dedicated professionals</p>
-          </div>
-        </div>
-        <div class="standard-card">
-          <div class="standard-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="8" r="4"/><path d="M6 20v-1a5 5 0 0 1 10 0v1"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg>
-          </div>
-          <div>
-            <h4>Rigorous Multi-Stage Vetting</h4>
-            <p>Background checks, references, skills assessment</p>
-          </div>
-        </div>
-        <div class="standard-card">
-          <div class="standard-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
-          </div>
-          <div>
-            <h4>Ongoing Training &amp; NP Oversight</h4>
-            <p>Continuous education and clinical supervision</p>
-          </div>
-        </div>
-        <div class="standard-card">
-          <div class="standard-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 14v3"/><path d="M9.5 18.5l2.5-1.5 2.5 1.5"/></svg>
-          </div>
-          <div>
-            <h4>One Caregiver Per Client</h4>
-            <p>The same trusted face every visit</p>
-          </div>
-        </div>
-      </div>
+  <section class="slide s9">
+    <div class="bg"></div><div class="bg-ov"></div>
+    <div class="sc">
+      <img class="lm" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
+      <h2 class="headline">Questions? We're here.</h2>
+      <p class="body">Reach out anytime to learn more about partnering with Jane's Home Care.</p>
+      <hr class="gold-line" />
+      <a href="tel:5592962189" class="ph">(559) 296-2189</a>
+      <a href="mailto:info@janeshomecare.com" class="em">info@janeshomecare.com</a>
+      <a href="https://www.janeshomecare.com" class="wb" target="_blank">www.janeshomecare.com</a>
     </div>
+    <div class="fine">Jane's Home Care · Fresno, Clovis &amp; Surrounding Areas · Licensed, Insured &amp; Bonded</div>
   </section>
 
-  <!-- ======================== SLIDE 8: SERVICES ======================== -->
-  <section class="slide s8" data-slide="7">
-    <div class="slide-content">
-      <div class="eyebrow anim-item">What We Provide</div>
-      <h2 class="headline anim-item">Comprehensive non-medical home care.</h2>
-      <div class="service-pills anim-item">
-        <!-- Personal Care -->
-        <div class="service-pill">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.3 2-3.5 2-5a7 7 0 0 0-14 0c0 1.5.5 3.7 2 5"/><path d="M12 10v4"/><path d="M10 12h4"/><circle cx="12" cy="20" r="2"/></svg>
-          <div class="service-pill-text"><span class="pill-name">Personal Care</span><span class="pill-desc">Bathing, grooming &amp; daily hygiene</span></div>
-        </div>
-        <!-- Companion Care -->
-        <div class="service-pill">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <div class="service-pill-text"><span class="pill-name">Companion Care</span><span class="pill-desc">Companionship &amp; emotional support</span></div>
-        </div>
-        <!-- Memory Support -->
-        <div class="service-pill">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 1 8 8c0 3-1.5 5.5-4 7v3H8v-3c-2.5-1.5-4-4-4-7a8 8 0 0 1 8-8z"/><line x1="9" y1="22" x2="15" y2="22"/></svg>
-          <div class="service-pill-text"><span class="pill-name">Memory Support</span><span class="pill-desc">Alzheimer's &amp; dementia care</span></div>
-        </div>
-        <!-- Overnight -->
-        <div class="service-pill">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <div class="service-pill-text"><span class="pill-name">Overnight &amp; 24-Hour</span><span class="pill-desc">Round-the-clock supervision</span></div>
-        </div>
-        <!-- Respite Care -->
-        <div class="service-pill">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-          <div class="service-pill-text"><span class="pill-name">Respite Care</span><span class="pill-desc">Flexible relief for family caregivers</span></div>
-        </div>
-        <!-- Transitional -->
-        <div class="service-pill">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M14 2l-2 5-2-5"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <div class="service-pill-text"><span class="pill-name">Transitional &amp; Post-Discharge</span><span class="pill-desc">Safe recovery &amp; readmission prevention</span></div>
-        </div>
-      </div>
-      <p class="bottom-note anim-item">Private pay. No contracts. Care starts within 24 hours.</p>
-    </div>
-  </section>
-
-  <!-- ======================== SLIDE 9: CONTACT ======================== -->
-  <section class="slide s9" data-slide="8">
-    <div class="slide-bg"></div>
-    <div class="slide-bg-overlay"></div>
-    <img class="euc-watermark" src="/images/eucalyptus-watermark.png" alt="" />
-    <div class="slide-content">
-      <img class="logomark anim-item" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
-      <h2 class="headline anim-item">Questions? We're here.</h2>
-      <p class="body-text anim-item">Reach out anytime to learn more about partnering with Jane's Home Care.</p>
-      <hr class="gold-line-expand anim-item" />
-      <div class="contact-links anim-item">
-        <a href="tel:5592962189" class="phone-link">(559) 296-2189</a>
-        <a href="mailto:info@janeshomecare.com" class="email-link">info@janeshomecare.com</a>
-        <a href="https://www.janeshomecare.com" class="web-link" target="_blank" rel="noopener">www.janeshomecare.com</a>
-      </div>
-    </div>
-    <div class="footer-text">Jane's Home Care &middot; Fresno, Clovis &amp; Surrounding Areas &middot; Licensed, Insured &amp; Bonded</div>
-  </section>
-
-</div><!-- end .deck -->
+</div>
 
 <script>
-(function() {
-  var TOTAL = 9;
-  var deck = document.getElementById('deck');
-  var counter = document.getElementById('slideCounter');
-  var progressEl = document.getElementById('progress');
-  var slides = document.querySelectorAll('.slide');
-  var current = 0;
-  var isTransitioning = false;
-  var TRANSITION_MS = 800;
-
-  // Build progress dots
-  for (var i = 0; i < TOTAL; i++) {
-    var dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    (function(idx) { dot.addEventListener('click', function() { goTo(idx); }); })(i);
-    progressEl.appendChild(dot);
-  }
-  var dots = progressEl.querySelectorAll('.dot');
-
-  function goTo(index) {
-    if (isTransitioning || index === current || index < 0 || index >= TOTAL) return;
-    isTransitioning = true;
-
-    // Mark leaving — remove active and add leaving
-    slides[current].classList.add('leaving');
-    slides[current].classList.remove('active');
-
-    // Reset standard-card visibility on slide 7 when leaving
-    if (current === 6) {
-      var cards = slides[6].querySelectorAll('.standard-card');
-      // They'll reset naturally when leaving class is processed
-    }
-
-    var prev = current;
-    current = index;
-    deck.style.transform = 'translateX(-' + (current * 100) + 'vw)';
-    counter.textContent = (current + 1) + ' / ' + TOTAL;
-
-    // Update dots
-    for (var i = 0; i < dots.length; i++) {
-      dots[i].classList.toggle('active', i === current);
-    }
-
-    // After a brief delay, clear leaving and set active on new slide
-    setTimeout(function() {
-      for (var i = 0; i < slides.length; i++) {
-        slides[i].classList.remove('leaving');
-      }
-      slides[current].classList.add('active');
-      console.log('Active class added to slide', current, slides[current].classList.toString());
-    }, 400);
-
-    setTimeout(function() { isTransitioning = false; }, TRANSITION_MS);
-  }
-
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
-
-  // Mouse wheel (debounced)
-  var wheelTimeout = null;
-  window.addEventListener('wheel', function(e) {
-    e.preventDefault();
-    if (wheelTimeout) return;
-    var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    if (Math.abs(delta) < 15) return;
-    if (delta > 0) next(); else prev();
-    wheelTimeout = setTimeout(function() { wheelTimeout = null; }, 600);
-  }, { passive: false });
-
-  // Arrow keys
-  window.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); next(); }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
-  });
-
-  // Touch swipe
-  var touchStartX = 0;
-  var touchStartY = 0;
-  window.addEventListener('touchstart', function(e) {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-  window.addEventListener('touchend', function(e) {
-    var dx = e.changedTouches[0].clientX - touchStartX;
-    var dy = e.changedTouches[0].clientY - touchStartY;
-    if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
-    if (dx < 0) next(); else prev();
-  }, { passive: true });
-
-  // Begin button
-  document.getElementById('beginBtn').addEventListener('click', next);
-  
-  // Nav arrows
-  document.getElementById('prevBtn').addEventListener('click', prev);
-  document.getElementById('nextBtn').addEventListener('click', next);
-
-  // Initialize first slide as active
-  slides[0].classList.add('active');
-})();
+var c=0,t=9,dk=document.getElementById('deck'),ct=document.getElementById('ctr'),de=document.getElementById('dots');
+for(var i=0;i<t;i++){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');(function(x){d.onclick=function(){go(x)}})(i);de.appendChild(d)}
+var ds=de.querySelectorAll('.dot');
+function go(i){if(i<0||i>=t||i===c)return;c=i;dk.style.transform='translateX(-'+(c*100)+'vw)';ct.textContent=(c+1)+' / '+t;for(var j=0;j<ds.length;j++)ds[j].classList.toggle('on',j===c)}
+function nxt(){go(c+1)}function prev(){go(c-1)}
+window.addEventListener('keydown',function(e){if(e.key==='ArrowRight')nxt();if(e.key==='ArrowLeft')prev()});
+var wt=null;window.addEventListener('wheel',function(e){e.preventDefault();if(wt)return;var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(Math.abs(d)<15)return;if(d>0)nxt();else prev();wt=setTimeout(function(){wt=null},600)},{passive:false});
+var tx=0;window.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});window.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)<50)return;if(dx<0)nxt();else prev()},{passive:true});
 </script>
-
 </body>
 </html>
