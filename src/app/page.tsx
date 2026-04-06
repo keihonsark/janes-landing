@@ -48,9 +48,11 @@ export default function Home() {
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [whoNeedsCare, setWhoNeedsCare] = useState("");
   const [message, setMessage] = useState("");
+  const [isCaregiverJob, setIsCaregiverJob] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -63,6 +65,7 @@ export default function Home() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             firstName,
+            email,
             phone,
             whoNeedsCare,
             message,
@@ -70,7 +73,7 @@ export default function Home() {
         }
       );
       if (!res.ok) throw new Error("Failed");
-      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      if (whoNeedsCare !== "Looking for Work" && typeof window !== "undefined" && typeof window.gtag === "function") {
         window.gtag("event", "conversion", {
           send_to: "AW-18023593816/BAseCIXm7ZIcENjuqJJD",
           value: 50,
@@ -172,6 +175,15 @@ export default function Home() {
                   </div>
                   <div className={styles.formGroup}>
                     <input
+                      type="email"
+                      placeholder="Email Address *"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <input
                       type="tel"
                       placeholder="Phone Number *"
                       required
@@ -182,35 +194,46 @@ export default function Home() {
                   <div className={styles.formGroup}>
                     <select
                       value={whoNeedsCare}
-                      onChange={(e) => setWhoNeedsCare(e.target.value)}
+                      onChange={(e) => { setWhoNeedsCare(e.target.value); setIsCaregiverJob(e.target.value === "Looking for Work"); }}
+                      required
                     >
                       <option value="">Who needs care?</option>
                       <option value="My Parent">My Parent</option>
                       <option value="My Spouse">My Spouse</option>
                       <option value="Myself">Myself</option>
                       <option value="Someone Else">Someone Else</option>
+                      <option value="Looking for Work">I&apos;m a caregiver looking for work</option>
                     </select>
                   </div>
-                  <div className={styles.formGroup}>
-                    <textarea
-                      placeholder="Tell us a little about what you need help with..."
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className={styles.submitBtn}
-                    disabled={formState === "sending"}
-                  >
-                    {formState === "sending"
-                      ? "Sending..."
-                      : "Request My Free Call →"}
-                  </button>
-                  <p className={styles.formPrivacy}>
-                    <IconLock size={13} /> Your information is private and never
-                    shared
-                  </p>
+                  {isCaregiverJob ? (
+                    <div style={{ background: "#fef3cd", border: "1px solid #e6d590", borderRadius: "8px", padding: "16px", marginTop: "8px", fontSize: "14px", color: "#664d03", lineHeight: "1.6" }}>
+                      <strong>Thank you for your interest!</strong><br />
+                      We&apos;re not currently hiring caregivers. Please follow us on <a href="https://www.facebook.com/p/Janes-Home-Care-61573825001654/" target="_blank" rel="noopener" style={{ color: "#664d03", fontWeight: 700 }}>Facebook</a> for future openings.
+                    </div>
+                  ) : (
+                    <>
+                      <div className={styles.formGroup}>
+                        <textarea
+                          placeholder="Tell us a little about what you need help with..."
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className={styles.submitBtn}
+                        disabled={formState === "sending"}
+                      >
+                        {formState === "sending"
+                          ? "Sending..."
+                          : "Request My Free Call →"}
+                      </button>
+                      <p className={styles.formPrivacy}>
+                        <IconLock size={13} /> Your information is private and never
+                        shared
+                      </p>
+                    </>
+                  )}
                 </form>
               )}
             </div>
