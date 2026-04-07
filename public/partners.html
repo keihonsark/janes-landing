@@ -97,16 +97,41 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .s5b { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 8px 16px; border: 1px solid var(--sage); border-radius: 6px; font-size: 13px; color: var(--sage); font-weight: 600; }
 
 /* S6 */
-.s6 { background: var(--sage-dark); color: white; }
+.s6 { background: var(--charcoal); color: white; }
+.s6 .bg { background-image: url('/images/bg-dark.jpg'); background-size: cover; background-position: center; }
+.s6 .bg-ov { background: rgba(0,0,0,0.5); }
 .s6 .sc { text-align: center; }
 .s6 .headline { font-size: 40px; color: white; margin-bottom: 28px; }
-.s6 .ph { font-family: 'Playfair Display', serif; font-size: 52px; color: var(--gold); text-decoration: none; display: block; margin-bottom: 8px; }
-.s6 .av { color: rgba(255,255,255,0.45); font-size: 14px; margin-bottom: 48px; }
-.steps { display: flex; justify-content: center; align-items: center; max-width: 700px; margin: 0 auto; }
-.step { text-align: center; flex: 1; }
-.sn { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--gold); margin-bottom: 4px; }
-.sl { color: white; font-size: 14px; font-weight: 600; }
-.sln { width: 80px; height: 1px; background: var(--gold); opacity: 0.4; }
+.s6 .ph {
+  font-family: 'Playfair Display', serif; font-size: 64px; color: var(--gold);
+  text-decoration: none; display: inline-block; margin-bottom: 8px; position: relative;
+  animation: phoneGlow 3s ease-in-out infinite;
+}
+.s6 .ph::before {
+  content: ''; position: absolute; left: -24px; top: 50%; transform: translateY(-50%);
+  width: 10px; height: 10px; background: var(--gold); border-radius: 50%;
+  animation: phonePulse 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(184,151,90,0.4);
+}
+@keyframes phonePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 20px rgba(184,151,90,0.4); }
+  50% { opacity: 0.5; box-shadow: 0 0 40px rgba(184,151,90,0.7); }
+}
+.s6 .av { color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 56px; letter-spacing: 1px; }
+.steps-premium { display: flex; align-items: flex-start; justify-content: center; gap: 0; max-width: 800px; margin: 0 auto; }
+.step-p { text-align: center; flex: 1; max-width: 200px; }
+.step-circle {
+  width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid rgba(184,151,90,0.4);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+  background: rgba(184,151,90,0.06); transition: all 0.4s;
+}
+.step-circle:hover { border-color: var(--gold); background: rgba(184,151,90,0.12); box-shadow: 0 0 30px rgba(184,151,90,0.15); }
+.step-num-p { font-family: 'Playfair Display', serif; font-size: 13px; color: var(--gold); letter-spacing: 2px; margin-bottom: 6px; }
+.step-title-p { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.step-desc-p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.4; }
+.step-connector { display: flex; align-items: center; padding-top: 30px; width: 80px; }
+.step-connector-line { width: 100%; height: 1px; background: linear-gradient(90deg, rgba(184,151,90,0.1), var(--gold), rgba(184,151,90,0.1)); position: relative; overflow: hidden; }
+.step-connector-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); animation: lineShimmer 3s ease-in-out infinite; }
 
 /* S7 */
 .s7 { background: var(--cream); }
@@ -197,9 +222,7 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .sv { transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
 .sv:hover { border-color: var(--sage); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.04); }
 
-/* PHONE GLOW — S6 */
-.s6 .ph { animation: phoneGlow 3s ease-in-out infinite; }
-@keyframes phoneGlow { 0%,100% { text-shadow: 0 0 20px rgba(184,151,90,0.2); } 50% { text-shadow: 0 0 40px rgba(184,151,90,0.5); } }
+/* PHONE GLOW — S6 (moved to S6 section) */
 
 /* EUCALYPTUS WATERMARK */
 .euc-wm { position: absolute; bottom: 20px; right: 20px; width: 250px; opacity: 0.05; pointer-events: none; z-index: 1; }
@@ -262,11 +285,10 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .gc { transition: all 0.4s ease; }
 .gc:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(184,151,90,0.15), 0 10px 40px rgba(0,0,0,0.2); transform: translateY(-6px); }
 
-/* PHONE PULSE — S6 */
-.s6 .ph { animation: phoneGlow 3s ease-in-out infinite; }
+/* PHONE PULSE — S6 (moved to S6 section) */
 @keyframes phoneGlow {
   0%, 100% { text-shadow: 0 0 20px rgba(184,151,90,0.15); }
-  50% { text-shadow: 0 0 40px rgba(184,151,90,0.45), 0 0 80px rgba(184,151,90,0.15); }
+  50% { text-shadow: 0 0 50px rgba(184,151,90,0.4), 0 0 100px rgba(184,151,90,0.1); }
 }
 
 /* STEP LINE SHIMMER — S6 */
@@ -390,17 +412,40 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
   </section>
 
   <section class="slide s6">
+    <div class="bg"></div><div class="bg-ov"></div>
+    <div class="particles"></div>
     <div class="sc">
       <div class="eyebrow ai">Exclusive for Partners</div>
       <h2 class="headline ai">Your priority line to premium care.</h2>
       <a href="tel:5592962189" class="ph ai">(559) 296-2189</a>
       <div class="av ai">Available 7 days a week</div>
-      <div class="steps ai">
-        <div class="step"><div class="sn">1</div><div class="sl">You refer</div></div>
-        <div class="sln"></div>
-        <div class="step"><div class="sn">2</div><div class="sl">We respond in &lt; 30 min</div></div>
-        <div class="sln"></div>
-        <div class="step"><div class="sn">3</div><div class="sl">Care starts within 24 hrs</div></div>
+      <div class="steps-premium ai">
+        <div class="step-p">
+          <div class="step-circle">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#B8975A" fill="none" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="step-num-p">01</div>
+          <div class="step-title-p">You Refer</div>
+          <div class="step-desc-p">Call or send through our partner form</div>
+        </div>
+        <div class="step-connector"><div class="step-connector-line"></div></div>
+        <div class="step-p">
+          <div class="step-circle">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#B8975A" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step-num-p">02</div>
+          <div class="step-title-p">We Respond</div>
+          <div class="step-desc-p">Within 30 minutes, guaranteed</div>
+        </div>
+        <div class="step-connector"><div class="step-connector-line"></div></div>
+        <div class="step-p">
+          <div class="step-circle">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#B8975A" fill="none" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+          </div>
+          <div class="step-num-p">03</div>
+          <div class="step-title-p">Care Begins</div>
+          <div class="step-desc-p">Within 24 hours, at their home</div>
+        </div>
       </div>
     </div>
   </section>
