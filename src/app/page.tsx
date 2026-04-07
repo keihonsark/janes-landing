@@ -48,6 +48,7 @@ export default function Home() {
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [whoNeedsCare, setWhoNeedsCare] = useState("");
@@ -65,6 +66,7 @@ export default function Home() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             firstName,
+            lastName,
             email,
             phone,
             whoNeedsCare,
@@ -164,14 +166,25 @@ export default function Home() {
                     We&apos;ll call you within 2 hours. No commitment, no
                     pressure.
                   </p>
-                  <div className={styles.formGroup}>
-                    <input
-                      type="text"
-                      placeholder="First Name *"
-                      required
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <input
+                        type="text"
+                        placeholder="First Name *"
+                        required
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <input
+                        type="text"
+                        placeholder="Last Name"
+                        required
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                    </div>
                   </div>
                   <div className={styles.formGroup}>
                     <input

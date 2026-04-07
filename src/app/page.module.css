@@ -169,6 +169,20 @@
   margin-bottom: 20px;
 }
 
+.formRow {
+  display: flex;
+  gap: 12px;
+}
+.formRow .formGroup {
+  flex: 1;
+}
+@media (max-width: 480px) {
+  .formRow {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
 .formGroup {
   margin-bottom: 14px;
 }
