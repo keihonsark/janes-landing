@@ -127,13 +127,12 @@ export default function Home() {
               Serving Fresno, Clovis &amp; Surrounding Areas
             </span>
             <h1 className={styles.heroH1}>
-              Trusted Home Care in Fresno —<br />
+              Trusted Home Care in Fresno.<br />
               Care Starts Within 24 Hours
             </h1>
             <p className={styles.heroSub}>
-              Compassionate in-home care for your loved one, overseen by a
-              licensed Nurse Practitioner. No contracts. Background-checked
-              caregivers.
+              In-home care overseen by a licensed Nurse Practitioner. No
+              contracts. Background-checked caregivers.
             </p>
 
             {/* FORM */}
@@ -345,8 +344,8 @@ export default function Home() {
               Currently practicing as a Nurse Practitioner in neurosurgery,
               Jessica Cassidy, FNP-C brings a level of clinical precision that
               most home care agencies simply cannot offer. Every care plan at
-              Jane&apos;s is personally reviewed by Jessica — ensuring your loved
-              one receives medically-informed, compassionate care from day one.
+              Jane&apos;s is personally reviewed by Jessica, ensuring your
+              family receives medically-informed, personalized care from day one.
             </p>
             <div className={styles.credentialBadges}>
               <span className={styles.credentialPill}>FNP-C Licensed</span>
