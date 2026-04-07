@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refer a Patient — Jane's Home Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --evergreen: #313c2c;
+  --sage: #96a183;
+  --hearthstone: #66523a;
+  --cream: #F7F4EF;
+  --porcelain: #f5f5f5;
+  --white: #fff;
+  --text: #3D4A3E;
+  --text-light: #6E7B6F;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { min-height: 100%; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text);
+  background: var(--cream);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background: url('/images/bg-cream-botanical.png') center/cover;
+  z-index: -2;
+}
+body::after {
+  content: ''; position: fixed; inset: 0;
+  background: rgba(247,244,239,0.85);
+  z-index: -1;
+}
+.grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.page { max-width: 580px; margin: 0 auto; padding: 60px 24px 48px; }
+
+.page-header { text-align: center; margin-bottom: 36px; }
+.page-header img { height: 50px; margin-bottom: 16px; }
+.page-header h1 {
+  font-family: 'Libre Caslon Display', serif; font-size: 36px;
+  color: var(--evergreen); font-weight: 400; margin-bottom: 12px;
+}
+.page-header p {
+  font-size: 15px; color: var(--text-light); line-height: 1.6;
+  max-width: 450px; margin: 0 auto;
+}
+.gold-line {
+  width: 50px; height: 2px; background: var(--hearthstone);
+  border: none; margin: 24px auto 0;
+}
+
+.card {
+  background: var(--white); border-radius: 20px; padding: 48px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--sage); margin-bottom: 20px;
+}
+.section-divider {
+  border: none; border-top: 1px solid rgba(150,161,131,0.2);
+  margin: 32px 0 24px;
+}
+
+.field { margin-bottom: 20px; }
+.field label {
+  display: block; font-size: 12px; font-weight: 600;
+  color: var(--evergreen); letter-spacing: 0.5px; margin-bottom: 6px;
+}
+.field input, .field select, .field textarea {
+  width: 100%; border: 1.5px solid rgba(150,161,131,0.3);
+  border-radius: 10px; padding: 14px 18px; font-family: 'Montserrat', sans-serif;
+  font-size: 14px; color: var(--text); background: #fafaf8;
+  outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+  -webkit-appearance: none; appearance: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(150,161,131,0.1);
+}
+.field input::placeholder, .field textarea::placeholder {
+  color: rgba(150,161,131,0.6);
+}
+.field select { cursor: pointer; color: var(--text); }
+.field select option[value=""] { color: rgba(150,161,131,0.6); }
+.field textarea { resize: vertical; min-height: 80px; }
+
+/* SELECT ARROW */
+.select-wrap { position: relative; }
+.select-wrap::after {
+  content: ''; position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+  width: 0; height: 0; border-left: 5px solid transparent;
+  border-right: 5px solid transparent; border-top: 5px solid var(--sage);
+  pointer-events: none;
+}
+.select-wrap select { padding-right: 40px; }
+
+/* URGENCY PILLS */
+.urgency-row { display: flex; gap: 12px; }
+.urgency-pill {
+  flex: 1; padding: 12px 16px; border: 1.5px solid rgba(150,161,131,0.3);
+  border-radius: 10px; text-align: center; cursor: pointer;
+  font-size: 13px; font-weight: 600; color: var(--text-light);
+  background: #fafaf8; transition: all 0.3s; user-select: none;
+}
+.urgency-pill:hover { border-color: var(--sage); }
+.urgency-pill.active-standard {
+  border-color: var(--sage); color: var(--sage);
+  background: rgba(150,161,131,0.06);
+  box-shadow: 0 0 0 3px rgba(150,161,131,0.08);
+}
+.urgency-pill.active-urgent {
+  border-color: var(--hearthstone); color: var(--hearthstone);
+  background: rgba(102,82,58,0.04);
+  box-shadow: 0 0 0 3px rgba(102,82,58,0.08);
+}
+
+/* SUBMIT */
+.submit-btn {
+  width: 100%; padding: 16px; border: none; border-radius: 10px;
+  background: var(--evergreen); color: var(--porcelain);
+  font-family: 'Montserrat', sans-serif; font-size: 15px;
+  font-weight: 600; letter-spacing: 0.5px; cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  margin-top: 8px;
+}
+.submit-btn:hover { background: #3d4a36; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.privacy {
+  text-align: center; font-size: 11px; color: var(--sage);
+  margin-top: 16px; display: flex; align-items: center;
+  justify-content: center; gap: 6px;
+}
+.privacy svg { flex-shrink: 0; }
+
+/* SUCCESS / ERROR */
+.result { text-align: center; padding: 48px; }
+.result img { height: 50px; margin-bottom: 20px; }
+.result h2 {
+  font-family: 'Libre Caslon Display', serif; font-size: 28px;
+  color: var(--evergreen); font-weight: 400; margin-bottom: 16px;
+}
+.result p { font-size: 15px; color: var(--text-light); line-height: 1.6; margin-bottom: 8px; }
+.result a { color: var(--evergreen); font-weight: 600; text-decoration: none; }
+.result a:hover { text-decoration: underline; }
+.result .phone-link {
+  font-family: 'Libre Caslon Display', serif; font-size: 22px;
+  color: var(--hearthstone); display: block; margin: 12px 0;
+}
+.result .retry {
+  display: inline-block; margin-top: 20px; padding: 10px 24px;
+  border: 1.5px solid rgba(150,161,131,0.3); border-radius: 8px;
+  font-size: 13px; font-weight: 600; color: var(--sage);
+  text-decoration: none; transition: all 0.3s;
+}
+.result .retry:hover { border-color: var(--sage); background: rgba(150,161,131,0.06); text-decoration: none; }
+
+/* FOOTER */
+.page-footer { text-align: center; padding: 32px 0 24px; }
+.page-footer p { font-size: 11px; color: var(--sage); line-height: 1.8; }
+.page-footer a { color: var(--sage); text-decoration: none; }
+.page-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .page { padding: 40px 16px 32px; }
+  .card { padding: 28px 20px; border-radius: 16px; }
+  .page-header h1 { font-size: 28px; }
+  .page-header p { font-size: 14px; }
+  .urgency-row { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<div class="page">
+  <div class="page-header">
+    <img src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
+    <h1>Refer a Patient</h1>
+    <p>Complete this form to refer a patient to Jane's Home Care. We'll respond within 30 minutes.</p>
+    <hr class="gold-line" />
+  </div>
+
+  <div class="card" id="formCard">
+    <form id="referForm" onsubmit="return handleSubmit(event)">
+      <div class="section-label">Your Information</div>
+
+      <div class="field">
+        <label for="partnerName">Your Name</label>
+        <input type="text" id="partnerName" name="partnerName" required placeholder="First and Last Name" />
+      </div>
+      <div class="field">
+        <label for="partnerOrg">Your Organization</label>
+        <input type="text" id="partnerOrg" name="partnerOrg" required placeholder="Facility or practice name" />
+      </div>
+      <div class="field">
+        <label for="partnerRole">Your Role</label>
+        <div class="select-wrap">
+          <select id="partnerRole" name="partnerRole" required>
+            <option value="">Select your role...</option>
+            <option value="Discharge Planner">Discharge Planner</option>
+            <option value="Physician">Physician</option>
+            <option value="Social Worker">Social Worker</option>
+            <option value="Case Manager">Case Manager</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Attorney / Estate Planner">Attorney / Estate Planner</option>
+            <option value="Senior Placement Specialist">Senior Placement Specialist</option>
+            <option value="Family Member">Family Member</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="partnerEmail">Your Email</label>
+        <input type="email" id="partnerEmail" name="partnerEmail" placeholder="For confirmation (optional)" />
+      </div>
+
+      <hr class="section-divider" />
+      <div class="section-label">Patient Information</div>
+
+      <div class="field">
+        <label for="patientName">Patient Name</label>
+        <input type="text" id="patientName" name="patientName" required placeholder="Patient's full name" />
+      </div>
+      <div class="field">
+        <label for="patientPhone">Patient Phone</label>
+        <input type="tel" id="patientPhone" name="patientPhone" required placeholder="(559) 000-0000" />
+      </div>
+      <div class="field">
+        <label for="careNeeds">Brief Care Needs</label>
+        <textarea id="careNeeds" name="careNeeds" rows="3" placeholder="Any details about the type of care needed, conditions, preferences..."></textarea>
+      </div>
+      <div class="field">
+        <label>Urgency</label>
+        <div class="urgency-row">
+          <div class="urgency-pill active-standard" id="pillStandard" onclick="setUrgency('standard')">Standard</div>
+          <div class="urgency-pill" id="pillUrgent" onclick="setUrgency('urgent')">Urgent &mdash; Within 24 Hours</div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Submit Referral &rarr;</button>
+
+      <div class="privacy">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Patient information is private and handled in accordance with HIPAA guidelines.
+      </div>
+    </form>
+  </div>
+
+  <div class="card" id="successCard" style="display:none;">
+    <div class="result">
+      <img src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
+      <h2>Referral Received</h2>
+      <p id="successMsg"></p>
+      <p>For urgent matters, call us directly:</p>
+      <a href="tel:5592962189" class="phone-link">(559) 296-2189</a>
+      <a href="javascript:location.reload()" class="retry">Submit Another Referral</a>
+    </div>
+  </div>
+
+  <div class="card" id="errorCard" style="display:none;">
+    <div class="result">
+      <img src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
+      <h2>Something went wrong</h2>
+      <p>We couldn't process your referral. Please call us directly:</p>
+      <a href="tel:5592962189" class="phone-link">(559) 296-2189</a>
+      <a href="javascript:location.reload()" class="retry">Try Again</a>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <p>Jane's Home Care &middot; Fresno, Clovis &amp; Surrounding Areas &middot; Licensed, Insured &amp; Bonded</p>
+    <p><a href="mailto:info@janeshomecare.com">info@janeshomecare.com</a> &middot; <a href="tel:5592962189">(559) 296-2189</a></p>
+  </div>
+</div>
+
+<script>
+var urgency = 'standard';
+
+function setUrgency(val) {
+  urgency = val;
+  var s = document.getElementById('pillStandard');
+  var u = document.getElementById('pillUrgent');
+  s.className = 'urgency-pill' + (val === 'standard' ? ' active-standard' : '');
+  u.className = 'urgency-pill' + (val === 'urgent' ? ' active-urgent' : '');
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  var pName = document.getElementById('partnerName').value;
+  var ptName = document.getElementById('patientName').value;
+
+  var data = {
+    type: 'patient_referral',
+    partner_name: pName,
+    partner_organization: document.getElementById('partnerOrg').value,
+    partner_role: document.getElementById('partnerRole').value,
+    partner_email: document.getElementById('partnerEmail').value,
+    patient_name: ptName,
+    patient_phone: document.getElementById('patientPhone').value,
+    care_needs: document.getElementById('careNeeds').value,
+    urgency: urgency
+  };
+
+  fetch('https://hook.us2.make.com/ggqjbq692g80fgm8mpf8dt0285z2t43l', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('Failed');
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successMsg').textContent =
+      'Thank you, ' + pName + ". We'll reach out to " + ptName + ' within 30 minutes.';
+    document.getElementById('successCard').style.display = 'block';
+  })
+  .catch(function() {
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('errorCard').style.display = 'block';
+  });
+
+  return false;
+}
+</script>
+</body>
+</html>
