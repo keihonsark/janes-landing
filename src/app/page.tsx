@@ -330,7 +330,7 @@ export default function Home() {
         <div className={styles.jessicaInner}>
           <div className={styles.jessicaImageWrap}>
             <Image
-              src="/images/jessica-headshot.jpg"
+              src="/images/jessica.jpg"
               alt="Jessica Cassidy, FNP-C — Care Director at Jane's Home Care"
               width={400}
               height={500}
