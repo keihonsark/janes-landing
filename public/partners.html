@@ -53,17 +53,16 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .s4 { background: linear-gradient(135deg, var(--evergreen) 0%, #3d4a36 50%, var(--evergreen) 100%); color: white; }
 .s4 .sc { text-align: center; }
 .s4 .bt {
-  font-family: 'Libre Caslon Display', serif; font-size: 42px; letter-spacing: 3px; margin-bottom: 48px;
+  font-family: 'Libre Caslon Display', serif; font-size: 56px; letter-spacing: 4px; margin-bottom: 16px;
   background: linear-gradient(90deg, #B8975A 0%, #D4B978 25%, #F0D89A 50%, #D4B978 75%, #B8975A 100%);
   background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   animation: goldShimmer 4s ease-in-out infinite;
 }
-.gcc { display: flex; gap: 24px; justify-content: center; }
-.gc { flex: 1; max-width: 280px; padding: 32px 24px; border: 1px solid rgba(184,151,90,0.3); border-radius: 14px; background: rgba(255,255,255,0.04); text-align: center; transition: all 0.4s ease; }
+.gc { padding: 24px 20px; border: 1px solid rgba(184,151,90,0.3); border-radius: 14px; background: rgba(255,255,255,0.04); text-align: center; transition: all 0.4s ease; }
 .gc:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(184,151,90,0.15), 0 10px 40px rgba(0,0,0,0.2); transform: translateY(-6px); }
-.gc svg { width: 36px; height: 36px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 16px; }
-.gc h3 { color: white; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-.gc p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.5; }
+.gc svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 12px; }
+.gc h3 { color: white; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.gc p { color: rgba(255,255,255,0.5); font-size: 12px; line-height: 1.4; }
 
 /* S2 — PROBLEM */
 .s2 { background: var(--evergreen); color: white; }
@@ -170,7 +169,7 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 @media (max-width: 768px) {
   .s1 .tg { font-size: 40px; } .s1 .ts { font-size: 30px; } .s1 .logo-c { height: 56px; }
   .s2 .headline { font-size: 30px; } .s3 .headline { font-size: 28px; }
-  .s4 .bt { font-size: 28px; } .gcc { flex-direction: column; align-items: center; }
+  .s4 .bt { font-size: 32px; } .gc-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .s5 .sc { flex-direction: column; } .s5p { flex: none; max-width: 280px; }
   .sg { grid-template-columns: 1fr; } .svg { grid-template-columns: 1fr 1fr; }
   .sc { padding: 0 24px; } .arr { display: none; }
@@ -271,19 +270,38 @@ a, button, .arr { cursor: none; }
   <section class="slide s4">
     <div class="particles"></div>
     <div class="sc">
-      <div class="bt ai">SETTING THE GOLD STANDARD IN HOME CARE</div>
-      <div class="gcc ai">
+      <div class="bt ai">THE GOLD STANDARD</div>
+      <div class="ai" style="font-family:'Montserrat',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:40px;">What Sets Jane's Home Care Apart</div>
+      <div class="gc-grid ai" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:960px;margin:0 auto;">
         <div class="gc">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>
-          <h3>Proactive Communication</h3><p>Real-time updates to families and care teams &mdash; never left wondering.</p>
+          <svg viewBox="0 0 24 24"><path d="M4.8 13.4c0-4 3.2-7.2 7.2-7.2s7.2 3.2 7.2 7.2" stroke-linecap="round"/><circle cx="12" cy="16" r="2"/><path d="M12 14v-3" stroke-linecap="round"/></svg>
+          <h3>Nurse Practitioner-Led</h3>
+          <p>Every care plan developed and overseen by a licensed NP</p>
         </div>
         <div class="gc">
-          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <h3>Licensed Home Care Aides</h3><p>Certified, trained, and held to the highest professional standards.</p>
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75" stroke-linecap="round"/></svg>
+          <h3>Licensed Home Care Aides</h3>
+          <p>Certified, trained, and held to clinical-grade standards</p>
         </div>
         <div class="gc">
-          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8" stroke-linecap="round"/></svg>
-          <h3>AI-Powered Care Technology</h3><p>State-of-the-art tools including AI integration and proactive safety systems.</p>
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <h3>Proactive Communication</h3>
+          <p>Real-time updates to families and referring providers</p>
+        </div>
+        <div class="gc">
+          <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Treatment Plan Integration</h3>
+          <p>We reinforce PT/OT plans, medication schedules, and recovery protocols</p>
+        </div>
+        <div class="gc">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4" stroke-linecap="round"/><circle cx="17" cy="17" r="3"/><path d="M17 16v2M17 18h.01" stroke-linecap="round"/></svg>
+          <h3>AI-Powered Care Technology</h3>
+          <p>Smart scheduling, safety monitoring, and care documentation</p>
+        </div>
+        <div class="gc">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Licensed, Bonded &amp; Insured</h3>
+          <p>Fully compliant with the State of California</p>
         </div>
       </div>
     </div>
