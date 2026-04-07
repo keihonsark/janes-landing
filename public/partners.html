@@ -180,16 +180,62 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .s9 .fine { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.25); font-size: 11px; }
 
 @media (max-width: 768px) {
-  .s1 .tg { font-size: 40px; } .s1 .ts { font-size: 30px; } .s1 .logo-c { height: 56px; }
-  .s2 .headline { font-size: 30px; } .s3 .headline { font-size: 28px; }
-  .s4 .bt { font-size: 32px; } .gc-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .s5 .sc { flex-direction: column; } .s5p { flex: none; max-width: 280px; }
-  .sg { grid-template-columns: 1fr; } .svg { grid-template-columns: 1fr 1fr; }
-  .sc { padding: 0 24px; } .arr { display: none; }
+  /* Nav */
+  .nav-logo { height: 24px; top: 12px; left: 16px; }
+  .arr { display: none; }
+  button[onclick="window.print()"] { display: none !important; }
+  .counter { bottom: 12px; right: 16px; font-size: 11px; }
   body { cursor: auto !important; } a, button, .arr { cursor: auto !important; } #cursor { display: none !important; }
-  .s6 .ph { font-size: 36px; }
-  .steps-premium { flex-direction: column; align-items: center; gap: 16px; }
-  .step-connector { display: none; }
+
+  /* Slide scroll */
+  .slide { overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; align-items: flex-start; padding-top: 60px; padding-bottom: 80px; }
+  .sc { padding: 0 24px; margin-top: auto; margin-bottom: auto; }
+
+  /* Font sizes */
+  .s1 .tg, .s4 .bt { font-size: 36px !important; }
+  .s1 .ts { font-size: 24px !important; }
+  .s1 .logo-c { height: 50px !important; }
+  .headline { font-size: 26px !important; }
+  .eyebrow { font-size: 10px !important; letter-spacing: 3px !important; margin-bottom: 12px !important; }
+  .body { font-size: 15px !important; }
+  .s6 .ph, .s9 .ph { font-size: 32px !important; }
+
+  /* Gold Standard cards */
+  .gc-grid { grid-template-columns: 1fr 1fr !important; }
+  .gc { padding: 16px 14px !important; }
+  .gc h3 { font-size: 12px !important; }
+  .gc p { font-size: 11px !important; }
+  .gc svg { width: 22px !important; height: 22px !important; }
+
+  /* Jessica */
+  .s5 .sc { flex-direction: column !important; gap: 24px !important; }
+  .s5p { flex: none !important; max-width: 200px !important; margin: 0 auto; }
+  .s5t .headline { font-size: 24px !important; }
+  .s5t .body { font-size: 14px !important; padding-left: 16px !important; }
+
+  /* Priority steps */
+  .steps-premium { flex-direction: column !important; gap: 20px !important; }
+  .step-connector { display: none !important; }
+  .step-p { max-width: 100% !important; display: flex !important; align-items: center !important; gap: 16px !important; text-align: left !important; }
+  .step-circle { margin: 0 !important; flex-shrink: 0; width: 48px !important; height: 48px !important; }
+
+  /* Services grid */
+  .svg { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+  .sv { padding: 16px 12px !important; }
+  .sv h4 { font-size: 12px !important; }
+  .sv p { font-size: 11px !important; }
+
+  /* Caregiver standard */
+  .sg { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .sgc { padding: 16px !important; }
+
+  /* Treatment pills */
+  .s3 .gc-grid, .s3 div[style*="flex-wrap"] { gap: 8px !important; }
+  .s3 div[style*="border-radius:20px"] { padding: 6px 14px !important; font-size: 11px !important; }
+}
+
+@media (max-width: 480px) {
+  .gc-grid { grid-template-columns: 1fr !important; }
 }
 
 /* ANIMATION SYSTEM */
@@ -507,7 +553,7 @@ function go(i){if(i<0||i>=t||i===c)return;for(var j=0;j<sl.length;j++)sl[j].clas
 function nxt(){go(c+1)}function prev(){go(c-1)}
 window.addEventListener('keydown',function(e){if(e.key==='ArrowRight')nxt();if(e.key==='ArrowLeft')prev()});
 var wt=null;window.addEventListener('wheel',function(e){e.preventDefault();if(wt)return;var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(Math.abs(d)<15)return;if(d>0)nxt();else prev();wt=setTimeout(function(){wt=null},600)},{passive:false});
-var tx=0;window.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});window.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)<50)return;if(dx<0)nxt();else prev()},{passive:true});
+var tx=0,ty=0;window.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});window.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx;var dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){if(dx<0)nxt();else prev()}},{passive:true});
 
 var params = new URLSearchParams(window.location.search);
 var partnerName = params.get('partner');
