@@ -146,9 +146,8 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .s6 .sc { text-align: center; }
 .s6 .headline { font-size: 40px; color: #f5f5f5; margin-bottom: 28px; }
 .s6 .ph {
-  font-family: 'Libre Caslon Display', serif; font-size: 64px; color: var(--gold);
+  font-family: 'Libre Caslon Display', serif; font-size: 64px; color: #f5f5f5;
   text-decoration: none; display: inline-block; margin-bottom: 8px;
-  animation: phoneGlow 3s ease-in-out infinite;
 }
 @keyframes phoneGlow { 0%,100% { text-shadow: 0 0 20px rgba(102,82,58,0.15); } 50% { text-shadow: 0 0 50px rgba(102,82,58,0.4), 0 0 100px rgba(102,82,58,0.1); } }
 .s6 .av { color: rgba(245,245,245,0.45); font-size: 13px; margin-bottom: 56px; letter-spacing: 1px; }
@@ -156,11 +155,11 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .step-p { text-align: center; flex: 1; max-width: 200px; }
 .step-circle { width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid rgba(150,161,131,0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; background: rgba(150,161,131,0.06); transition: all 0.4s; }
 .step-circle:hover { border-color: var(--sage); background: rgba(150,161,131,0.12); box-shadow: 0 0 30px rgba(150,161,131,0.15); }
-.step-num-p { font-family: 'Libre Caslon Display', serif; font-size: 13px; color: var(--gold); letter-spacing: 2px; margin-bottom: 6px; }
+.step-num-p { font-family: 'Libre Caslon Display', serif; font-size: 13px; color: #96a183; letter-spacing: 2px; margin-bottom: 6px; }
 .step-title-p { font-size: 16px; font-weight: 700; color: #f5f5f5; margin-bottom: 4px; }
 .step-desc-p { font-size: 12px; color: rgba(245,245,245,0.55); line-height: 1.4; }
 .step-connector { display: flex; align-items: center; padding-top: 30px; width: 80px; }
-.step-connector-line { width: 100%; height: 1px; background: linear-gradient(90deg, rgba(150,161,131,0.1), var(--sage), rgba(150,161,131,0.1)); position: relative; overflow: hidden; }
+.step-connector-line { width: 100%; height: 1px; background: linear-gradient(90deg, rgba(150,161,131,0.1), rgba(150,161,131,0.3), rgba(150,161,131,0.1)); position: relative; overflow: hidden; }
 .step-connector-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); animation: lineShimmer 3s ease-in-out infinite; }
 
 /* S9 ��� CONTACT */
@@ -171,11 +170,11 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .s9 .lm { height: 50px; margin-bottom: 20px; }
 .s9 .headline { font-size: 42px; color: #f5f5f5; }
 .s9 .body { color: rgba(245,245,245,0.7); text-align: center; max-width: 480px; margin-bottom: 32px; }
-.s9 .ph { font-family: 'Libre Caslon Display', serif; font-size: 36px; color: var(--gold); text-decoration: none; display: block; margin-bottom: 12px; }
+.s9 .ph { font-family: 'Libre Caslon Display', serif; font-size: 36px; color: #f5f5f5; text-decoration: none; display: block; margin-bottom: 12px; }
 .s9 .ph:hover { text-shadow: 0 0 30px rgba(102,82,58,0.4); }
-.s9 .em { color: white; font-size: 16px; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
+.s9 .em { color: #f5f5f5; font-size: 16px; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
 .s9 .em:hover { color: var(--gold); }
-.s9 .wb { color: rgba(255,255,255,0.4); font-size: 14px; text-decoration: none; display: block; transition: color 0.3s; }
+.s9 .wb { color: rgba(245,245,245,0.5); font-size: 14px; text-decoration: none; display: block; transition: color 0.3s; }
 .s9 .wb:hover { color: rgba(255,255,255,0.7); }
 .s9 .fine { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.25); font-size: 11px; }
 
@@ -302,6 +301,9 @@ a, button, .arr { cursor: none; }
 @keyframes leafFloat2 { 0% { transform: translateY(0) rotate(-15deg); opacity: 0; } 10% { opacity: 0.05; } 90% { opacity: 0.03; } 100% { transform: translateY(-110vh) rotate(30deg); opacity: 0; } }
 @keyframes leafFloat3 { 0% { transform: translateY(0) rotate(30deg); opacity: 0; } 10% { opacity: 0.04; } 90% { opacity: 0.02; } 100% { transform: translateY(-110vh) rotate(75deg); opacity: 0; } }
 
+/* NAV MENU */
+.nav-item:hover { color: #96a183 !important; }
+
 /* EUCALYPTUS WATERMARK */
 .euc-wm { position: absolute; bottom: 20px; right: 20px; width: 250px; opacity: 0.05; pointer-events: none; z-index: 1; }
 
@@ -324,6 +326,20 @@ a, button, .arr { cursor: none; }
 </div>
 <img class="nav-logo" src="/images/logo-white.png" alt="Jane's Home Care" />
 <button onclick="window.print()" style="position:fixed;top:24px;right:32px;z-index:100;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;backdrop-filter:blur(10px);transition:all 0.3s;" title="Download PDF">&#8595;</button>
+<button id="navBtn" onclick="toggleNav()" style="position:fixed;top:24px;right:120px;z-index:200;background:rgba(255,255,255,0.06);border:1px solid rgba(150,161,131,0.25);color:rgba(245,245,245,0.6);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:14px;backdrop-filter:blur(10px);transition:all 0.3s;" title="Navigate">&#9776;</button>
+<div id="navPanel" style="position:fixed;top:0;right:-320px;width:300px;height:100vh;background:rgba(49,60,44,0.97);backdrop-filter:blur(20px);z-index:199;padding:80px 32px 32px;transition:right 0.4s cubic-bezier(0.65,0,0.35,1);overflow-y:auto;">
+  <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#96a183;margin-bottom:24px;">Navigate</div>
+  <div class="nav-item" onclick="goAndClose(0)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">1. The Gold Standard</div>
+  <div class="nav-item" onclick="goAndClose(1)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">2. What Sets Us Apart</div>
+  <div class="nav-item" onclick="goAndClose(2)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">3. The Reality</div>
+  <div class="nav-item" onclick="goAndClose(3)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">4. Treatment Plan Integration</div>
+  <div class="nav-item" onclick="goAndClose(4)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">5. Clinical Leadership</div>
+  <div class="nav-item" onclick="goAndClose(5)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">6. Caregiver Standard</div>
+  <div class="nav-item" onclick="goAndClose(6)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">7. Testimonial</div>
+  <div class="nav-item" onclick="goAndClose(7)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">8. Our Services</div>
+  <div class="nav-item" onclick="goAndClose(8)" style="padding:12px 0;border-bottom:1px solid rgba(150,161,131,0.15);color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">9. Priority Line</div>
+  <div class="nav-item" onclick="goAndClose(9)" style="padding:12px 0;color:#f5f5f5;font-size:15px;cursor:pointer;transition:color 0.3s;">10. Contact</div>
+</div>
 <button class="arr arr-l" onclick="prev()">&#8592;</button>
 <button class="arr arr-r" onclick="nxt()">&#8594;</button>
 <div id="progressBar" style="position:fixed;bottom:0;left:0;height:2px;background:#96a183;z-index:100;transition:width 0.8s cubic-bezier(0.65,0,0.35,1);width:10%;"></div>
@@ -359,7 +375,7 @@ a, button, .arr { cursor: none; }
       <div class="ai" style="font-family:'Montserrat',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:40px;">What Sets Jane's Home Care Apart</div>
       <div class="gc-grid ai" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:960px;margin:0 auto;">
         <div class="gc">
-          <svg viewBox="0 0 24 24"><path d="M4.8 13.4c0-4 3.2-7.2 7.2-7.2s7.2 3.2 7.2 7.2" stroke-linecap="round"/><circle cx="12" cy="16" r="2"/><path d="M12 14v-3" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M4 15c0-3.3 2.7-6 6-6h0c3.3 0 6 2.7 6 6"/><path d="M4 15v-3a4 4 0 014-4h0"/><path d="M16 15v-3a4 4 0 00-4-4h0"/><circle cx="18" cy="18" r="2"/><path d="M16 15v1a2 2 0 002 2h0" stroke-linecap="round"/></svg>
           <h3>Nurse Practitioner-Led</h3>
           <p>Every care plan developed and overseen by a licensed NP</p>
         </div>
@@ -379,7 +395,7 @@ a, button, .arr { cursor: none; }
           <p>We reinforce PT/OT plans, medication schedules, and recovery protocols</p>
         </div>
         <div class="gc">
-          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4" stroke-linecap="round"/><circle cx="17" cy="17" r="3"/><path d="M17 16v2M17 18h.01" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 2v4M16 2v4M8 18v4M16 18v4M2 8h4M2 16h4M18 8h4M18 16h4" stroke-linecap="round"/><circle cx="12" cy="12" r="3"/></svg>
           <h3>AI-Powered Care Technology</h3>
           <p>Smart scheduling, safety monitoring, and care documentation</p>
         </div>
@@ -408,7 +424,7 @@ a, button, .arr { cursor: none; }
     <img class="euc-wm" src="/images/eucalyptus-branch.png" alt="" />
     <div class="sc">
       <img class="lm ai" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
-      <h2 class="headline ai">Home care should be an integral part of the treatment plan.</h2>
+      <h2 class="headline ai">Home care should be an integral part of the medical treatment plan.</h2>
       <p class="body ai">Contributing to better patient outcomes &mdash; not just filling a gap.</p>
       <hr class="gold-line ai" />
       <div class="ai" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px;max-width:700px;">
@@ -419,7 +435,8 @@ a, button, .arr { cursor: none; }
         <div style="padding:8px 18px;border:1px solid rgba(150,161,131,0.3);border-radius:20px;font-size:13px;color:#313c2c;">Nutritional Support</div>
         <div style="padding:8px 18px;border:1px solid rgba(150,161,131,0.3);border-radius:20px;font-size:13px;color:#313c2c;">Post-Surgical Recovery</div>
       </div>
-      <p class="it ai">This is what Jane's Home Care was built for.</p>
+      <div class="ai" style="margin-top:24px;font-family:'Libre Caslon Display',serif;font-size:20px;font-style:italic;color:#313c2c;max-width:650px;text-align:center;line-height:1.5;">&ldquo;Home health may be there for one hour &mdash; but who&rsquo;s there for the other 23? <span style="font-weight:700;color:#66523a;">We are.</span>&rdquo;</div>
+      <p class="it ai">Jane's Home Care was built for this.</p>
     </div>
   </section>
 
@@ -488,11 +505,11 @@ a, button, .arr { cursor: none; }
       <div class="eyebrow ai">Our Services</div>
       <h2 class="headline ai">Personalized Home Care Services</h2>
       <div class="svg ai">
-        <div class="sv"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/><circle cx="12" cy="12" r="10"/></svg><h4>Post-Surgical Recovery</h4><p>Safe recovery support following surgery or hospitalization</p></div>
-        <div class="sv"><svg viewBox="0 0 24 24"><path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5"/><path d="M10 12h4M12 10v4" stroke-linecap="round"/></svg><h4>Medication Management</h4><p>Reminders, organization, and adherence monitoring</p></div>
-        <div class="sv"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><path d="M12 8v6M9 20l3-6 3 6" stroke-linecap="round" stroke-linejoin="round"/></svg><h4>PT/OT Support</h4><p>Reinforcing therapy plans at home</p></div>
-        <div class="sv"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><h4>Fall Prevention</h4><p>Environmental assessment and mobility assistance</p></div>
-        <div class="sv"><svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 018 8c0 3-1.5 5.5-4 7v3H8v-3c-2.5-1.5-4-4-4-7a8 8 0 018-8z"/><path d="M9 22h6" stroke-linecap="round"/></svg><h4>Memory &amp; Cognitive Care</h4><p>Specialized Alzheimer's and dementia support</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M3 20v-8h18v8"/><path d="M3 12V8a2 2 0 012-2h6v6"/><path d="M21 12V8a2 2 0 00-2-2h-4" stroke-linecap="round"/><circle cx="8" cy="8" r="2"/></svg><h4>Post-Surgical Recovery</h4><p>Safe recovery support following surgery or hospitalization</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M10.5 1.5l-8.5 8.5a4.95 4.95 0 007 7l8.5-8.5a4.95 4.95 0 00-7-7z"/><path d="M6.5 12.5l5-5" stroke-linecap="round"/></svg><h4>Medication Management</h4><p>Reminders, organization, and adherence monitoring</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><circle cx="18" cy="4" r="2"/><path d="M18 8v4l-4 4M18 12h-4"/><path d="M4 20l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg><h4>PT/OT Support</h4><p>Reinforcing therapy plans at home</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 15h.01" stroke-linecap="round"/></svg><h4>Fall Prevention</h4><p>Environmental assessment and mobility assistance</p></div>
+        <div class="sv"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 015 11.9V16a1 1 0 01-1 1H8a1 1 0 01-1-1v-2.1A7 7 0 0112 2z"/><path d="M9 21h6M10 17v4M14 17v4" stroke-linecap="round"/></svg><h4>Memory &amp; Cognitive Care</h4><p>Specialized Alzheimer's and dementia support</p></div>
         <div class="sv"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><h4>24-Hour &amp; Overnight</h4><p>Round-the-clock supervision and support</p></div>
       </div>
       <p class="fn ai">Licensed. Bonded. Insured. Private pay &mdash; no contracts. Care starts within 24 hours.</p>
@@ -502,6 +519,11 @@ a, button, .arr { cursor: none; }
   <!-- SLIDE 9: PRIORITY LINE -->
   <section class="slide s6">
     <div class="bg"></div><div class="bg-ov"></div>
+    <div class="float-leaves">
+      <img src="/images/eucalyptus-branch.png" class="fl fl1" />
+      <img src="/images/eucalyptus-branch.png" class="fl fl2" />
+      <img src="/images/eucalyptus-branch.png" class="fl fl3" />
+    </div>
     <div class="sc">
       <div class="eyebrow ai" style="color:#96a183">Exclusive for Partners</div>
       <h2 class="headline ai">Your priority line to premium care.</h2>
@@ -530,6 +552,11 @@ a, button, .arr { cursor: none; }
   <section class="slide s9">
     <div class="bg"></div><div class="bg-ov"></div>
     <div class="particles"></div>
+    <div class="float-leaves">
+      <img src="/images/eucalyptus-branch.png" class="fl fl1" />
+      <img src="/images/eucalyptus-branch.png" class="fl fl2" />
+      <img src="/images/eucalyptus-branch.png" class="fl fl3" />
+    </div>
     <div class="sc">
       <img class="lm ai" src="/images/logomark-white.png" alt="" />
       <h2 class="headline ai">Questions? We're here.</h2>
@@ -570,7 +597,7 @@ if (partnerName) {
   if (!cv) return;
   var ctx = cv.getContext('2d');
   var s = 4;
-  ctx.fillStyle = '#66523a';
+  ctx.fillStyle = '#96a183';
   var pattern = [
     [1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,1,0,0,1,0,1,1,0,0,0,0,0,1],
@@ -613,6 +640,17 @@ document.querySelectorAll('a, button, .arr').forEach(function(el) {
   el.addEventListener('mouseenter', function() { cursorEl.style.transform = 'scale(1.5) rotate(15deg)'; cursorEl.style.opacity = '0.7'; });
   el.addEventListener('mouseleave', function() { cursorEl.style.transform = 'scale(1) rotate(0deg)'; cursorEl.style.opacity = '1'; });
 });
+
+var navOpen = false;
+function toggleNav() {
+  navOpen = !navOpen;
+  document.getElementById('navPanel').style.right = navOpen ? '0' : '-320px';
+  document.getElementById('navBtn').textContent = navOpen ? '\u2715' : '\u2630';
+}
+function goAndClose(i) {
+  toggleNav();
+  setTimeout(function() { go(i); }, 300);
+}
 </script>
 </body>
 </html>
