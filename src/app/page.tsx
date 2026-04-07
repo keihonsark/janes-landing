@@ -255,7 +255,7 @@ export default function Home() {
           <div className={styles.heroRight}>
             <div className={styles.heroImageWrap}>
               <Image
-                src="/images/In-home-care-fresno-caregiver.jpg"
+                src="/images/caregiver-hero.jpg"
                 alt="Compassionate in-home caregiver in Fresno helping a senior"
                 fill
                 className={styles.heroImage}
