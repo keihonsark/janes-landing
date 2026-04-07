@@ -36,9 +36,6 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .arr:hover { background: rgba(255,255,255,0.2); }
 .arr-l { left: 20px; }
 .arr-r { right: 20px; }
-.dots { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; gap: 10px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--gold); background: transparent; cursor: pointer; transition: background 0.3s; }
-.dot.on { background: var(--gold); }
 .counter { position: fixed; bottom: 28px; right: 32px; z-index: 100; font-size: 13px; color: rgba(255,255,255,0.5); }
 
 /* S1 */
@@ -176,17 +173,35 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
   .s5 .sc { flex-direction: column; } .s5p { flex: none; max-width: 280px; }
   .sg { grid-template-columns: 1fr; } .svg { grid-template-columns: 1fr 1fr; }
   .sc { padding: 0 24px; } .arr { display: none; }
+  body { cursor: auto !important; } a, button, .arr { cursor: auto !important; } #cursor { display: none !important; }
 }
 
 /* ANIMATION SYSTEM */
-.ai { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.ai { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
 .slide.active .ai { opacity: 1; transform: translateY(0); }
-.slide.active .ai:nth-child(1) { transition-delay: 0.1s; }
-.slide.active .ai:nth-child(2) { transition-delay: 0.2s; }
-.slide.active .ai:nth-child(3) { transition-delay: 0.3s; }
-.slide.active .ai:nth-child(4) { transition-delay: 0.4s; }
-.slide.active .ai:nth-child(5) { transition-delay: 0.5s; }
-.slide.active .ai:nth-child(6) { transition-delay: 0.6s; }
+.slide.active .ai:nth-child(1) { transition-delay: 0.15s; }
+.slide.active .ai:nth-child(2) { transition-delay: 0.35s; }
+.slide.active .ai:nth-child(3) { transition-delay: 0.55s; }
+.slide.active .ai:nth-child(4) { transition-delay: 0.75s; }
+.slide.active .ai:nth-child(5) { transition-delay: 0.95s; }
+.slide.active .ai:nth-child(6) { transition-delay: 1.15s; }
+
+/* LOADER */
+@keyframes loaderFadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes loaderBar { 0% { width: 0; } 100% { width: 100%; } }
+
+/* CURSOR */
+body { cursor: none; }
+a, button, .arr { cursor: none; }
+
+/* PRINT */
+@media print {
+  .deck { display: block !important; transform: none !important; }
+  .slide { min-width: 100% !important; width: 100% !important; height: auto !important; min-height: 100vh; page-break-after: always; display: flex !important; }
+  .arr, .counter, .nav-logo, #muteBtn, .particles, button[onclick="window.print()"], #loader, #progressBar, #cursor { display: none !important; }
+  body, html { overflow: visible !important; height: auto !important; cursor: auto !important; }
+  .ai { opacity: 1 !important; transform: none !important; }
+}
 
 /* GOLD SHIMMER — S1 title */
 .s1 .tg {
@@ -334,12 +349,19 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 </head>
 <body>
 
+<img id="cursor" src="/images/eucalyptus-branch.png" alt="" style="position:fixed;width:24px;height:auto;pointer-events:none;z-index:99999;transition:transform 0.2s ease,opacity 0.3s;opacity:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15));" />
+<div id="loader" style="position:fixed;inset:0;z-index:10000;background:#1a1510;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.8s ease;">
+  <img src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" style="height:60px;opacity:0;animation:loaderFadeIn 1s ease 0.3s forwards;" />
+  <div style="width:60px;height:2px;background:rgba(184,151,90,0.2);margin-top:20px;border-radius:2px;overflow:hidden;">
+    <div style="height:100%;background:#B8975A;animation:loaderBar 1.5s ease 0.5s forwards;width:0;"></div>
+  </div>
+</div>
 <img class="nav-logo" src="/images/Janes Home Care Logo_Primary.png" alt="Jane's Home Care" />
 <button id="muteBtn" onclick="toggleSound()" style="position:fixed;top:24px;right:32px;z-index:100;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;backdrop-filter:blur(10px);transition:all 0.3s;" title="Toggle sound">&#9834;</button>
 <button onclick="window.print()" style="position:fixed;top:24px;right:76px;z-index:100;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;backdrop-filter:blur(10px);transition:all 0.3s;" title="Download PDF">&#8595;</button>
 <button class="arr arr-l" onclick="prev()">&#8592;</button>
 <button class="arr arr-r" onclick="nxt()">&#8594;</button>
-<div class="dots" id="dots"></div>
+<div id="progressBar" style="position:fixed;bottom:0;left:0;height:2px;background:var(--gold);z-index:100;transition:width 0.8s cubic-bezier(0.65,0,0.35,1);width:10%;"></div>
 <div class="counter" id="ctr">1 / 10</div>
 
 <div class="deck" id="deck">
@@ -354,6 +376,7 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
       <hr class="gold-line ai" style="margin:20px auto" />
       <div class="lbl ai">REFERRAL PARTNER PROGRAM</div>
       <button class="begin ai" onclick="nxt()">Begin &rarr;</button>
+      <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:1px;">or press arrow keys</div>
     </div>
   </section>
 
@@ -525,11 +548,9 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 </div>
 
 <script>
-var c=0,t=10,dk=document.getElementById('deck'),ct=document.getElementById('ctr'),de=document.getElementById('dots');
-for(var i=0;i<t;i++){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');(function(x){d.onclick=function(){go(x)}})(i);de.appendChild(d)}
-var ds=de.querySelectorAll('.dot');
+var c=0,t=10,dk=document.getElementById('deck'),ct=document.getElementById('ctr'),pb=document.getElementById('progressBar');
 var sl=document.querySelectorAll('.slide');
-function go(i){if(i<0||i>=t||i===c)return;c=i;dk.style.transform='translateX(-'+(c*100)+'vw)';playChime();ct.textContent=(c+1)+' / '+t;for(var j=0;j<ds.length;j++)ds[j].classList.toggle('on',j===c);for(var j=0;j<sl.length;j++)sl[j].classList.remove('active');sl[c].classList.add('active')}
+function go(i){if(i<0||i>=t||i===c)return;for(var j=0;j<sl.length;j++)sl[j].classList.remove('active');c=i;dk.style.transform='translateX(-'+(c*100)+'vw)';playChime();ct.textContent=(c+1)+' / '+t;pb.style.width=((c+1)/t*100)+'%';setTimeout(function(){sl[c].classList.add('active')},300)}
 function nxt(){go(c+1)}function prev(){go(c-1)}
 window.addEventListener('keydown',function(e){if(e.key==='ArrowRight')nxt();if(e.key==='ArrowLeft')prev()});
 var wt=null;window.addEventListener('wheel',function(e){e.preventDefault();if(wt)return;var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(Math.abs(d)<15)return;if(d>0)nxt();else prev();wt=setTimeout(function(){wt=null},600)},{passive:false});
@@ -670,6 +691,25 @@ function playChime() {
   ];
   for(var y=0;y<pattern.length;y++){for(var x=0;x<pattern[y].length;x++){if(pattern[y][x])ctx.fillRect(x*s+2,y*s+2,s,s);}}
 })();
+
+setTimeout(function() {
+  var loader = document.getElementById('loader');
+  if (loader) {
+    loader.style.opacity = '0';
+    setTimeout(function() { loader.style.display = 'none'; }, 800);
+  }
+}, 2800);
+
+var cursorEl = document.getElementById('cursor');
+document.addEventListener('mousemove', function(e) {
+  cursorEl.style.opacity = '1';
+  cursorEl.style.left = (e.clientX - 12) + 'px';
+  cursorEl.style.top = (e.clientY - 12) + 'px';
+});
+document.querySelectorAll('a, button, .arr').forEach(function(el) {
+  el.addEventListener('mouseenter', function() { cursorEl.style.transform = 'scale(1.5) rotate(15deg)'; cursorEl.style.opacity = '0.7'; });
+  el.addEventListener('mouseleave', function() { cursorEl.style.transform = 'scale(1) rotate(0deg)'; cursorEl.style.opacity = '1'; });
+});
 </script>
 </body>
 </html>
