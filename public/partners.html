@@ -63,8 +63,15 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
   background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   animation: goldShimmer 4s ease-in-out infinite;
 }
-.gc { padding: 24px 20px; border: 1px solid rgba(150,161,131,0.25); border-radius: 14px; background: rgba(255,255,255,0.04); text-align: center; transition: all 0.4s ease; }
-.gc:hover { border-color: var(--sage); box-shadow: 0 0 20px rgba(150,161,131,0.1), 0 10px 40px rgba(0,0,0,0.2); transform: translateY(-6px); }
+.gc { padding: 24px 20px; border: 1px solid rgba(150,161,131,0.25); border-radius: 14px; background: rgba(255,255,255,0.04); text-align: center; opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.4s, box-shadow 0.4s; }
+.slide.active .gc { opacity: 1; transform: translateY(0); }
+.slide.active .gc:nth-child(1) { transition-delay: 0.2s; }
+.slide.active .gc:nth-child(2) { transition-delay: 0.35s; }
+.slide.active .gc:nth-child(3) { transition-delay: 0.5s; }
+.slide.active .gc:nth-child(4) { transition-delay: 0.65s; }
+.slide.active .gc:nth-child(5) { transition-delay: 0.8s; }
+.slide.active .gc:nth-child(6) { transition-delay: 0.95s; }
+.gc:hover { border-color: rgba(150,161,131,0.5); box-shadow: 0 8px 30px rgba(0,0,0,0.15); transform: translateY(-4px); }
 .gc svg { width: 28px; height: 28px; stroke: #96a183; fill: none; stroke-width: 1.5; margin-bottom: 12px; }
 .gc h3 { color: #f5f5f5; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
 .gc p { color: rgba(245,245,245,0.55); font-size: 12px; line-height: 1.4; }
@@ -229,6 +236,26 @@ a, button, .arr { cursor: none; }
   transform: rotate(-5deg); transform-origin: center;
 }
 
+/* CARD SWEEP — S4 */
+.gc-grid { position: relative; overflow: hidden; }
+.gc-grid::after {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 55%, transparent 60%);
+  animation: cardSweep 6s ease-in-out infinite;
+  pointer-events: none; z-index: 1;
+}
+@keyframes cardSweep { 0% { transform: translateX(-80%) translateY(-20%); } 100% { transform: translateX(80%) translateY(20%); } }
+
+/* FLOATING LEAVES — S4 */
+.float-leaves { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.fl { position: absolute; width: 40px; height: auto; opacity: 0.06; }
+.fl1 { right: 8%; bottom: -10%; animation: leafFloat1 18s ease-in-out infinite; }
+.fl2 { left: 12%; bottom: -15%; animation: leafFloat2 22s ease-in-out infinite 3s; }
+.fl3 { right: 25%; bottom: -20%; animation: leafFloat3 25s ease-in-out infinite 7s; transform: rotate(30deg); }
+@keyframes leafFloat1 { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.06; } 90% { opacity: 0.04; } 100% { transform: translateY(-110vh) rotate(45deg); opacity: 0; } }
+@keyframes leafFloat2 { 0% { transform: translateY(0) rotate(-15deg); opacity: 0; } 10% { opacity: 0.05; } 90% { opacity: 0.03; } 100% { transform: translateY(-110vh) rotate(30deg); opacity: 0; } }
+@keyframes leafFloat3 { 0% { transform: translateY(0) rotate(30deg); opacity: 0; } 10% { opacity: 0.04; } 90% { opacity: 0.02; } 100% { transform: translateY(-110vh) rotate(75deg); opacity: 0; } }
+
 /* EUCALYPTUS WATERMARK */
 .euc-wm { position: absolute; bottom: 20px; right: 20px; width: 250px; opacity: 0.05; pointer-events: none; z-index: 1; }
 
@@ -276,6 +303,11 @@ a, button, .arr { cursor: none; }
   <!-- SLIDE 2: GOLD STANDARD CARDS -->
   <section class="slide s4">
     <div class="bg"></div><div class="bg-ov"></div>
+    <div class="float-leaves">
+      <img src="/images/eucalyptus-branch.png" class="fl fl1" />
+      <img src="/images/eucalyptus-branch.png" class="fl fl2" />
+      <img src="/images/eucalyptus-branch.png" class="fl fl3" />
+    </div>
     <div class="sc">
       <div class="bt ai">THE GOLD STANDARD</div>
       <div class="ai" style="font-family:'Montserrat',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:40px;">What Sets Jane's Home Care Apart</div>
