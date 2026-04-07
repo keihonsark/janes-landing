@@ -547,24 +547,38 @@ if (partnerName) {
 
 var audioCtx = null;
 var isMuted = true;
-var ambientGain = null;
-var ambientOsc = null;
+var masterGain = null;
+var padGains = [];
+var padOscs = [];
 
 function initAudio() {
   if (audioCtx) return;
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  ambientGain = audioCtx.createGain();
-  ambientGain.gain.value = 0;
-  ambientGain.connect(audioCtx.destination);
-  var filter = audioCtx.createBiquadFilter();
-  filter.type = 'lowpass';
-  filter.frequency.value = 300;
-  filter.connect(ambientGain);
-  ambientOsc = audioCtx.createOscillator();
-  ambientOsc.type = 'sine';
-  ambientOsc.frequency.value = 174;
-  ambientOsc.connect(filter);
-  ambientOsc.start();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0;
+  masterGain.connect(audioCtx.destination);
+
+  // Warm ambient pad - 3 detuned sine waves for richness
+  var freqs = [132, 198, 264];
+  var detunes = [0, -8, 5];
+  freqs.forEach(function(freq, i) {
+    var g = audioCtx.createGain();
+    g.gain.value = 0.008;
+    var f = audioCtx.createBiquadFilter();
+    f.type = 'lowpass';
+    f.frequency.value = 200;
+    f.Q.value = 0.5;
+    var o = audioCtx.createOscillator();
+    o.type = 'sine';
+    o.frequency.value = freq;
+    o.detune.value = detunes[i];
+    o.connect(f);
+    f.connect(g);
+    g.connect(masterGain);
+    o.start();
+    padOscs.push(o);
+    padGains.push(g);
+  });
 }
 
 function toggleSound() {
@@ -572,38 +586,59 @@ function toggleSound() {
   isMuted = !isMuted;
   var btn = document.getElementById('muteBtn');
   if (isMuted) {
-    ambientGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+    masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
+    btn.textContent = '\u266A';
     btn.style.opacity = '0.4';
-    btn.style.textDecoration = 'line-through';
   } else {
-    ambientGain.gain.linearRampToValueAtTime(0.012, audioCtx.currentTime + 0.5);
+    masterGain.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 1.5);
+    btn.textContent = '\u266B';
     btn.style.opacity = '1';
-    btn.style.textDecoration = 'none';
   }
 }
 
 function playChime() {
   if (isMuted || !audioCtx) return;
-  var g = audioCtx.createGain();
-  g.gain.setValueAtTime(0.035, audioCtx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-  g.connect(audioCtx.destination);
-  var o = audioCtx.createOscillator();
-  o.type = 'sine';
-  o.frequency.value = 523;
-  o.connect(g);
-  o.start();
-  o.stop(audioCtx.currentTime + 0.6);
+
+  // Soft bell-like chime using two harmonics with slow decay
+  var now = audioCtx.currentTime;
+
+  // Note 1 - soft fundamental
+  var g1 = audioCtx.createGain();
+  g1.gain.setValueAtTime(0.025, now);
+  g1.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
+  g1.connect(audioCtx.destination);
+  var o1 = audioCtx.createOscillator();
+  o1.type = 'triangle';
+  o1.frequency.value = 440;
+  o1.connect(g1);
+  o1.start(now);
+  o1.stop(now + 2);
+
+  // Note 2 - fifth above, even softer, slight delay
   var g2 = audioCtx.createGain();
-  g2.gain.setValueAtTime(0.02, audioCtx.currentTime);
-  g2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+  g2.gain.setValueAtTime(0, now);
+  g2.gain.linearRampToValueAtTime(0.015, now + 0.1);
+  g2.gain.exponentialRampToValueAtTime(0.001, now + 2.2);
   g2.connect(audioCtx.destination);
   var o2 = audioCtx.createOscillator();
   o2.type = 'sine';
-  o2.frequency.value = 784;
+  o2.frequency.value = 659;
   o2.connect(g2);
-  o2.start();
-  o2.stop(audioCtx.currentTime + 0.5);
+  o2.start(now);
+  o2.stop(now + 2.5);
+
+  // Note 3 - octave above, whisper quiet, more delay
+  var g3 = audioCtx.createGain();
+  g3.gain.setValueAtTime(0, now);
+  g3.gain.linearRampToValueAtTime(0.008, now + 0.15);
+  g3.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
+  g3.connect(audioCtx.destination);
+  var o3 = audioCtx.createOscillator();
+  o3.type = 'sine';
+  o3.frequency.value = 880;
+  o3.connect(g3);
+  o3.start(now);
+  o3.stop(now + 1.8);
 }
 
 (function(){
