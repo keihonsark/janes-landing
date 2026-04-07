@@ -300,11 +300,21 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 /* NAV ARROW REFINEMENT */
 .arr { opacity: 0.4; }
 .arr:hover { opacity: 1; }
+
+@media print {
+  .deck { display: block !important; transform: none !important; }
+  .slide { min-width: 100% !important; width: 100% !important; height: auto !important; min-height: 100vh; page-break-after: always; display: flex !important; }
+  .arr, .dots, .counter, .nav-logo, #muteBtn, .particles, button[onclick="window.print()"] { display: none !important; }
+  body, html { overflow: visible !important; height: auto !important; }
+  .ai { opacity: 1 !important; transform: none !important; }
+}
 </style>
 </head>
 <body>
 
 <img class="nav-logo" src="/images/Janes Home Care Logo_Primary.png" alt="Jane's Home Care" />
+<button id="muteBtn" onclick="toggleSound()" style="position:fixed;top:24px;right:32px;z-index:100;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;backdrop-filter:blur(10px);transition:all 0.3s;" title="Toggle sound">&#9834;</button>
+<button onclick="window.print()" style="position:fixed;top:24px;right:76px;z-index:100;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;backdrop-filter:blur(10px);transition:all 0.3s;" title="Download PDF">&#8595;</button>
 <button class="arr arr-l" onclick="prev()">&#8592;</button>
 <button class="arr arr-r" onclick="nxt()">&#8594;</button>
 <div class="dots" id="dots"></div>
@@ -461,6 +471,8 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
       <a href="tel:5592962189" class="ph ai">(559) 296-2189</a>
       <a href="mailto:info@janeshomecare.com" class="em ai">info@janeshomecare.com</a>
       <a href="https://www.janeshomecare.com" class="wb ai" target="_blank">www.janeshomecare.com</a>
+      <canvas id="qrCanvas" width="80" height="80" style="margin-top:24px;border-radius:4px;"></canvas>
+      <div style="color:rgba(255,255,255,0.3);font-size:10px;margin-top:6px;">Scan to call</div>
     </div>
     <div class="fine">Jane's Home Care · Fresno, Clovis &amp; Surrounding Areas · Licensed, Insured &amp; Bonded</div>
   </section>
@@ -472,11 +484,112 @@ var c=0,t=10,dk=document.getElementById('deck'),ct=document.getElementById('ctr'
 for(var i=0;i<t;i++){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');(function(x){d.onclick=function(){go(x)}})(i);de.appendChild(d)}
 var ds=de.querySelectorAll('.dot');
 var sl=document.querySelectorAll('.slide');
-function go(i){if(i<0||i>=t||i===c)return;c=i;dk.style.transform='translateX(-'+(c*100)+'vw)';ct.textContent=(c+1)+' / '+t;for(var j=0;j<ds.length;j++)ds[j].classList.toggle('on',j===c);for(var j=0;j<sl.length;j++)sl[j].classList.remove('active');sl[c].classList.add('active')}
+function go(i){if(i<0||i>=t||i===c)return;c=i;dk.style.transform='translateX(-'+(c*100)+'vw)';playChime();ct.textContent=(c+1)+' / '+t;for(var j=0;j<ds.length;j++)ds[j].classList.toggle('on',j===c);for(var j=0;j<sl.length;j++)sl[j].classList.remove('active');sl[c].classList.add('active')}
 function nxt(){go(c+1)}function prev(){go(c-1)}
 window.addEventListener('keydown',function(e){if(e.key==='ArrowRight')nxt();if(e.key==='ArrowLeft')prev()});
 var wt=null;window.addEventListener('wheel',function(e){e.preventDefault();if(wt)return;var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(Math.abs(d)<15)return;if(d>0)nxt();else prev();wt=setTimeout(function(){wt=null},600)},{passive:false});
 var tx=0;window.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});window.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)<50)return;if(dx<0)nxt();else prev()},{passive:true});
+
+var params = new URLSearchParams(window.location.search);
+var partnerName = params.get('partner');
+var companyName = params.get('company');
+if (partnerName) {
+  var lblEl = document.querySelector('.s1 .lbl');
+  if (lblEl) {
+    lblEl.textContent = 'Prepared for ' + partnerName + (companyName ? ' \u2014 ' + companyName : '');
+  }
+}
+
+var audioCtx = null;
+var isMuted = true;
+var ambientGain = null;
+var ambientOsc = null;
+
+function initAudio() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  ambientGain = audioCtx.createGain();
+  ambientGain.gain.value = 0;
+  ambientGain.connect(audioCtx.destination);
+  var filter = audioCtx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 300;
+  filter.connect(ambientGain);
+  ambientOsc = audioCtx.createOscillator();
+  ambientOsc.type = 'sine';
+  ambientOsc.frequency.value = 174;
+  ambientOsc.connect(filter);
+  ambientOsc.start();
+}
+
+function toggleSound() {
+  initAudio();
+  isMuted = !isMuted;
+  var btn = document.getElementById('muteBtn');
+  if (isMuted) {
+    ambientGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+    btn.style.opacity = '0.4';
+    btn.style.textDecoration = 'line-through';
+  } else {
+    ambientGain.gain.linearRampToValueAtTime(0.012, audioCtx.currentTime + 0.5);
+    btn.style.opacity = '1';
+    btn.style.textDecoration = 'none';
+  }
+}
+
+function playChime() {
+  if (isMuted || !audioCtx) return;
+  var g = audioCtx.createGain();
+  g.gain.setValueAtTime(0.035, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+  g.connect(audioCtx.destination);
+  var o = audioCtx.createOscillator();
+  o.type = 'sine';
+  o.frequency.value = 523;
+  o.connect(g);
+  o.start();
+  o.stop(audioCtx.currentTime + 0.6);
+  var g2 = audioCtx.createGain();
+  g2.gain.setValueAtTime(0.02, audioCtx.currentTime);
+  g2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+  g2.connect(audioCtx.destination);
+  var o2 = audioCtx.createOscillator();
+  o2.type = 'sine';
+  o2.frequency.value = 784;
+  o2.connect(g2);
+  o2.start();
+  o2.stop(audioCtx.currentTime + 0.5);
+}
+
+(function(){
+  var cv = document.getElementById('qrCanvas');
+  if (!cv) return;
+  var ctx = cv.getContext('2d');
+  var s = 4;
+  ctx.fillStyle = '#B8975A';
+  var pattern = [
+    [1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,1,0,0,1,0,1,1,0,0,0,0,0,1],
+    [1,0,1,1,1,0,1,0,1,1,0,0,1,0,1,1,1,0,1],
+    [1,0,1,1,1,0,1,0,0,1,1,0,1,0,1,1,1,0,1],
+    [1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1],
+    [1,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1],
+    [0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0],
+    [1,0,1,0,1,1,1,1,0,0,1,0,1,0,0,1,1,0,1],
+    [0,1,0,1,1,0,0,1,1,0,1,1,0,1,0,1,0,1,0],
+    [1,0,1,1,0,1,1,0,1,1,0,0,1,0,1,0,1,0,1],
+    [0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,1,0,1,0],
+    [1,1,1,1,1,1,1,0,0,1,0,1,1,0,1,0,1,0,1],
+    [1,0,0,0,0,0,1,0,1,0,1,0,0,1,0,1,0,0,0],
+    [1,0,1,1,1,0,1,0,1,1,0,1,1,0,1,1,0,1,1],
+    [1,0,1,1,1,0,1,0,0,1,0,0,1,0,0,1,1,0,0],
+    [1,0,1,1,1,0,1,0,1,0,1,1,0,1,0,0,1,0,1],
+    [1,0,0,0,0,0,1,0,0,1,1,0,1,0,1,1,0,1,0],
+    [1,1,1,1,1,1,1,0,1,0,0,1,1,0,0,1,1,0,1]
+  ];
+  for(var y=0;y<pattern.length;y++){for(var x=0;x<pattern[y].length;x++){if(pattern[y][x])ctx.fillRect(x*s+2,y*s+2,s,s);}}
+})();
 </script>
 </body>
 </html>
