@@ -41,7 +41,9 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .counter { position: fixed; bottom: 28px; right: 32px; z-index: 100; font-size: 13px; color: rgba(255,255,255,0.5); }
 
 /* S1 — TITLE */
-.s1 { background: radial-gradient(ellipse at 30% 40%, rgba(150,161,131,0.15) 0%, transparent 60%), var(--evergreen); color: white; }
+.s1 { background: var(--evergreen); color: white; }
+.s1 .bg { background-image: url('/images/bg-evergreen-hero.png'); }
+.s1 .bg-ov { background: rgba(49,60,44,0.55); }
 .s1 .sc { text-align: center; }
 .s1 .logo-c { height: 80px; margin-bottom: 36px; }
 .s1 .tg { font-family: 'Libre Caslon Display', serif; font-size: 64px; font-weight: 700; line-height: 1.1; }
@@ -50,7 +52,9 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .s1 .begin { margin-top: 50px; color: var(--gold); font-size: 15px; font-weight: 600; background: none; border: none; cursor: pointer; letter-spacing: 1px; font-family: 'Montserrat', sans-serif; animation: bounceRight 2s ease-in-out infinite; }
 
 /* S4 — GOLD STANDARD CARDS */
-.s4 { background: linear-gradient(135deg, var(--evergreen) 0%, #3d4a36 50%, var(--evergreen) 100%); color: white; }
+.s4 { background: var(--evergreen); color: white; }
+.s4 .bg { background-image: url('/images/bg-evergreen-gold.png'); }
+.s4 .bg-ov { background: rgba(49,60,44,0.5); }
 .s4 .sc { text-align: center; }
 .s4 .bt {
   font-family: 'Libre Caslon Display', serif; font-size: 56px; letter-spacing: 4px; margin-bottom: 16px;
@@ -73,8 +77,8 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
 /* S3 — REFRAME */
 .s3 { background: var(--cream); }
-.s3 .bg { background-image: url('/images/bg-warm.jpg'); }
-.s3 .bg-ov { background: rgba(247,244,239,0.85); }
+.s3 .bg { background-image: url('/images/bg-cream-botanical.png'); }
+.s3 .bg-ov { background: rgba(247,244,239,0.8); }
 .s3 .sc { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .s3 .lm { height: 50px; margin-bottom: 24px; }
 .s3 .headline { font-size: 42px; color: var(--text); max-width: 800px; }
@@ -83,6 +87,8 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
 /* S5 — NP-LED */
 .s5 { background: var(--cream); }
+.s5 .bg { background-image: url('/images/bg-cream-light.png'); }
+.s5 .bg-ov { background: rgba(247,244,239,0.75); }
 .s5 .sc { display: flex; gap: 60px; align-items: center; }
 .s5p { flex: 0 0 340px; }
 .s5p img { width: 100%; border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); transition: transform 0.8s ease, box-shadow 0.8s ease; }
@@ -94,8 +100,8 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
 /* S7 — CAREGIVER STANDARD */
 .s7 { background: var(--cream); }
-.s7 .bg { background-image: url('/images/bg-warm.jpg'); }
-.s7 .bg-ov { background: rgba(247,244,239,0.88); }
+.s7 .bg { background-image: url('/images/bg-cream-botanical.png'); }
+.s7 .bg-ov { background: rgba(247,244,239,0.82); }
 .s7 .sc { text-align: center; }
 .s7 .headline { font-size: 36px; color: var(--text); margin-bottom: 40px; }
 .sg { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
@@ -108,11 +114,13 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
 /* S-TEST — TESTIMONIAL */
 .s-test { background: var(--cream); }
-.s-test .bg { background-image: url('/images/bg-warm.jpg'); background-size: cover; background-position: center; }
-.s-test .bg-ov { background: rgba(247,244,239,0.9); }
+.s-test .bg { background-image: url('/images/bg-cream-light.png'); background-size: cover; background-position: center; }
+.s-test .bg-ov { background: rgba(247,244,239,0.85); }
 
 /* S8 — SERVICES */
 .s8 { background: var(--cream); }
+.s8 .bg { background-image: url('/images/bg-sage-watercolor.png'); }
+.s8 .bg-ov { background: rgba(245,245,245,0.8); }
 .s8 .sc { text-align: center; }
 .s8 .headline { font-size: 36px; color: var(--text); margin-bottom: 36px; }
 .svg { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 800px; margin: 0 auto 28px; }
@@ -125,6 +133,8 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 
 /* S6 — PRIORITY LINE */
 .s6 { background: var(--evergreen); color: white; }
+.s6 .bg { background-image: url('/images/bg-evergreen-hero.png'); }
+.s6 .bg-ov { background: rgba(49,60,44,0.6); }
 .s6 .sc { text-align: center; }
 .s6 .headline { font-size: 40px; color: white; margin-bottom: 28px; }
 .s6 .ph {
@@ -153,7 +163,9 @@ body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height
 .step-connector-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); animation: lineShimmer 3s ease-in-out infinite; }
 
 /* S9 ��� CONTACT */
-.s9 { background: radial-gradient(ellipse at 50% 40%, rgba(150,161,131,0.1) 0%, transparent 60%), var(--evergreen); color: white; }
+.s9 { background: var(--evergreen); color: white; }
+.s9 .bg { background-image: url('/images/bg-evergreen-gold.png'); }
+.s9 .bg-ov { background: rgba(49,60,44,0.55); }
 .s9 .sc { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .s9 .lm { height: 50px; margin-bottom: 20px; }
 .s9 .headline { font-size: 42px; color: white; }
@@ -254,6 +266,7 @@ a, button, .arr { cursor: none; }
 
   <!-- SLIDE 1: TITLE -->
   <section class="slide s1 active">
+    <div class="bg"></div><div class="bg-ov"></div>
     <div class="particles"></div>
     <div class="sc">
       <img class="logo-c ai" src="/images/Janes Home Care Logo_Primary.png" alt="" /><br>
@@ -268,6 +281,7 @@ a, button, .arr { cursor: none; }
 
   <!-- SLIDE 2: GOLD STANDARD CARDS -->
   <section class="slide s4">
+    <div class="bg"></div><div class="bg-ov"></div>
     <div class="particles"></div>
     <div class="sc">
       <div class="bt ai">THE GOLD STANDARD</div>
@@ -340,6 +354,7 @@ a, button, .arr { cursor: none; }
 
   <!-- SLIDE 5: NP-LED / JESSICA -->
   <section class="slide s5">
+    <div class="bg"></div><div class="bg-ov"></div>
     <div class="sc">
       <div class="s5p ai"><img src="/images/jessica.jpg" alt="Jessica Cassidy, NP" /></div>
       <div class="s5t ai">
@@ -397,6 +412,7 @@ a, button, .arr { cursor: none; }
 
   <!-- SLIDE 8: SERVICES -->
   <section class="slide s8">
+    <div class="bg"></div><div class="bg-ov"></div>
     <div class="sc">
       <div class="eyebrow ai">What We Provide</div>
       <h2 class="headline ai">Clinical-grade home care services.</h2>
@@ -414,6 +430,7 @@ a, button, .arr { cursor: none; }
 
   <!-- SLIDE 9: PRIORITY LINE -->
   <section class="slide s6">
+    <div class="bg"></div><div class="bg-ov"></div>
     <div class="particles"></div>
     <div class="sc">
       <div class="eyebrow ai">Exclusive for Partners</div>
@@ -441,6 +458,7 @@ a, button, .arr { cursor: none; }
 
   <!-- SLIDE 10: CONTACT -->
   <section class="slide s9">
+    <div class="bg"></div><div class="bg-ov"></div>
     <div class="particles"></div>
     <div class="sc">
       <img class="lm ai" src="/images/Janes Home Care_Logomark_Logomark_Full Color.png" alt="" />
