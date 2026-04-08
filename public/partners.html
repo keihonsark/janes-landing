@@ -715,5 +715,20 @@ function goAndClose(i) {
   setTimeout(function() { go(i); }, 300);
 }
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var params = new URLSearchParams(window.location.search);
+    var ref = params.get('ref') || 'direct';
+    fetch('https://hook.us2.make.com/zmwnihkw71g4fxeuqndrno6lxd1jaomr', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        partner_ref: ref,
+        timestamp: new Date().toISOString(),
+        page: 'partner-brochure'
+      })
+    }).catch(function(){});
+  });
+</script>
 </body>
 </html>
