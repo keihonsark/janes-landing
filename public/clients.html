@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 <title>Jane's Home Care — Care, Right Where You Are</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -10,9 +10,9 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--sage:#96a183;--sage-subtle:#e8eddf;--evergreen:#313c2c;--hearthstone:#66523a;--warm-white:#faf9f6;--cream:#f0ece4;--tp:#313c2c;--ts:#5a6650;--tl:#7a8570}
-body{font-family:'Montserrat',sans-serif;background:var(--warm-white);color:var(--tp);overflow:hidden;height:100vh;width:100vw}
-.sc{display:flex;height:100vh;width:max-content;transition:transform .7s cubic-bezier(.4,0,.2,1)}
-.sl{width:100vw;height:100vh;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+body{font-family:'Montserrat',sans-serif;background:var(--warm-white);color:var(--tp);overflow:hidden;height:100vh;height:100dvh;width:100vw}
+.sc{display:flex;height:100vh;height:100dvh;width:max-content;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.sl{width:100vw;height:100vh;height:100dvh;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
 .eu{position:absolute;pointer-events:none;z-index:1}
 .eu.tr{top:-20px;right:-30px;width:200px;opacity:.15;transform:rotate(-30deg)}
@@ -27,6 +27,8 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 .ic svg{width:24px;height:24px;stroke:var(--evergreen);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .ics{width:44px;height:44px;border-radius:50%;background:var(--sage-subtle);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ics svg{width:20px;height:20px;stroke:var(--evergreen);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* NAV */
 .nb{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(250,249,246,.94);backdrop-filter:blur(12px);border-top:1px solid var(--sage-subtle)}
 .nl{display:flex;gap:10px;align-items:center}
 .nc{display:flex;gap:6px;align-items:center}
@@ -43,7 +45,7 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 .mt.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .mt.open span:nth-child(2){opacity:0}
 .mt.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-.sm{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--warm-white);z-index:150;padding:90px 32px 40px;transition:right .35s cubic-bezier(.4,0,.2,1);box-shadow:-4px 0 24px rgba(0,0,0,.08)}
+.sm{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--warm-white);z-index:150;padding:90px 32px 40px;transition:right .35s cubic-bezier(.4,0,.2,1);box-shadow:-4px 0 24px rgba(0,0,0,.08);overflow-y:auto}
 .sm.open{right:0}
 .sm h3{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--tl);text-transform:uppercase;letter-spacing:3px;margin-bottom:20px}
 .sm a{display:block;padding:14px 0;color:var(--evergreen);text-decoration:none;font-size:16px;font-weight:500;border-bottom:1px solid var(--sage-subtle)}
@@ -163,23 +165,120 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 .ctah{margin-top:20px;font-size:14px;color:var(--tl)}
 .ctaft{margin-top:12px;font-size:12px;color:var(--tl)}
 
+/* ===== MOBILE MASTER FIX ===== */
 @media(max-width:900px){
-.si{padding:44px 28px 84px}
-.cg,.cgg,.jg{grid-template-columns:1fr;gap:28px;text-align:center}
-.ci{max-height:35vh;border-radius:14px;order:-1}
-.svg2{grid-template-columns:repeat(2,1fr)}
-.phrow,.mmrow{grid-template-columns:1fr;gap:4px;text-align:center}
-.phl,.mml{text-align:center}.pha,.mma{transform:rotate(90deg)}
-.jp{width:220px;height:280px;margin:0 auto}
-.cgimg{max-height:30vh;border-radius:14px}
-.nst{display:none}
-.ctafr{grid-template-columns:1fr}
+  /* Allow vertical scroll within each slide */
+  .sl{overflow-y:auto;overflow-x:hidden;align-items:flex-start;-webkit-overflow-scrolling:touch}
+  .si{padding:80px 24px 100px;align-items:flex-start;min-height:100%;height:auto}
+  
+  /* Cover */
+  .cg{grid-template-columns:1fr;gap:24px;text-align:center}
+  .ci{max-height:280px;border-radius:14px;width:100%;max-width:100%}
+  .cl{height:56px;margin-bottom:24px}
+  .ct h1{font-size:32px}
+  .ct p{font-size:15px;margin-bottom:24px}
+  .cb{padding:14px 28px;font-size:15px}
+  
+  /* Empathy */
+  .eb h2{font-size:28px}
+  .eb>p{font-size:16px;margin-bottom:28px}
+  .ep{gap:10px}
+  .epl{font-size:13px;padding:8px 16px}
+  
+  /* Services */
+  .svg2{grid-template-columns:1fr 1fr;gap:12px}
+  .svc{padding:20px 14px}
+  .svc .ic{width:44px;height:44px;margin-bottom:12px}
+  .svc .ic svg{width:20px;height:20px}
+  .svc h4{font-size:14px;margin-bottom:4px}
+  .svc p{font-size:12px}
+  .svb h2{font-size:28px;margin-bottom:28px}
+  .svf{font-size:14px}
+  
+  /* Process */
+  .db h2{font-size:28px;margin-bottom:28px}
+  .dst{padding:18px;gap:14px}
+  .sn{width:38px;height:38px;font-size:15px}
+  .dst h4{font-size:16px}
+  .dst p{font-size:14px}
+  
+  /* Caregivers */
+  .cgg{grid-template-columns:1fr;gap:24px}
+  .cgimg{max-height:220px;border-radius:14px;width:100%}
+  .cgt h2{font-size:28px}
+  .cgt>p{font-size:15px;margin-bottom:20px}
+  .cgb{gap:14px}
+  .cgbd{gap:12px}
+  .cgbd h4{font-size:15px}
+  .cgbd p{font-size:13px}
+  .ics{width:38px;height:38px}
+  .ics svg{width:18px;height:18px}
+  
+  /* Post-hospital */
+  .phb h2{font-size:26px;margin-bottom:16px}
+  .phstat{padding:18px 20px}
+  .phstat .big{font-size:36px}
+  .phstat .sub{font-size:13px}
+  .phrow{grid-template-columns:1fr;gap:2px;padding:12px 16px;text-align:left}
+  .phl{text-align:left;font-size:13px;color:var(--tl)}
+  .pha{display:none}
+  .phr{font-size:14px}
+  .phr::before{content:'→ ';color:var(--sage)}
+  .phft{font-size:15px;margin-top:20px}
+  
+  /* Memory */
+  .mmb h2{font-size:26px}
+  .mmi{font-size:15px;margin-bottom:16px}
+  .mmstat{padding:16px 20px}
+  .mmstat .big{font-size:32px}
+  .mmstat .sub{font-size:13px}
+  .mmrow{grid-template-columns:1fr;gap:2px;padding:12px 16px;text-align:left}
+  .mml{text-align:left;font-size:13px;color:var(--tl)}
+  .mma{display:none}
+  .mmr{font-size:14px}
+  .mmr::before{content:'→ ';color:var(--sage)}
+  
+  /* Jessica */
+  .jg{grid-template-columns:1fr;gap:24px;text-align:center}
+  .jp{width:200px;height:260px;margin:0 auto}
+  .jt h2{font-size:26px}
+  .jt>p{font-size:14px}
+  .jb{font-size:12px;padding:8px 14px}
+  .te{padding:18px;text-align:left}
+  .te blockquote{font-size:14px}
+  
+  /* CTA */
+  .ctal{height:52px;margin-bottom:20px}
+  .ctab h2{font-size:28px}
+  .ctasb{font-size:15px;margin-bottom:16px}
+  .ctaph{font-size:18px;padding:14px 32px}
+  .ctafr{grid-template-columns:1fr}
+  .ctaf input,.ctaf textarea{padding:12px 14px;font-size:14px}
+  .ctasu{padding:14px;font-size:15px}
+  
+  /* Nav */
+  .nb{padding:8px 16px}
+  .nbtn{width:38px;height:38px}
+  .nst{display:none}
+  .ncta{font-size:13px;padding:8px 16px}
+  .nd{width:6px;height:6px}
+  .nd.active{width:18px}
+  
+  /* Menu */
+  .mt{top:16px;right:16px;width:42px;height:42px}
+  
+  /* Hide decorative elements on mobile */
+  .eu,.wm{display:none}
 }
-@media(max-width:560px){
-.si{padding:36px 18px 78px}
-.svg2{grid-template-columns:1fr}
-.ep{flex-direction:column;align-items:center}
-.nb{padding:10px 14px}
+
+@media(max-width:480px){
+  .si{padding:72px 18px 96px}
+  .svg2{grid-template-columns:1fr}
+  .ep{flex-direction:column;align-items:center}
+  .ct h1{font-size:28px}
+  .ci{max-height:220px}
+  .cl{height:48px;margin-bottom:20px}
+  .phb h2,.mmb h2{font-size:24px}
 }
 </style>
 </head>
@@ -251,7 +350,7 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 </div></div>
 </section>
 
-<!-- 4: OUR PROCESS -->
+<!-- 4: PROCESS -->
 <section class="sl">
 <div class="bg" style="background-image:url('/images/bg-cream-botanical.png');opacity:.3"></div>
 <img class="eu ml" src="/images/eucalyptus-branch.png" alt=""/>
@@ -296,10 +395,7 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 <div class="si"><div class="phb">
 <div class="lb an" style="text-align:center">Safe Return Home</div>
 <h2 class="an d1">Thoughtful Support After a Hospital Stay</h2>
-<div class="phstat an d2">
-<div class="big">1 in 5</div>
-<div class="sub">patients experience a preventable adverse event within 3 weeks of discharge</div>
-</div>
+<div class="phstat an d2"><div class="big">1 in 5</div><div class="sub">patients experience a preventable adverse event within 3 weeks of discharge</div></div>
 <div class="php an d3">
 <div class="phrow"><div class="phl">Medication confusion</div><div class="pha"><svg viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="phr">Reinforce routines and schedules</div></div>
 <div class="phrow"><div class="phl">Falls and reduced mobility</div><div class="pha"><svg viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="phr">Supervision, safe transfers, mobility support</div></div>
@@ -311,7 +407,7 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 </div></div>
 </section>
 
-<!-- 7: MEMORY CARE -->
+<!-- 7: MEMORY -->
 <section class="sl">
 <div class="bg" style="background-image:url('/images/bg-sage-watercolor.png');opacity:.15"></div>
 <img class="eu tr" src="/images/eucalyptus-branch.png" alt="" style="opacity:.1"/>
@@ -319,10 +415,7 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 <div class="lb an" style="text-align:center">Memory Care</div>
 <h2 class="an d1">Dementia &amp; Alzheimer's Care</h2>
 <p class="mmi an d2">When memory changes, the whole family feels it. What once felt simple can become heavy. Routines change, safety becomes a concern, and families are often carrying more than anyone sees.</p>
-<div class="mmstat an d2">
-<div class="big">70%</div>
-<div class="sub">of family caregivers say coordinating care is stressful</div>
-</div>
+<div class="mmstat an d2"><div class="big">70%</div><div class="sub">of family caregivers say coordinating care is stressful</div></div>
 <div class="mmp an d3">
 <div class="mmrow"><div class="mml">Confusion and memory loss</div><div class="mma"><svg viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="mmr">Calm, structured daily support</div></div>
 <div class="mmrow"><div class="mml">Wandering or safety concerns</div><div class="mma"><svg viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="mmr">Safety monitoring and supervision</div></div>
@@ -391,12 +484,34 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 <script>
 var current=0,total=9,container=document.getElementById('sc'),slides=document.querySelectorAll('.sl'),dotsEl=document.getElementById('navDots');
 for(var i=0;i<total;i++){var d=document.createElement('button');d.className='nd'+(i===0?' active':'');d.setAttribute('data-i',i);d.onclick=function(){goSlide(parseInt(this.getAttribute('data-i')))};dotsEl.appendChild(d)}
-function goSlide(n){if(n<0||n>=total)return;slides[current].classList.remove('active');current=n;slides[current].classList.add('active');container.style.transform='translateX(-'+(current*100)+'vw)';var ds=document.querySelectorAll('.nd');for(var j=0;j<ds.length;j++)ds[j].className='nd'+(j===current?' active':'')}
+function goSlide(n){if(n<0||n>=total)return;slides[current].classList.remove('active');current=n;slides[current].classList.add('active');container.style.transform='translateX(-'+(current*100)+'vw)';var ds=document.querySelectorAll('.nd');for(var j=0;j<ds.length;j++)ds[j].className='nd'+(j===current?' active':'');slides[current].scrollTop=0}
 function nextSlide(){goSlide(current+1)}function prevSlide(){goSlide(current-1)}
 document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown')nextSlide();if(e.key==='ArrowLeft'||e.key==='ArrowUp')prevSlide()});
-var tX=0,tY=0;document.addEventListener('touchstart',function(e){tX=e.touches[0].clientX;tY=e.touches[0].clientY},{passive:true});
-document.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tX,dy=e.changedTouches[0].clientY-tY;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){dx<0?nextSlide():prevSlide()}});
+
+// TOUCH: only swipe horizontally if gesture is clearly horizontal
+var tX=0,tY=0,tMoving=false,tDir=null;
+document.addEventListener('touchstart',function(e){tX=e.touches[0].clientX;tY=e.touches[0].clientY;tMoving=true;tDir=null},{passive:true});
+document.addEventListener('touchmove',function(e){
+if(!tMoving)return;
+var dx=Math.abs(e.touches[0].clientX-tX),dy=Math.abs(e.touches[0].clientY-tY);
+if(!tDir&&(dx>10||dy>10)){tDir=dx>dy?'h':'v'}
+// If horizontal swipe, prevent vertical scroll
+if(tDir==='h'){e.preventDefault()}
+},{passive:false});
+document.addEventListener('touchend',function(e){
+if(tDir==='h'){
+var dx=e.changedTouches[0].clientX-tX;
+if(Math.abs(dx)>50){dx<0?nextSlide():prevSlide()}
+}
+tMoving=false;tDir=null;
+});
+
+// WHEEL: only on desktop (no touch device)
+var isTouchDevice='ontouchstart' in window;
+if(!isTouchDevice){
 var wL;document.addEventListener('wheel',function(e){e.preventDefault();if(wL)return;wL=setTimeout(function(){wL=null},800);Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY>0?nextSlide():prevSlide():e.deltaX>0?nextSlide():prevSlide()},{passive:false});
+}
+
 function toggleMenu(){document.getElementById('menuToggle').classList.toggle('open');document.getElementById('slideMenu').classList.toggle('open');document.getElementById('menuOverlay').classList.toggle('open')}
 var params=new URLSearchParams(window.location.search),ref=params.get('ref')||'direct';
 fetch('https://hook.us2.make.com/zmwnihkw71g4fxeuqndrno6lxd1jaomr',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({partner_ref:ref,timestamp:new Date().toISOString(),page:'client-brochure'})}).catch(function(){});
