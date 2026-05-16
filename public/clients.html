@@ -62,14 +62,15 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 .sf .dot{color:var(--sage);margin:0 10px;font-weight:400}
 
 /* S10 CLOSING CARD */
-.fc{text-align:center;max-width:560px;width:100%;display:flex;flex-direction:column;align-items:center}
-.fcl{height:88px;margin-bottom:32px}
-.fc h2{font-size:clamp(34px,4.5vw,52px);margin-bottom:16px;line-height:1.1}
-.fcs{font-family:'Radley',serif;font-style:italic;font-size:19px;color:var(--tp);margin-bottom:40px;line-height:1.55;max-width:460px}
-.fcph{font-family:'Libre Caslon Display',serif;font-size:clamp(34px,4.8vw,50px);color:var(--evergreen);text-decoration:none;letter-spacing:.01em;margin-bottom:8px;display:block;font-weight:600}
-.fcph:hover{color:var(--hearthstone)}
-.fcwb{font-size:15px;letter-spacing:3px;text-transform:uppercase;color:var(--evergreen);font-weight:700;text-decoration:none;margin-bottom:36px;display:block}
-.fcwb:hover{color:var(--sage)}
+.fc{text-align:center;max-width:580px;width:100%;display:flex;flex-direction:column;align-items:center}
+.fcl{height:130px;margin-bottom:36px}
+.fc h2{font-size:clamp(34px,4.5vw,52px);margin-bottom:18px;line-height:1.1}
+.fcs{font-family:'Radley',serif;font-style:italic;font-size:20px;color:var(--tp);margin-bottom:40px;line-height:1.55;max-width:460px}
+.fcph{display:inline-flex;align-items:center;gap:12px;background:var(--evergreen);color:#fff;padding:18px 44px;border-radius:50px;font-family:'Libre Caslon Display',serif;font-size:clamp(26px,3.6vw,34px);font-weight:600;text-decoration:none;letter-spacing:.01em;margin-bottom:18px;transition:all .3s;box-shadow:0 4px 18px rgba(49,60,44,.18)}
+.fcph:hover{background:var(--hearthstone);transform:translateY(-1px);box-shadow:0 8px 24px rgba(49,60,44,.25);color:#fff}
+.fcph svg{stroke:#fff;flex-shrink:0}
+.fcwb{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--ts);font-weight:600;text-decoration:none;margin-bottom:32px;display:block;transition:color .25s}
+.fcwb:hover{color:var(--evergreen)}
 .fcdiv{width:60px;height:2px;background:var(--sage);margin:0 auto 28px;border-radius:1px}
 .fcmeta{font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ts);font-weight:600}
 .fctag{font-family:'Radley',serif;font-style:italic;font-size:15px;color:var(--hearthstone);margin-top:18px;font-weight:500}
@@ -296,11 +297,12 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
   .sf .dot{margin:0 7px}
 
   /* Closing card on mobile */
-  .fcl{height:60px;margin-bottom:24px}
+  .fcl{height:96px;margin-bottom:24px}
   .fc h2{font-size:30px}
   .fcs{font-size:16px;margin-bottom:28px}
-  .fcph{font-size:30px}
-  .fcwb{font-size:13px;letter-spacing:2.5px;margin-bottom:28px}
+  .fcph{font-size:24px;padding:14px 32px}
+  .fcph svg{width:18px;height:18px}
+  .fcwb{font-size:12px;letter-spacing:2.5px;margin-bottom:24px}
 }
 
 @media(max-width:480px){
@@ -520,9 +522,9 @@ h3,h4{font-family:'Radley',serif;color:var(--evergreen)}
 <img class="eu bl" src="/images/eucalyptus-branch.png" alt="" style="opacity:.07"/>
 <div class="si"><div class="fc">
 <img src="/images/Janes Home Care Logo_Primary.png" alt="Jane's Home Care" class="fcl an"/>
-<h2 class="an d1">Care Starts in 24 Hours</h2>
-<p class="fcs an d2">When you're ready, we are too. No pressure, no commitment &mdash; just a real conversation about what your family needs.</p>
-<a href="tel:5592962189" class="fcph an d3" onclick="trackPhone()">(559) 296-2189</a>
+<h2 class="an d1">Care, Right Where You Are.</h2>
+<p class="fcs an d2">Begin with a conversation. We'll listen first.</p>
+<a href="tel:5592962189" class="fcph an d3" onclick="trackPhone()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(559) 296-2189</a>
 <a href="https://janeshomecare.com" class="fcwb an d3">janeshomecare.com</a>
 <div class="fcdiv an d4"></div>
 <div class="fcmeta an d4">Licensed &middot; Bonded &middot; Insured</div>
