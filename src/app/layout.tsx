@@ -24,9 +24,13 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://go.janeshomecare.com"),
   title: "Trusted Home Care in Fresno | Jane's Home Care",
   description:
-    "Compassionate in-home senior care in Fresno, CA. Overseen by a licensed Nurse Practitioner. No contracts. Care can begin within 24 hours. Call (559) 296-2189.",
+    "Trusted in-home senior care in Fresno, CA. Overseen by a licensed Nurse Practitioner. No contracts. Care can begin within 24 hours. Call (559) 296-2189.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({
